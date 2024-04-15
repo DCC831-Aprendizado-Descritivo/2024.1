@@ -1,0 +1,45 @@
+---
+# title: 'Página do curso DCC831 -- Aprendizado Descritivo -- DCC/UFMG'
+# subtitle: "Professor Renato Vimieiro"
+page-layout: full
+---
+
+
+<div class="gradient-text">
+
+
+<span style="font-size: 3.1rem; letter-spacing: -2px; font-weight:700;">
+Aprendizado Descritivo &mdash; DCC/UFMG<br>
+</span>
+<span style="font-size: 1.1rem; letter-spacing: 0px; line-height: 0.6; font-family:Economica; text-transform:uppercase;">
+[Prof. Renato Vimieiro](https://dcc.ufmg.br/professor/renato-vimieiro/)
+</span>
+</div>
+
+
+Essa disciplina é ofertada no [Programa de Pós-Graduação em Ciência da Computação](https://ppgcc.dcc.ufmg.br) da
+[Universidade Federal de Minas Gerais](http://ufmg.br). Ela tem como objetivo apresentar 
+técnicas avançadas para identificação de padrões descritivos em bases de dados. 
+A(o) aluna(o) terá contato com técnicas para aprendizado de padrões 
+não-supervisionados e supervisionados. Serão discutidas as dificuldades computacionais
+da busca por tais padrões, bem como sua utilidade para análise exploratória de dados.
+
+Os tópicos abordados na disciplina são:
+
+- Diferenças entre aprendizado descritivo e preditivo.
+- Aprendizado descritivo não-supervisionado.
+- Aprendizado descritivo supervisionado.
+- Representações condensadas.
+- Métricas de qualidade de padrões descritivos. 
+- Algoritmos de aprendizado de padrões descritivos supervisionados e não-supervisionados.
+- Estudos de casos e aplicações em problemas reais.
+
+Os tópicos são apresentados através de aulas expositivas sobre o assunto, leitura e
+apresentação de seminários sobre artigos recentes na literatura, e projetos de aplicação
+dos métodos estudados para extração de conhecimento de bases de dados.
+
+Utilize o menu acima ou o link a seguir para visualizar o conteúdo produzido nos seminários e projetos
+desenvolvidos pelos alunos.
+
+- Seminários: [Padrões frequentes](seminario1.qmd); [Descoberta de subgrupos](seminario2.qmd); [Aplicações](seminario3.qmd)
+

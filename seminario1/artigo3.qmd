@@ -1,0 +1,4 @@
+---
+title: 'Artigo 3: Representation Learning for Frequent Subgraph Mining'
+page-layout: full
+---

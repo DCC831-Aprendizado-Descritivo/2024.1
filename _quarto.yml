@@ -1,0 +1,28 @@
+project:
+  type: website
+  render:
+    - "*.qmd"
+
+website:
+  title: "Aprendizado Descritivo"
+  navbar:
+    title: false
+    left:
+      - href: index.qmd
+        text: Home
+      - text: "Seminário 1"
+        menu:
+            - seminario1/artigo1.qmd
+            - seminario1/artigo2.qmd
+            - seminario1/artigo3.qmd
+            
+      #- about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    
+execute:
+  freeze: auto    

@@ -1,0 +1,50 @@
+---
+# title: 'Seminários sobre Mineração de Padrões Frequentes -- 2024.1'
+page-layout: full
+---
+
+# Introdução
+
+Os seminários da disciplina consistem em uma apresentação coletiva (da turma) de um artigo mais recente
+sobre tópicos diretamente relacionados ao conteúdo visto em sala. A ideia é que a turma
+como um todo estude os artigos mais recentes da área e discuta esses trabalhos em sala.
+Em cada sessão, discutimos três artigos recentes relacionados aos tópicos abordados
+nas aulas teóricas.
+
+Para isso, adotamos um formato adaptado da proposta apresentada pelos Profs. Alec Jacobson
+e Colin Raffel, ambos da Universidade de Toronto (Canadá) -- veja a proposta original
+em <https://colinraffel.com/blog/role-playing-seminar.html>. A proposta consiste em
+fazer uma encenação de papéis (role play) científicos para a apresentação do seminário.
+Nessa proposta, cada grupo cumprirá um papel na apresentação. Ao final, uma apresentação
+em formato de slides e um documento textual são produzidos. A apresentação é usada em sala
+de aula para fomentar as discussões, enquanto o documento fornece uma descrição textual
+das impressões da turma com a intenção de descrever o tema do artigo para um público 
+amplo interessado em aprendizado de máquina e mineração de dados.
+
+São apresentados a seguir os artigos discutidos no semestre 2024/1, com os respectivos
+links para os slides e documentos textuais apresentando os artigos.
+
+## Artigo 1
+
+[A Survey of High Utility Itemset Mining](seminario1/artigo1.qmd)
+
+by Fournier-Viger, Philippe, Jerry Chun-Wei Lin, Tin Truong-Chi, and Roger Nkambou. 2019
+
+<https://doi.org/10.1007/978-3-030-04921-8_1>
+
+
+## Artigo 2
+
+[Finding Local Groupings of Time Series](seminario1/artigo2.qmd)
+
+by Lee, Zed, Marco Trincavelli, and Panagiotis Papapetrou. 2023
+
+<https://doi.org/10.1007/978-3-031-26422-1_5>
+
+## Artigo 3
+
+[Representation Learning for Frequent Subgraph Mining](seminario1/artigo3.qmd)
+
+by Ying, Rex, Tianyu Fu, Andrew Wang, Jiaxuan You, Yu Wang, and Jure Leskovec. 2024
+
+<https://arxiv.org/abs/2402.14367>

@@ -1,0 +1,4 @@
+---
+title: 'Artigo 2: Finding Local Groupings of Time Series'
+page-layout: full
+---
