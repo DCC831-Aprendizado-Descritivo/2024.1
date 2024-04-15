@@ -20,9 +20,10 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: minty
     css: styles.css
     toc: true
+#    linkcolor: "#666666"
     
 execute:
   freeze: auto    

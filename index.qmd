@@ -12,7 +12,7 @@ page-layout: full
 Aprendizado Descritivo &mdash; DCC/UFMG<br>
 </span>
 <span style="font-size: 1.1rem; letter-spacing: 0px; line-height: 0.6; font-family:Economica; text-transform:uppercase;">
-[Prof. Renato Vimieiro](https://dcc.ufmg.br/professor/renato-vimieiro/)
+<a href="https://dcc.ufmg.br/professor/renato-vimieiro/" style="color:#636363" class="prof">Prof. Renato Vimieiro</a>
 </span>
 </div>
 
@@ -41,5 +41,5 @@ dos métodos estudados para extração de conhecimento de bases de dados.
 Utilize o menu acima ou o link a seguir para visualizar o conteúdo produzido nos seminários e projetos
 desenvolvidos pelos alunos.
 
-- Seminários: [Padrões frequentes](seminario1.qmd); [Descoberta de subgrupos](seminario2.qmd); [Aplicações](seminario3.qmd)
+- Seminários: [Padrões frequentes](seminario1.qmd); Descoberta de subgrupos; Aplicações
 
