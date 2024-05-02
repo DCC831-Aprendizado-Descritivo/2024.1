@@ -2,3 +2,21 @@
 title: 'Artigo 1: A Survey of High Utility Itemset Mining'
 page-layout: full
 ---
+
+# História
+
+
+
+# Formalização
+
+
+
+# Metodologia
+
+
+
+# Impactos sociais
+
+
+
+# Como usar
