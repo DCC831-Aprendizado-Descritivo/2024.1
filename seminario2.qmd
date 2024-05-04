@@ -139,3 +139,5 @@ O algoritmo Z-Grouping é composto por quatro passos distintos, cada um focado e
 (@) Validação dos Agrupamentos Locais 
 
     Por fim, os agrupamentos locais são validados em relação aos agrupamentos globais pré-definidos. Isso é feito calculando uma pontuação de validade com base na proporção de instâncias de séries temporais em comum e utilizando um parâmetro de densidade para controlar a validade dos agrupamentos locais.
+
+
