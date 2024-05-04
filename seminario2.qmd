@@ -138,6 +138,101 @@ O algoritmo Z-Grouping é composto por quatro passos distintos, cada um focado e
 
 (@) Validação dos Agrupamentos Locais 
 
-    Por fim, os agrupamentos locais são validados em relação aos agrupamentos globais pré-definidos. Isso é feito calculando uma pontuação de validade com base na proporção de instâncias de séries temporais em comum e utilizando um parâmetro de densidade para controlar a validade dos agrupamentos locais.
+    Por fim, os agrupamentos locais são validados em relação aos agrupamentos globais pré-definidos. Isso é feito calculando uma pontuação de validade com base na proporção de instâncias de séries temporais em comum e utilizando um parâmetro de densidade para controlar a validade dos agrupamentos locais. 
+
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/6QRyPGWH/algoritmo.png)
+
+::: {#fig-steps fig-align='center'}
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/sgjQv2Jx/figura-1-steps.png){fig-align="center"}
+
+Um exemplo dos quatro passos do Z-grouping
+::: 
+
+## 2.3 Metodologia Experimental
+
+A metodologia experimental da pesquisa visa avaliar o desempenho do método Z-Grouping na identificação de agrupamentos locais em séries temporais. Para isso, foi utilizada uma abordagem abrangente que inclui a análise de conjuntos de dados reais de diferentes setores, bem como um conjunto de dados sintético para investigação detalhada dos parâmetros do método. Além disso, alguns métodos foram adaptados para efeitos de comparação. Abaixo, é fornecida uma descrição mais detalhada da metodologia utilizada. 
+
+(@) **Datasets:** Os conjuntos de dados reais utilizados abrangem três setores diferentes: indústria de varejo, mercado de ações e epidemias de COVID-19. Além disso, um conjunto de dados sintético foi gerado para investigação detalhada dos parâmetros do método. Este conjunto de dados sintético simula a presença de similaridade local em meio a padrões sinusoidais com diferentes frequências e amplitudes, além de incorporar ruído e outliers para refletir cenários do mundo real.
+
+(@) **Concorrentes:** Como não existe um concorrente direto para o problema, foram feitas adaptações nos métodos semigeometric tiling, kmeans, kmeans-FLEX e kNN para identificar agrupamentos locais em séries temporais. 
+
+(@) **Protocolo do Experimento:** Para avaliar o desempenho do método Z-Grouping, foi desenvolvido um protocolo de experimento que envolve a divisão dos dados em conjuntos de treinamento e teste. Durante a fase de treinamento, os agrupamentos locais são identificados nos dados de treinamento. Na fase de teste, o objetivo é determinar se os agrupamentos identificados podem identificar padrões de similaridade local em novas instâncias não vistas. Para cada amostra de teste, o agrupamento global correspondente é usado como referência. Isso simula situações do mundo real, como identificar padrões de vendas de um novo produto com base em produtos existentes. 
+
+(@) **Métricas de Avaliação:** Os resultados são avaliados em termos de erros de predição, como erro quadrático médio (MSE) e erro absoluto médio (MAE), bem como a cobertura dos agrupamentos, ou seja, a fração de séries temporais cobertas pelos agrupamentos identificados.  
 
 
+## 2.4 Análise Crítica dos Resultados 
+
+Em relação aos resultados alcançados, todos foram validados 10 vezes, e os seguintes parâmetros foram utilizados: 
+
+**α:** Este é um parâmetro que controla o nível de "pureza" dos agrupamentos.  
+
+**λ:** Este parâmetro controla o número de rótulos de abstração que o algoritmo pode usar. 
+
+**η:** Este parâmetro define o número mínimo de amostras necessárias para que um agrupamento seja considerado válido. 
+
+**w:** Este é o intervalo de tempo (em número de amostras) que esses algoritmos usam para identificar os agrupamentos locais. 
+
+**k:** Este é o número de agrupamentos (clusters) que esses algoritmos tentam formar. 
+
+**Corte de silhueta:** Este é um parâmetro que define um valor de corte para a métrica de silhueta.
+
+Os algoritmos testados utilizaram os seguintes parâmetros: 
+
+**Z-Grouping:** α = {0.8, 0.9, 1}, λ = {3, 5, 10}, e η = {1, 1.5, 2}. 
+
+**Semigeometric:** α = {0.8, 0.9, 1}, e η = {1, 1.5, 2}. 
+
+**kmeans:** intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}. 
+
+**kNN:** intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}. 
+
+**kmeans-FLEX:** corte de silhueta de 0,1 até falha em detectar quaisquer agrupamentos válidos.
+
+Em relação aos resultados no conjunto de dados sintéticos, pode-se analisar através da tabela 2 os erros de teste médios do Z-Grouping e seus quatro competidores. Através dela podemos chegar a algumas conclusões em relação ao Z-Grouping e seus concorrentes:
+
+* O Z-Grouping sempre consegue encontrar agrupamentos locais válidos de baixos erros considerando MSE e MAE; 
+
+* Semigeometric sofre com sua falta de poder de representação com uma forte suposição binária superado pelo Z-Grouping em relação aos agrupamentos locais; 
+
+* kNN atinge seu melhor escore com {w: 180, k: 3};  
+
+* kmeans não mostra diferenças notáveis com várias configurações de parâmetros, e é geralmente pior do que seus concorrentes;
+
+* Kmeans-FLEX tem seu menor MSE sendo apenas 3,4% menor que o menor erro do kmeans; 
+
+* O Semigeometric, kmeans, kNN e kmeans-FLEX são piores do que o Z-Grouping em todas as situações. 
+
+Além disso, utilizando os dados de UCR o Z-Grouping apresentou dificuldade para encontrar padrões para o agrupamento, performando de forma semelhante aos competidores devido a perda de informação pelo SAX em conjuntos mais uniformes. 
+
+Já em relação aos resultados no conjunto de dados reais, com os dados de GARMENT e STOCK o Z-Grouping apresentou resultados com diferença de 44.3% (MSE) e 25.2% (MAE) com cobertura de 88% dos dados, sendo superior aos competidores. E com os dados da COVID pode-se perceber que o trade-off de minimização do erro por perda de cobertura acabou levando o algoritmo a desempenhar com pouca melhora, sacrificando bastante da cobertura, cobrindo apenas 40% dos dados.
+
+Por fim, ao analisarmos o efeito dos parâmetros, um λ maior pode levar a uma menor cobertura, um α maior leva a agrupamentos mais puros o que permite um número menor de rótulos de evento diferentes, e um η maior exige mais amostras no agrupamento local para validade resultando em menos agrupamentos. Os parâmetros mais altos fazem com que o algoritmo perca sua capacidade de crescer mostrando aproximadamente só 10% de cobertura, além de gerar erros mais altos devido à ausência de pontos de dados para comparação. Por isso as associações dos agrupamentos são utilizadas para aumentar a cobertura preenchendo as lacunas criadas pelos altos valores dos parâmetros.
+
+::: {#tbl-steps tbl-align='center'}
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/wjwtJdWV/tabela-teste.png){tbl-align="center"}
+
+Erros médios de teste dos algoritmos no banco de dados Sintético (CV: Covarege(%))
+:::
+
+# 3. Conclusão 
+
+Este artigo revela dois problemas inéditos no âmbito de mineração de agrupamentos de séries temporais, abrangendo tanto agrupamentos locais quanto globais, e propõe o Z-Grouping como o algoritmo estado-da-arte na solução de ambos. Os problemas evidenciados, bem como a solução proposta no artigo, apresentam aplicabilidade prática em múltiplas áreas, como a prevenção do desmatamento, o manejo de demandas de consumo de energia elétrica e a distribuição de medicamentos.  
+
+Além disso, duas vantagens significativas de aplicabilidade do método Z-Grouping devem ser destacadas. Primeiramente, o método permite a análise das séries temporais ao longo do tempo, sem a necessidade de ter a série completa de dados de uma vez. Isso significa que é possível analisar os dados à medida que eles se tornam disponíveis, o que é especialmente útil em cenários onde os dados são gerados continuamente. Em segundo lugar, o método não exige conhecimento prévio sobre quais dados investigar. Ele é capaz de identificar agrupamentos locais e globais nas séries temporais sem a necessidade de informações prévias sobre padrões ou características específicas dos dados. Com isso, o Z-Grouping emerge como uma ferramenta poderosa para a descoberta de padrões temporais em diferentes áreas de pesquisa e indústrias.
+
+## 3.1 Sumário dos Resultados 
+
+O Z-Grouping foi testado contra quatro soluções alternativas para o problema de agrupamentos locais, baseadas em adaptações para o problema específico proposto no artigo de abordagens utilizadas de maneira geral em agrupamentos de séries temporais. Os cinco foram avaliados em três datasets com dados do mundo real, um dataset gerado sinteticamente e os 128 datasets clássicos de séries temporais da UCR (University of California, Riverside). O resultado dos experimentos constatou que o Z-Grouping atingiu taxas de erro menores do que seus competidores, e ao mesmo tempo gerou agrupamentos locais sem limitações no tamanho dos intervalos de tempo, o que não pode ser feito utilizando as demais abordagens.
+
+## 3.2 Considerações Finais e Sugestões para Futuras Pesquisas
+
+Possíveis abordagens de pesquisas futuras podem incluir o uso de outras funções de abstração temporal (além da SAX, utilizada no artigo), a aplicação de técnicas e heurísticas de otimização global na criação dos agrupamentos locais e o estudo de adaptações do algoritmo para séries temporais multivariadas, isto é, para a geração de agrupamentos multidimensionais.
+
+# 4. Referências
+
+Lee, Z., Trincavelli, M., Papapetrou, P. (2023). Finding Local Groupings of Time Series. In: Amini, MR., Canu, S., Fischer, A., Guns, T., Kralj Novak, P., Tsoumakas, G. (eds) Machine Learning and Knowledge Discovery in Databases. ECML PKDD 2022. Lecture Notes in Computer Science, vol 13718. Springer, Cham. https://doi.org/10.1007/978-3-031-26422-1_5  
+
+ALMEIDA, Dayse S.; NONATO, Luis Gustavo. Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais. Anais, 2021.  
+
+SILVA, P. L. P. Um Estudo sobre o Agrupamento de Séries Temporais e sua Aplicação em Curvas de Carga Residenciais. Universidade Federal de Minas Gerais, 2016.  
