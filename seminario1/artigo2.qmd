@@ -237,3 +237,166 @@ Lee, Z., Trincavelli, M., Papapetrou, P. (2023). Finding Local Groupings of Time
 ALMEIDA, Dayse S.; NONATO, Luis Gustavo. Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais. Anais, 2021.  
 
 SILVA, P. L. P. Um Estudo sobre o Agrupamento de Séries Temporais e sua Aplicação em Curvas de Carga Residenciais. Universidade Federal de Minas Gerais, 2016.  
+
+
+# 5. Apêndice: Roteiro de Instalação do Z-Grouping
+
+O Z-Grouping é uma ferramenta poderosa para análise de séries temporais, oferecendo uma implementação eficiente e robusta disponível no repositório oficial dos autores do artigo: https://github.com/zedshape/zgrouping/. 
+
+## 5.1 Instalação
+
+Para utilizar o Z-Grouping, é necessário ter instaladas as extensões [numba](https://numba.pydata.org/), [numpy](https://numpy.org/), [pyts](https://pyts.readthedocs.io/en/stable/) e o [Python](https://www.python.org/) em sua versão 3.7 ou superior. Devido às dependências utilizadas, recomenda-se a utilização do Python 3.8 ou superior para evitar conflitos de versão. 
+
+Para instalar o Python 3.8, siga os passos abaixo: 
+
+1. Instale as dependências necessárias:
+```Bash
+sudo apt-get install libsqlite3-dev ## (ou sqlite-devel dependendo do SO). 
+cd /opt/ 
+sudo wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz 
+sudo tar -xzf Python-3.8.3.tgz 
+cd Python-3.8.3 
+sudo ./configure --enable-optimizations --enable-loadable-sqlite-extensions 
+sudo make altinstall 
+```
+2. Ative o ambiente com Python 3.8:
+```Bash
+python3.8 -m venv ./.venv 
+source .venv/bin/activate 
+pip install --upgrade pip 
+pip install numba numpy==1.19.5 pyts matplotlib==3.3.1 
+```
+3. Por fim, para instalar o Z-Grouping, siga estas instruções:
+```Bash
+git clone https://github.com/zedshape/zgrouping.git 
+cd zgrouping 
+```
+
+Certifique-se de seguir esses passos com atenção para garantir uma instalação bem-sucedida do Z-Grouping em seu ambiente de desenvolvimento. 
+
+## 5.2 Utilização do Algoritmo Z-Grouping
+
+O algoritmo pode ser facilmente executado importando o método createGroupings do repositório fornecido: 
+
+```python
+from zgrouping.syntheticGenerator import createSyntheticData 
+```
+
+Ele recebe os seguintes parâmetros: 
+* `matrices`: matriz de labels de evento. Essa matriz pode ser gerada utilizando o método `utils.createChannel` sobre as séries temporais de entrada. 
+* `alpha`: o limiar de pureza. 
+* `debug`: opções de _print_ e debug. 
+* `accept`: habilita a função de validação da qualidade dos agrupamentos. 
+
+## 5.3 _Datasets_
+
+O repositório do Z-Grouping já contém bases de dados para teste e avaliação do algoritmo, localizadas na pasta `datasets`. Algumas das bases de dados incluem: 
+* `Covid-19`: Base de dados referente ao continente do país, país e contagem de casos de covid no país de 22/01/2020 até 30/09/2021. 
+* `Stocks`: Base de dados de ações contendo informações como data do registro, valor de abertura do dia, maior valor no dia, menor valor no dia, volume e TAG (nome) da ação. 
+
+Além disso, o repositório inclui um gerador de bases de dados sintéticas, que cria padrões entre séries temporais. Este gerador pode ser utilizado importando o método `createSyntheticData` do repositório: 
+
+```python
+from zgrouping.syntheticGenerator import createSyntheticData
+```
+
+O método `syntheticGenerator.createSyntheticData` requer os seguintes argumentos: 
+* `c`: Número de agrupamentos globais. 
+* `tc`: Número de membros da instância por agrupamento. 
+* `tl`: Tamanho de cada série temporal. 
+* `no_outliers`: Número de outliers. 
+* `outlier_size`: Tamanho do outlier. 
+* `amp`: Amplitude. 
+* `lineranges`: Comprimento de linhas retas. 
+* `lineheights`: Altura das linhas retas. 
+
+Esses _datasets_ sintéticos podem ser utilizados como substitutos para os _datasets_ reais mencionados anteriormente. No entanto, ainda é necessário passar essas bases pelo método de criação de canais, que é o dado de entrada para o algoritmo de agrupamento.
+
+## 5.4 Exemplo de Uso
+
+Para ilustrar o uso do Z-Grouping, apresentamos a seguir um exemplo prático de execução do algoritmo. Os passos a seguir demonstram como gerar dados sintéticos, aplicar transformações e finalmente executar o Z-Grouping para obter os agrupamentos desejados.
+
+```{python}
+from zgrouping import grouping, syntheticGenerator, utils 
+import matplotlib.pyplot as plt 
+
+# Synthetic generator 
+tc = 50 
+tl = 365 
+c = 20 
+no_outliers = 10 
+outlier_size = 10 
+
+# Grouping generation 
+n_bins = 5 
+alpha = 0.9 
+eta = 1.5 
+
+X_raw, y = syntheticGenerator.createSyntheticData(tc=tc, tl=tl, c=c, no_outliers=no_outliers, outlier_size=outlier_size) 
+
+# Visualização dos Dados Sintéticos 
+plt.plot(X_raw[0]) 
+plt.plot(X_raw[150]) 
+plt.show() 
+
+# Normalização e Transformação 
+X = utils.znorm(X_raw)  
+X_sax = utils.SAXify(X, n_bins=5) 
+print(X_sax[200]) 
+```
+
+Após a geração e transformação dos dados, será obtida uma matriz com padrões simbólicos, representando séries temporais. A seguir, é apresentado um exemplo dos dados antes e depois da transformação. 
+
+[//]: # (colocar ou não a imagem aqui?)
+
+Após a preparação dos dados, eles serão utilizados como entrada para a criação dos canais do Z-Grouping. A matriz resultante deve ter dimensões $S \times T$, onde $S$ é o número de séries temporais e $T$ é o tamanho de cada série temporal. Isso significa que cada linha da matriz representa uma série temporal e cada coluna representa o valor daquela série temporal em um determinado tempo. 
+
+```{python}
+matrices = utils.createChannels(X_sax)
+```
+
+Com os canais devidamente criados, será utilizado o Z-Grouping para obter os agrupamentos desejados. O código a seguir demonstra como executar o algoritmo e obter os agrupamentos: 
+
+```{python}
+groupings, associations = grouping.createGroupings(matrices, alpha=alpha, accept=False, debug=True) 
+```
+
+A variável `groupings` resultante é uma lista de objetos, onde cada objeto representa um agrupamento detectado. Cada agrupamento contém dois campos importantes: 
+* `members`: um vetor de booleanos indicando se uma série temporal pertence ou não a esse agrupamento, funcionando como uma máscara. 
+* `range`: o intervalo de tempo no qual o padrão se repete entre as séries temporais. 
+
+ Agora, para melhor visualização dos resultados, foi feita uma função que desenha os gráficos de algumas das séries temporais pertencentes a um determinado agrupamento e destaca o padrão detectado. 
+
+[//]: # (por alguma razão inexplicável precisa colocar 2 espaços depois do import e do def abaixo para o quarto gerar a célula de jupyter notebook corretamente)
+ ```{python}
+import  random
+
+def  print_3_examples(data, grouping, number_prints): 
+    mask = [(index, value) for (index, value) in enumerate(grouping['members'])] 
+    members = list(filter(lambda tuple : tuple[1], mask)) 
+    
+    randIndexList = [random.randint(0, len(members) -1) for i in range(number_prints)] 
+    choosedMembers = [members[index][0] for index in randIndexList] 
+    
+    interval = grouping['range'][0:number_prints] 
+
+    fig, axs = plt.subplots(nrows=number_prints, ncols=1) 
+    fig.set_figheight(15) 
+    i = 0 
+    for ax, i in zip(axs, choosedMembers): 
+        thisData = data[i] 
+        patternData = list(filter(lambda tuple: interval[0] <= tuple[0] <= interval[1], enumerate(thisData))) 
+        patternX = [pattern[0] for pattern in patternData] 
+        patternY = [pattern[1] for pattern in patternData] 
+        ax.plot(thisData) 
+        ax.plot(patternX, patternY, 'r') 
+        i += 1 
+
+    plt.subplots_adjust(hspace=0.0) 
+    plt.show() 
+
+    print(choosedMembers) 
+
+ 
+print_3_examples(X_raw, groupings[13], 6)
+ ```
