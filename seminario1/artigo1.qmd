@@ -207,3 +207,9 @@ A saída do algoritmo também é um arquivo *.txt*, contendo os itemsets de alta
     <figcaption>Arquivo de saída</figcaption>
 </figure>
 
+
+## Referências 
+* Fournier-Viger, P., Chun-Wei Lin, J., Truong-Chi, T., Nkambou, R. (2019). A Survey of High Utility Itemset Mining. In: Fournier-Viger, P., Lin, JW., Nkambou, R., Vo, B., Tseng, V. (eds) High-Utility Pattern Mining. Studies in Big Data, vol 51. Springer, Cham. <https://doi.org/10.1007/978-3-030-04921-8_1>
+* FOURNIER-VIGER, P. et al. FHM: Faster High-Utility Itemset Mining Using Estimated Utility Co-occurrence Pruning. ReserachGate, Taiwan, jul./2014. Disponível em: <https://www.researchgate.net/publication/263696687>. Acesso em: 23 abr. 2024.  
+* Fournier-Viger, Philippe. "SPMF: A Java Open-Source Pattern Mining Library." Disponível em: <https://www.philippe-fournier-viger.com/spmf/index.php>. Acesso em: 22 de Abril de 2024. 
+* LIU, Mengchi; QU, Junfeng. Mining High Utility Itemsets without Candidate Generation. ResearchGate, Wuhan, nov./2020. Disponível em: <https://www.researchgate.net/publication/262369808>. Acesso em: 23 abr. 2024.  
