@@ -120,4 +120,90 @@ No entanto, a implementação de algoritmos de mineração de alta utilidade sus
 
 Outra questão relevante é a elisão fiscal, na qual empresas utilizam o conhecimento de padrões de alta utilidade para minimizar suas obrigações fiscais de forma legal, mas questionável do ponto de vista ético. Esses desafios destacam a importância de regulamentações sólidas e transparência no uso de algoritmos de mineração de dados, garantindo que o impacto social e ético seja considerado em todas as etapas, desde a implementação até a operação dessas ferramentas avançadas.
 
-## Como usar    
+## Como usar  
+Neste guia iremos ensinar o passo a passo para poder executar o SPMF, um software livre que tem implementado vários algoritmos de mineração de itemsets de alta qualidade.
+
+A execução do SPMF exige o JAVA versão mínima 1.8, aqui iremos mostrar a instalação tanto do JAVA quanto do SPMF para o Windows, o processo de instalação do programa deve ser o mesmo no Linux, já que o programa é baseado em JAVA, a diferença se dará na instalação do JAVA.
+
+### Instalação
+
+Inicialmente segui o guia de instalação do JAVA [deste link](https://www.java.com/pt-BR/download/help/download_options_pt-br.html), mas na hora de execução do SPMF o programa não funcionou e a solução foi reinstalar o JAVA de outra forma. Apenas a fim de documentar um possível erro que você encontre ao tentar executar o SPMF, fica aqui o vídeo do processo de instalação que **não funcionou**.
+<figure align="center">
+  <video width="480" height="360" controls>
+    <source src="img/Instalacao_JAVA18.mp4" type="video/mp4">
+  </video>
+    <figcaption>Instalação da versão errada do JAVA</figcaption>
+</figure>
+
+A instalação do SPMF é simples e se encontra [neste link](https://www.philippe-fournier-viger.com/spmf/index.php?link=download.php). O vídeo a seguir mostra o processo inteiro:
+<figure align="center">
+  <video width="480" height="360" controls>
+    <source src="img/Instalacao_SPMF.mp4" type="video/mp4">
+  </video>
+    <figcaption>Instalação do software SPMF</figcaption>
+</figure>
+
+Como dito anteriormente, no final obtemos um erro do JAVA que é concertado pela re-instalação de uma versão atual [neste link](https://www.oracle.com/java/technologies/downloads/), tal processo é mostrado no vídeo a seguir:
+<figure align="center">
+  <video width="480" height="360" controls>
+    <source src="img/Instalacao_JAVA22.mp4" type="video/mp4">
+  </video>
+    <figcaption>Instalação da versão mais recente do JAVA</figcaption>
+</figure>
+
+### Execução
+
+#### Arquivo de Entrada
+
+O SPMF suporta arquivos de entrada no formato *.txt*. 
+
+A primeira parte do arquivo de entrada é opcional e é usada para nomear os itens presentes no banco de dados. 
+
+* Linhas começando com @​.
+* Primeira linha com "@CONVERTED_FROM_TEXT"​
+* Demais linhas fazem a ligação do item com sua descrição no formato @ITEM={ID}={DESCRICAO}
+  * {ID} é o número do item
+  * {DESCRICAO} é o nome do item
+
+<figure align="center">
+    <img src="img\Entrada_pt1.png">
+    <figcaption>Primira parte do arquivo de entrada (opcional)</figcaption>
+</figure>
+
+A segunda parte contém os dados das transações, com cada linha representando uma transação e cada coluna separada por ":" contendo o itemset, a utilidade total do itemset e a utilidade de cada item do itemset, respectivamente.
+
+* Linhas representam as transações​
+* Cada linha possui 3 colunas separadas pelo caractere ‘:’​
+  1. Coluna 1: itemset com os ids dos itens separados por espaço simples.
+  2. Coluna 2: utilidade total do itemset.
+  3. Coluna 3: utilidade respectiva de cada item do itemset separadas por espaço simples.​
+
+<figure align="center">
+    <img src="img\Entrada_pt2.png">
+    <figcaption>Segunda parte do arquivo de entrada</figcaption>
+</figure>
+
+#### Execução do Software
+Vídeo tutorial de como se deve executar o programa a partir do dado de entrada, o algoritmo escolhido no tutorial foi o *Two-Phase*:
+<figure align="center">
+  <video width="480" height="360" controls>
+    <source src="img/Execucao_SPMF.mp4" type="video/mp4">
+  </video>
+</figure>
+Apesar de no tutorial ser mostrado a execução com o algoritmo *Two-Phase*, temos várias opções de algoritmos para mineração de itensets de alta utilidade, como *UP-Growth*, *UP-Growth+*, *FHM* e *HUI-Miner*.
+
+#### Arquivo de Saída
+
+A saída do algoritmo também é um arquivo *.txt*, contendo os itemsets de alta utilidade encontrados, o suporte do itemset (nem todos os algoritmos geram esse valor) e a utilidade do itemset.
+
+* Linhas representam itemsets de alta utilidade encontrados.​
+* Cada linha possui 3 seções:​
+  1. O itemset, com os ids ou nomes dos itens separados por espaço simples,  depende da existência da 1ª parte do arquivo de entrada.​
+  2. “#SUP: {VALOR}” onde {VALOR} é o suporte do itemset (nem todos os algoritmos geram esse valor)​
+  3. “#UTIL: {VALOR}” onde {VALOR} é a utilidade do itemset.
+
+<figure align="center">
+    <img src="img\Saida.png">
+    <figcaption>Arquivo de saída</figcaption>
+</figure>
+
