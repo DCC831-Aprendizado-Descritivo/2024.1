@@ -6,7 +6,7 @@ crossref:
 format: 
     html:
         code-fold: true
-jupyter: python3
+jupyter: artigo2-venv
 ---
 
 # 1. Introdução
@@ -100,10 +100,30 @@ Essas considerações destacam a importância de uma abordagem holística e cuid
 
 ## 2.1 Conceitos Chave 
 
-Para compreender o algoritmo Z-Grouping, é fundamental dominar alguns conceitos fundamentais: 
+Para compreender o algoritmo Z-Grouping, é fundamental dominar alguns conceitos fundamentais.
+```{python}
+from zgrouping.zgrouping import grouping, syntheticGenerator, utils
+import matplotlib.pyplot as plt
+```
 
 I) Séries Temporais: Uma série temporal consiste em observações coletadas sequencialmente ao longo do tempo. Cada observação está vinculada a um instante específico, sendo a ordem das observações de crucial importância.
 Exemplo: Uma série temporal pode registrar as vendas diárias de um produto ao longo de um período, como as vendas diárias de um modelo de smartphone em uma loja.
+
+```{python}
+tc = 50
+tl = 365
+c = 20
+no_outliers = 10
+outlier_size = 10
+
+# GROUPING GENERATION
+n_bins = 5
+alpha = 0.9
+eta = 1.5
+
+X_raw, y = syntheticGenerator.createSyntheticData(tc = tc, tl=tl, c = c, no_outliers = no_outliers, outlier_size=outlier_size)
+plt.plot(X_raw[0])
+```
 
 II) Abstração Temporal: A abstração temporal é o processo de simplificar ou extrair características mais significativas de uma série temporal, facilitando sua análise. Exemplo: A aplicação do Symbolic Aggregate Approximation (SAX) para converter uma série temporal de vendas diárias em uma sequência de símbolos que representam padrões de vendas ao longo do tempo.
 
@@ -119,7 +139,11 @@ VII) Associação de Agrupamentos Locais: Associações são identificadas entre
 
 VIII) Semigeometric Tiling: Um algoritmo utilizado para identificar padrões ou agrupamentos em matrizes binárias, considerando combinações de intervalos de tempo e contagens de eventos. 
 
+![Fonte:  Z. Lee et al. (2022)](https://media.springernature.com/lw685/springer-static/image/chp%3A10.1007%2F978-3-319-46128-1_21/MediaObjects/431503_1_En_21_Fig2_HTML.gif){fig-align="center"}
+
 IX) Matriz de Associação e Validação: Uma representação matricial usada para identificar e validar associações entre agrupamentos locais. Essa matriz registra as relações entre os agrupamentos locais e os agrupamentos globais pré-definidos. 
+
+![Fonte:  Z. Lee et al. (2022)](./imgs/grouping.png){fig-align="center"}
 
 ## 2.2 Apresentação do Algoritmo 
 
@@ -128,6 +152,27 @@ O algoritmo Z-Grouping é composto por quatro passos distintos, cada um focado e
 (@) Geração da Matriz de Sequência de Eventos
 
     Neste passo, uma coleção de séries temporais é convertida em uma matriz de eventos, utilizando técnicas de abstração temporal como o método SAX. Isso permite uma representação mais simplificada dos dados, facilitando a análise subsequente.
+
+```{python}
+X = utils.znorm(X_raw)
+X_sax = utils.SAXify(X, n_bins = 5)
+X_sax[0]
+```
+
+```{python}
+plt.plot(X_raw[0])
+plt.plot(X_sax[0])
+plt.show()
+```
+
+(@) Criação de canais de rótulos
+
+    A matriz de eventos em seguida é subdividida em uma matriz binária de mesmo tamanho para cada rótulo
+
+```{python}
+matrices = utils.createChannels(X_sax)
+matrices[0]
+```
 
 (@) Geração de Agrupamentos Locais
 
