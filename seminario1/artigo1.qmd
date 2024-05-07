@@ -67,15 +67,57 @@ Perceba que, de acordo com essas definições, todos os algoritmos que são util
 | abordagens reduzem o espaço de busca          |                                              |
 | eliminando itens que não atendem aos critérios|                                              |
 | mínimos.
+  
+  
+## Metodologia do artigo
+O artigo adota uma abordagem metodológica baseada em Survey, delineando inicialmente o problema em questão e, em seguida, apresentando algoritmos destinados à sua resolução. Uma filtragem criteriosa de artigos relevantes no domínio da mineração de itemsets de alta utilidade foi realizada, seguida pela compilação e síntese dos algoritmos destacados, abordando suas estruturas e conceitos fundamentais.
 
+Os primeiros algoritmos abrangentes para identificar conjuntos de itens de alta utilidade operam em duas fases distintas: primeiro, geram-se candidatos que são subsequentemente avaliados quanto à sua utilidade efetiva. Esses algoritmos introduziram uma inovação crucial ao estabelecer uma medida monótona que serviria como limite superior para a utilidade dos conjuntos de itens. Uma dessas medidas pioneiras foi a TWU (Transaction-Weighted Utilization), a qual permitiu uma poda eficiente do espaço de busca. Em estágios posteriores, surgiram algoritmos de uma única fase, cujo propósito é economizar tempo ao integrar a geração e avaliação de candidatos em um único passo. Vale ressaltar que muitos desses algoritmos propostos representam generalizações de técnicas de mineração de conjuntos de itens frequentes estabelecidas, como o Two Phase (uma extensão do Apriori) e o UP-Growth (uma extensão do FP-Growth).
 
+Dentre os algoritmos apresentados para a mineração de padrões frequentes de alta utilidade são destacados os seguintes:
 
-# Metodologia
+| Algoritmo  | Tipo de Busca         | Fases | Representação dos Dados         | Extende    |
+|------------|-----------------------|-------|---------------------------------|------------|
+| Two-Phase  | Busca em Largura      | Duas  | Horizontal                      | Apriori    |
+| HUP-Growth | Busca em Profundidade | Duas  | Horizontal (Árvore de Prefixos) | FP-Growth  |
+| D2HUP      | Busca em Profundidade | Uma   | Vertical (Hiperestrutura)       | H-Mine     |
+| FHM        | Busca em Profundidade | Uma   | Vertical (Listas de Utilidade)  | Eclat      |
+| EFIM       | Busca em Profundidade | Uma   | Vertical (com fusões)           | LCM        |
 
+O artigo porém não se contém somente em discutir os algoritmos completos de mineração de padrões, mas também, reconhecendo a importância de representações com um nível maior de significado. É nesse ponto em que são apresentados os algoritmos que mineram representações concisas dos subconjuntos de alta utilidade:
 
+| Algoritmo   | Padrões   | Fases | Representação dos Dados        | Extende    |
+|-------------|-----------|-------|--------------------------------|------------|
+| MinFHM      | MinUIs    | Uma   | Vertical (Listas de Utilidade) | FHM        |
+| CHUD        | CHUIs     | Duas  | Vertical (Listas de Utilidade) | DCI Closed |
+| EFIM-CLOSED​ | CHUIs     | Uma   | Horizontal (com fusões)        | EFM        |
+| GUIDE       | MHUIs One | Uma   | Stream                         | UpGrowth   |
 
-# Impactos sociais
+Por fim, são apresentados algoritmos que retornam apenas os K subconjuntos de alta utilidade mais frequentes no conjunto de transações:
 
+| Algoritmo | Tipo de Busca         | Fases | Representação dos Dados         | Extende   |
+|-----------|-----------------------|-------|---------------------------------|-----------|
+| TKU​       | Busca em Profundidade​ | Duas  | Horizontal (Árvore de Prefixos) |​ UP-Growth​ |
+| TKO​       | Busca em Profundidade​ | Uma   | Vertical (Listas de Utilidade)  | HUI-Miner​ |
+| REPT​      | Busca em Profundidade​ | Uma   | Horizontal (Árvore de Prefixos)​ | MU-Growth​ |
+| kHMC​      | Busca em Profundidade​ | Uma   | Vertical (Listas de Utilidade)​  | FHM​       |
 
+## Aplicações e Desafios Éticos e Sociais
 
-# Como usar
+Há uma vasta gama de problemas do mundo real que podem se beneficiar significativamente do uso de algoritmos de mineração de subconjuntos frequentes de alta utilidade. Entre eles:
+
+* _Mercado de Varejo:_ Potencial para aumentar os lucros ao impulsionar as vendas de produtos mais rentáveis.
+* _Mercado de Compra Conjunta:_ Oportunidade de melhorar a lucratividade ao associar produtos visando redução de impostos.
+* _Sistema de Recomendação:_ Aprimoramento da capacidade de gerar lucro ao focar em produtos mais rentáveis.
+* _Cross-Selling e Up-Selling:_ Estímulo para compras de produtos complementares e promoção de vendas casadas.
+* _Tratamento de Saúde:_ Desenvolvimento de conjuntos de tratamentos visando maior eficiência.
+* _Detecção de Fraudes:_ Identificação de padrões pouco frequentes, porém altamente úteis, na detecção de fraudes.
+Uso da Internet:__ Análise do comportamento dos usuários para aprimorar a importância do site.
+* _Telecomunicações:_ Utilização na identificação de padrões de comunicação que resultam em maior lucratividade.
+* _Mineração de Texto:_ Identificação de textos com elevado valor agregado.
+
+No entanto, a implementação de algoritmos de mineração de alta utilidade suscita preocupações sociais e éticas que demandam uma atenção cuidadosa. Um ponto crucial é a ameaça à privacidade, uma vez que a identificação de indivíduos a partir de dados aparentemente anônimos pode comprometer a segurança dos mesmos. Ademais, há o risco de manipulação do mercado e do comportamento do consumidor, onde o conhecimento de padrões de consumo pode ser utilizado de maneira indevida para influenciar escolhas.  
+
+Outra questão relevante é a elisão fiscal, na qual empresas utilizam o conhecimento de padrões de alta utilidade para minimizar suas obrigações fiscais de forma legal, mas questionável do ponto de vista ético. Esses desafios destacam a importância de regulamentações sólidas e transparência no uso de algoritmos de mineração de dados, garantindo que o impacto social e ético seja considerado em todas as etapas, desde a implementação até a operação dessas ferramentas avançadas.
+
+## Como usar    
