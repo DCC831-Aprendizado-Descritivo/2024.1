@@ -68,6 +68,40 @@ Perceba que, de acordo com essas definições, todos os algoritmos que são util
 | eliminando itens que não atendem aos critérios|                                              |
 | mínimos.
   
+## Técnicas e Algoritmos usados
+O artigo estudado tem por objetivo apresentar a área de mineração de padrões frequentes de alta utilidade, além de mostrar ao leitor diferentes algoritmos para realizar essa mineração. As principais técnicas para a confecção dos algoritmos são a de "Duas fases" e de "Uma fase", essas técnicas serão explicadas nas próximas subseções, juntamente com um algoritmo representante de cada classe.
+  
+### Algoritmos de duas fases
+Algoritmos que seguem essa técnica usam o conceito de "**Utilidade da transação**", ou *Transaction Utility* (*TU*), que pode ser definido como a soma da utilidade de todos os itens que estão presentes em uma transação, para definir limites superiores do quão alta a utilidade de um subconjunto dessa transação pode ser. Esse limite superior é calculado para cada um dos padrões (*itemsets*) candidatos através de uma "**Utilidade com peso em transações**", ou *Transaction Weighted Utility* (*TWU*), que é definida como a soma da utilidade de todas as transações que contêm o padrão em evidência.
+
+O valor obtido de *TWU* para um *itemset*, é o limite superior para todos os superconjuntos que possam ser formados a partir dele. Por exemplo, suponha a existência de um *itemset* base `{a, b}` que possui *TWU* igual a 10, isso significa que qualquer itemset da forma `{a, b, _}`, onde o terceiro e último item pode ser qualquer um do universo de itens disponívei, terá necessariamente uma utilidade menor que 10. A aplicação dessa propriedade nos algoritmos traz um importante avanço, que é o estabelecimento de um **decrescimento monotônico do TWU** de acordo com o aumento dos itens em um *itemset*.
+
+A partir dessas propriedades, é definido um **suporte de utilidade mínimo** que elimina todos os itemsets que tenham TWU abaixo desse limiar assim que são identificados, evitando a geração de superconjuntos que não têm chances de serem de alta utilidade.
+
+<figure align="center">
+    <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/8a7b57f4-490d-47d2-a4ee-6229d8931788">
+    <figcaption>Exemplo de cálculo do <i>TWU</i>.</figcaption>
+</figure>
+
+A **primeira fase** dos algoritmos consiste em gerar o *TWU* de todos os itens disponíveis, já que eles são o menor *itemset* possível (excluindo o conjunto vazio). Após o cálculo, todos os *itemsets* unitários que tenham um *TWU* que estejam abaixo do suporte de utilidade mínimo definido são eliminados do espaço de busca, evitando que candidatos infrutíferos sejam gerados. Em seguida, a geração de candidatos continua para os *itemsets* de dois elementos gerados a partir dos remanescentes do filtro anterior, sendo que esses novos candidatos serão também removidos no caso de terem *TWU* menor que o suporte mínimo. Essa sequência de ações continua em repetição até que já não seja mais possível gerar novos candidatos.
+
+> Note que nessa primeira fase está sendo calculado o *TWU*, que é o limite superior de utilidade, e não a utilidade dos itemsets em si
+
+A **segunda fase** do algoritmo consiste em calcular a utilidade de todos os candidatos que sobraram da fase anterior, eliminando aqueles que tenham utilidade menor que o limite inferior estabelecido.
+
+O primeiro algoritmo desenvolvido para essa técnica se chama ***Two-Phase Algorithm***, tendo sido baseado no algoritmo ***Apriori*** para mineração de padrões frequentes. É possível ver uma imagem do pseudocódigo desse algoritmo a seguir:
+
+<figure align="center">
+    <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/ab3ed3cc-7409-4bce-962f-51c0e8d72cca">
+    <figcaption>Pseudocódigo do algoritmo ***Two-Phase***.</figcaption>
+</figure>
+
+Perceba que a função ***ITEMSETGENERATION()*** recebe apenas o conjunto de candidatos da iteração anterior como parâmetro, não verificando a base de dados de transação para gerar os candidatos, o que pode levar a *itemsets* que não ocorrem em nenhuma transação, resultando em um desperdício de tempo considerável para os cálculos deles.
+
+Outra limitação do algoritmo é que ele itera pelo conjunto de dados várias vezes para calcular o TWU dos itemsets, elevando o custo do algoritmo. Note que a exploração do espaço de busca desse algoritmo segue a técnica de *Breadth First Search* (*BFS*), o que leva a uma maior demora para eliminação de candidatos infrutíferos, principalmente pelo fato de que o *TWU* é uma métrica de limite extrapolada.
+  
+### Algoritmos de uma fase
+
   
 ## Metodologia do artigo
 O artigo adota uma abordagem metodológica baseada em Survey, delineando inicialmente o problema em questão e, em seguida, apresentando algoritmos destinados à sua resolução. Uma filtragem criteriosa de artigos relevantes no domínio da mineração de itemsets de alta utilidade foi realizada, seguida pela compilação e síntese dos algoritmos destacados, abordando suas estruturas e conceitos fundamentais.
