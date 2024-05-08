@@ -101,7 +101,29 @@ Perceba que a função ***ITEMSETGENERATION()*** recebe apenas o conjunto de can
 Outra limitação do algoritmo é que ele itera pelo conjunto de dados várias vezes para calcular o TWU dos itemsets, elevando o custo do algoritmo. Note que a exploração do espaço de busca desse algoritmo segue a técnica de *Breadth First Search* (*BFS*), o que leva a uma maior demora para eliminação de candidatos infrutíferos, principalmente pelo fato de que o *TWU* é uma métrica de limite extrapolada.
   
 ### Algoritmos de uma fase
+Esses algoritmos são mais diretos, fazendo o cálculo da utilidade de cada padrão considerado no espaço de busca, o que permite identificar imediatamente se um *itemset* é de alta ou baixa utilidade sem a necessidade de guardá-lo em memória principal (RAM).
 
+Outra novidade desses algoritmos é que eles trazem uma nova forma de calcular os limites superiores de utilidade, sendo mais próxima à utilidade real dos itemsets do que o *TWU* usado nos algoritmos de duas fases. Como exemplo de algoritmo dessa técnica, será utilizado o ***Fast High-Utility Miner (FHM)***, que introduz o conceito de Listas de Utilidade, ou ***Utility List (UL)***, para representar o banco de dados das transações.
+
+Considerando um *itemset* `X`, a lista de utilidade `UL(X)` será uma lista de tuplas para todas as ocorrências de `X` nas transações do banco, sendo que cada tupla armazenará o **ID da transação** em que o *itemset* está presente, a **utilidade do itemset** naquela transação e a **soma da utilidade de todos os itens com ordem lexicográfica superior aos itens de `X`**. O algoritmo se inicia calculando as listas de utilidade de todos os itemsets de um único elemento, sendo que as listas de utilidades dos superconjuntos desses itemsets será calculada a partir dos componentes delas. 
+
+Por exemplo, suponha as listas de utilidade dos conjuntos unitários `UL({a})` e `UL({d})`, para gerar a lista de utilidade e calcular a utilidade do *itemset* `{a, d}`, será calculada a interseção das transações que estão em `UL({a})` e `UL({d})`. A utilidade do novo itemset será simplesmente a soma das utilidades dos *itemsets* geradores, enquanto a utilidade dos itens com ordem lexicográfica superior será igual a presente no *itemset* gerador de maior ordem lexicográfica, no caso do exemplo, será o mesmo de `{b}`.
+
+<figure align="center">
+    <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/ce870a3f-41ae-4292-abe5-eaa4fabb6e0d" width="800px" height="500px">
+    <figcaption>Exemplo de cálculo das listas de utilidade.</figcaption>
+</figure>
+
+O cálculo do limite superior para esse algoritmo é chamado de "**Limite Superior por Utilidade Residual**", ou ***Remaining Utility Upper-Bound***, é feito somando a utilidade de um item (*iutil*) com a utilidade dos itens residuais de ordem lexicográfica maior (*rutil*) para todas as transações presentes na lista de utilidade. Caso esse resultado final seja menor que a utilidade mínima definida, aquele itemset é eliminado do espaço de busca, evitando que novos candidatos sejam gerados. A figura a seguir mostra o pseudocódigo para o algoritmo ***FHM***:
+
+<figure align="center">
+    <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/39093f0c-9952-4096-b7ab-69421ffaf05a">
+    <figcaption>Pseudocódigo do algoritmo FHM.</figcaption>
+</figure>
+
+Algoritmos baseados em listas de utilidade, como o ***FHM***, são até duas ordens de magnitude mais rápidos que os algoritmos de duas fases. Porém, a geração de candidatos ainda é baseada em itemsets anteriores, sem verificar o banco de dados de transações, o que pode levar a candidatos inexistentes e aumento no custo total do algoritmo por gastar recursos verificando possibilidades desnecessárias.
+
+Além disso, o custo de memória para o armazenamento das listas de utilidade de cada itemset verificado pode vir a ser preocupante. Outro ponto de atenção de algoritmos que seguem essa estratégia é o fato de que são feitas muitas comparações com listas de utilidade anteriores no processo de geração de candidatos, já que um candidato com `k` itens deverá fazer comparações com `k-1` listas de utilidade anteriores.
   
 ## Metodologia do artigo
 O artigo adota uma abordagem metodológica baseada em Survey, delineando inicialmente o problema em questão e, em seguida, apresentando algoritmos destinados à sua resolução. Uma filtragem criteriosa de artigos relevantes no domínio da mineração de itemsets de alta utilidade foi realizada, seguida pela compilação e síntese dos algoritmos destacados, abordando suas estruturas e conceitos fundamentais.
