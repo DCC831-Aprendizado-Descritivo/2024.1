@@ -1,4 +1,96 @@
 ---
 title: 'Artigo 2: Finding Local Groupings of Time Series'
 page-layout: full
+crossref:
+    lof-title: "List of Figures"
+format: 
+    html:
+        code-fold: true
+jupyter: python3
 ---
+
+# 1. Introdução
+
+O estudo e a análise de séries temporais desempenham um papel crucial em uma ampla gama de campos, desde o monitoramento do varejo até a detecção de anomalias de segurança. Ao longo do tempo, observações contínuas capturam nuances e padrões que podem revelar insights valiosos sobre o comportamento de sistemas complexos. Neste contexto, a capacidade de agrupar séries temporais com base em padrões similares torna-se fundamental para extrair conhecimento significativo.
+
+## 1.1 Contextualização do Problema 
+
+A motivação por trás dessa abordagem é multifacetada. No setor de varejo, por exemplo, a identificação de tendências locais de compra, como picos de vendas durante períodos festivos, pode ser crucial para otimizar estratégias de marketing e estoque. Da mesma forma, em análises financeiras, compreender as tendências de mercado pode orientar decisões de investimento. Em setores como saúde e biomedicina, a análise de variações sazonais e padrões de sono pode contribuir para o desenvolvimento de tratamentos mais eficazes. Além disso, o planejamento de recursos, a detecção de anomalias de segurança e a análise de dados ambientais e climáticos também se beneficiam significativamente da capacidade de identificar e compreender padrões em séries temporais. 
+
+Neste contexto, este artigo aborda a importância da abordagem de agrupamento de séries temporais, com foco no algoritmo Z-groupings. Exploraremos como esse método oferece uma perspectiva única para a identificação de grupos locais em séries temporais, destacando sua relevância e aplicabilidade em diversas áreas de estudo e prática. Ao compreendermos melhor as nuances e potenciais aplicações do Z-groupings, podemos abrir novas oportunidades para análises mais precisas e insights mais profundos em uma variedade de domínios. 
+
+## 1.2 Relacionamento com Métodos Clássicos
+
+O algoritmo Z-groupings não possui comparativos diretos. No entanto, existem alguns métodos clássicos que realizam tarefas comparáveis:
+
+* K-means: Este método particiona séries temporais em k clusters, onde os clusters representam grupos locais análogos aos encontrados pelo Z-groupings. 
+
+* Agrupamento Hierárquico: Neste método, as séries temporais são hierarquicamente divididas com base em uma métrica de similaridade. Os grupos resultantes são comparáveis aos grupos locais identificados pelo Z-groupings. 
+
+Contudo, é importante ressaltar que esses algoritmos não são diretamente comparáveis, pois se limitam a encontrar similaridades dentro de uma única série temporal, não considerando relações entre diferentes séries. 
+
+Já em relação aos algoritmos de mineração de sequências, fica evidente que ambos compartilham diversas características fundamentais. Ambos os métodos têm a capacidade de identificar padrões sequenciais em conjuntos de dados, baseando-se na frequência de ocorrência desses padrões. Além disso, ambos utilizam o conceito de suporte para filtrar padrões menos frequentes, priorizando aqueles que são mais relevantes para a análise. 
+
+Entretanto, ao analisar as diferenças entre o Z-groupings e seus equivalentes na mineração de sequência, destacam-se aspectos distintivos que delineiam a aplicação específica do Z-groupings em contextos de séries temporais. Enquanto muitos algoritmos de mineração de sequência são aplicáveis a diversos tipos de dados, o Z-groupings é especialmente projetado para lidar com séries temporais. Sua funcionalidade principal reside na capacidade de agrupar sequências temporais em grupos locais, visando identificar associações significativas entre os padrões temporais presentes nos dados. Essa abordagem mais focalizada confere ao Z-groupings uma vantagem significativa em cenários onde a compreensão das relações temporais é crucial para a análise e interpretação dos dados. 
+
+Essas nuances ressaltam a importância do Z-groupings como uma ferramenta especializada e eficaz para a análise de séries temporais, oferecendo insights valiosos e facilitando a descoberta de padrões e associações relevantes nos dados. 
+
+## 1.3 Impacto Social e Potenciais Aplicações 
+
+Serão examinados três casos específicos que destacam a versatilidade e utilidade do Z-groupings: o agrupamento de séries temporais de consumo de energia elétrica em residências, a análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais, e a análise de consumo de medicamentos para otimização da logística de distribuição. Cada uma dessas aplicações oferece uma perspectiva única sobre como o Z-groupings pode ser empregado para abordar desafios complexos e promover impactos significativos em diversos setores.
+
+### 1.3.1 Agrupamento de séries temporais de consumo de energia elétrica em residências
+
+O agrupamento de séries temporais de consumo de energia elétrica em residências é uma aplicação-chave das redes inteligentes, impulsionadas pela convergência de sistemas computacionais, de medição e de comunicação. Os medidores inteligentes, responsáveis por capturar e transmitir dados de consumo em intervalos regulares, geram uma quantidade substancial de informações. A análise desses dados, conhecida como agrupamento de curvas de carga, é essencial para extrair insights relevantes. Neste contexto, o Z-groupings e outros algoritmos semelhantes emergem como ferramentas valiosas. 
+
+As implicações dessa aplicação são diversas: 
+
+* Previsão de demanda de energia: Identificar padrões de consumo semelhantes entre diferentes regiões possibilita prever com mais precisão a demanda futura de energia. Isso facilita o planejamento da produção e distribuição de eletricidade pelas empresas de energia. 
+
+* Detecção de anomalias: Ao conhecer os padrões de consumo típicos, torna-se mais fácil detectar anomalias que possam indicar falhas nos equipamentos, problemas de eficiência energética ou atividades suspeitas, como roubo de energia. 
+
+* Potencial para discriminação: O uso das informações sobre padrões de consumo para segmentar clientes ou estabelecer tarifas diferenciadas pode levar à discriminação. Alguns grupos demográficos podem ser penalizados ou excluídos, aumentando as desigualdades. 
+
+* Risco de monopólio: Empresas de distribuição de energia com acesso a recursos computacionais avançados para análise de dados têm uma vantagem competitiva significativa. Isso pode resultar em um desequilíbrio de mercado, com grandes empresas dominando e marginalizando empresas menores.
+
+Essas consequências ressaltam a importância não apenas da aplicação eficaz de algoritmos de agrupamento de séries temporais, como o Z-groupings, mas também da consideração cuidadosa dos impactos sociais e éticos das decisões baseadas em dados no setor de energia elétrica.
+
+### 1.3.2 Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais 
+
+A análise da relação entre manejos madeireiros e desmatamento na Amazônia, por meio do agrupamento de séries temporais, destaca-se como uma aplicação vital dessa técnica analítica. Ao examinar as mudanças no índice de cobertura vegetal ao longo do tempo, é possível identificar padrões e tendências cruciais para o monitoramento e prevenção do desmatamento, bem como para o planejamento estratégico de políticas de conservação. 
+
+As consequências potenciais desse enfoque são variadas:
+
+* Monitoramento e prevenção eficazes do desmatamento: O uso do agrupamento de séries temporais pode melhorar substancialmente as estratégias de prevenção do desmatamento, identificando áreas em risco e facilitando intervenções preventivas. 
+
+* Planejamento de políticas de conservação: A identificação de áreas com alto risco de desmatamento possibilita o direcionamento eficiente de recursos e esforços para medidas preventivas, como programas de educação ambiental e reforço da fiscalização. 
+
+* Riscos à privacidade: O monitoramento detalhado pode levantar preocupações de privacidade, revelando informações sensíveis sobre padrões de vida e comportamentos das comunidades locais. 
+
+* Desigualdade e discriminação: Restrições ao uso da terra e acesso limitado às ferramentas de análise podem resultar em desigualdades na distribuição de recursos para a conservação. 
+
+* Impacto nos meios de subsistência locais: As políticas de conservação devem considerar os impactos nas comunidades locais, garantindo que sejam justas e equitativas. 
+
+Essas considerações destacam a importância de uma abordagem ética e abrangente no uso do agrupamento de séries temporais para a análise da relação entre manejos madeireiros e desmatamento na Amazônia. 
+
+### 1.3.3 Análise de consumo de medicamentos para otimização da logística de distribuição 
+
+A aplicação do método Z-Grouping na análise do consumo e distribuição de medicamentos apresenta uma oportunidade significativa para aprimorar a gestão de recursos farmacêuticos, especialmente sob a perspectiva da saúde pública, com foco na atuação da Agência Nacional de Vigilância Sanitária (ANVISA). Ao identificar padrões temporais e regionais no uso de medicamentos, essa abordagem oferece insights valiosos para intervenções estratégicas na logística de distribuição. 
+
+As aplicações práticas dessa análise são amplas: 
+
+* Refinamento da Logística de Distribuição: A identificação de agrupamentos locais de consumo permite ajustes precisos na cadeia de suprimentos, garantindo a disponibilidade adequada de medicamentos essenciais nas regiões com maior demanda, o que é crucial para garantir a continuidade dos tratamentos, especialmente em contextos de doenças crônicas ou surtos de doenças infecciosas. 
+
+* Projeção de Demandas Futuras: O Z-Grouping possibilita a projeção de demandas com base em tendências históricas, permitindo a antecipação de necessidades, como vacinas ou medicamentos antivirais. Essa capacidade preditiva é fundamental para evitar escassez ou excesso de estoques, possibilitando uma resposta eficiente às flutuações do mercado e demandas emergentes. 
+
+* Diagnóstico de Desperdícios e Ineficiências: Além disso, essa abordagem revela padrões de subutilização ou desperdício de medicamentos, indicando áreas potenciais para otimização das políticas de distribuição e uso racional de recursos farmacêuticos.
+
+Entretanto, a implementação dessas análises não está isenta de desafios e consequências, como: 
+
+* Integridade e Segurança dos Dados: A gestão cuidadosa da integridade e segurança dos dados é essencial para prevenir riscos de comprometimento das análises, garantindo o cumprimento das normativas de proteção de dados, como a LGPD. 
+
+* Justiça na Distribuição de Medicamentos: Há o risco de que análises baseadas em dados não reflitam com precisão a distribuição demográfica, resultando em alocações de recursos que perpetuam desequilíbrios existentes. Portanto, é crucial que as decisões de política farmacêutica considerem profundamente as necessidades locais. 
+
+* Riscos da Dependência de Modelos Quantitativos: Apesar da robustez do Z-Grouping, sua aplicação deve ser complementada por análises qualitativas e conhecimento especializado em saúde pública para evitar decisões que não considerem a complexidade dos padrões de saúde específicos. 
+
+Essas considerações destacam a importância de uma abordagem holística e cuidadosa na utilização do Z-Grouping para análise de consumo de medicamentos e sua distribuição, visando garantir benefícios significativos sem comprometer a integridade dos dados ou perpetuar desigualdades existentes.
