@@ -3,7 +3,7 @@ title: 'Artigo 1: A Survey of High Utility Itemset Mining'
 page-layout: full
 ---
 
-No campo da mineração e análise de dados, a mineração de padrões frequentes possui uma relevância bastante significativa, sendo importante para encontrar associações e correlações entre diferentes variáveis. Essa área de estudo surgiu juntamente com o crescimento exponencial da quantidade de dados disponíveis em diversos setores da vida cotidiana, em especial o comércio, tendo sido batizada com o nome de "Analise da cesta de compras".  
+No campo da mineração e análise de dados, a mineração de padrões frequentes possui uma relevância bastante significativa, sendo importante para encontrar associações e correlações entre diferentes variáveis. Essa área de estudo surgiu juntamente com o crescimento exponencial da quantidade de dados disponíveis em diversos setores da vida cotidiana, em especial o comércio, tendo sido batizada com o nome de "Análise da cesta de compras".  
 
 <figure align="center">
     <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/32526767-ceb1-4aff-a196-bd750f7b571b">
@@ -33,7 +33,7 @@ Para entender esses algoritmos, é primeiro necessário fazer uma segunda leva d
 > **Utilidade interna:** Se refere à utilidade de um item quando comparado com os outros dentro de uma mesma transação, podendo ser contabilizada como a quantidade de ocorrências daquele item dentro da transação. Note que essa medida é específica para cada uma das transações, com um item podendo ter uma alta utilidade interna em uma e uma baixa em outra.  
 > **Utilidade externa:** Se refere à utilidade de um item quando comparado com todos os outros itens em um âmbito mais geral, podendo ser representado como o preço dele, o peso, ou outra medida importante.  
 > **Utilidade total do item:** Calculada como a multiplicação da utilidade interna e externa do item na transação em específico.  
-> **Utilidade total do padrão (*itemset*):** Calculada como a soma da utilidade total de todos os itens que componham o padrão, note que se um item não está presente em uma transação, a utilidade total dele automaticamente é zero.  
+> **Utilidade total do padrão (*itemset*):** Calculada como a soma da utilidade total de todos os itens que componham o padrão. Note que se um item não está presente em uma transação, a utilidade total dele automaticamente é zero.  
 
 <figure align="center">
     <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/a770b686-5b9d-440c-bbbf-85a7dc3896fd" width="800px" height="400px">
@@ -85,7 +85,7 @@ A partir dessas propriedades, é definido um **suporte de utilidade mínimo** qu
 
 A **primeira fase** dos algoritmos consiste em gerar o *TWU* de todos os itens disponíveis, já que eles são o menor *itemset* possível (excluindo o conjunto vazio). Após o cálculo, todos os *itemsets* unitários que tenham um *TWU* que estejam abaixo do suporte de utilidade mínimo definido são eliminados do espaço de busca, evitando que candidatos infrutíferos sejam gerados. Em seguida, a geração de candidatos continua para os *itemsets* de dois elementos gerados a partir dos remanescentes do filtro anterior, sendo que esses novos candidatos serão também removidos no caso de terem *TWU* menor que o suporte mínimo. Essa sequência de ações continua em repetição até que já não seja mais possível gerar novos candidatos.
 
-> Note que nessa primeira fase está sendo calculado o *TWU*, que é o limite superior de utilidade, e não a utilidade dos itemsets em si
+> Note que nessa primeira fase está sendo calculado o *TWU*, que é o limite superior de utilidade, e não a utilidade dos itemsets em si.
 
 A **segunda fase** do algoritmo consiste em calcular a utilidade de todos os candidatos que sobraram da fase anterior, eliminando aqueles que tenham utilidade menor que o limite inferior estabelecido.
 
@@ -114,7 +114,7 @@ Por exemplo, suponha as listas de utilidade dos conjuntos unitários `UL({a})` e
     <figcaption>Exemplo de cálculo das listas de utilidade.</figcaption>
 </figure>
 
-O cálculo do limite superior para esse algoritmo é chamado de "**Limite Superior por Utilidade Residual**", ou ***Remaining Utility Upper-Bound***, é feito somando a utilidade de um item (*iutil*) com a utilidade dos itens residuais de ordem lexicográfica maior (*rutil*) para todas as transações presentes na lista de utilidade. Caso esse resultado final seja menor que a utilidade mínima definida, aquele itemset é eliminado do espaço de busca, evitando que novos candidatos sejam gerados. A figura a seguir mostra o pseudocódigo para o algoritmo ***FHM***:
+O cálculo do limite superior para esse algoritmo é chamado de "**Limite Superior por Utilidade Residual**", ou ***Remaining Utility Upper-Bound***, e é realizado somando a utilidade de um item (*iutil*) com a utilidade dos itens residuais de ordem lexicográfica maior (*rutil*) para todas as transações presentes na lista de utilidade. Caso esse resultado final seja menor que a utilidade mínima definida, aquele itemset é eliminado do espaço de busca, evitando que novos candidatos sejam gerados. A figura a seguir mostra o pseudocódigo para o algoritmo ***FHM***:
 
 <figure align="center">
     <img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/39093f0c-9952-4096-b7ab-69421ffaf05a">
@@ -140,7 +140,7 @@ Dentre os algoritmos apresentados para a mineração de padrões frequentes de a
 | FHM        | Busca em Profundidade | Uma   | Vertical (Listas de Utilidade)  | Eclat      |
 | EFIM       | Busca em Profundidade | Uma   | Vertical (com fusões)           | LCM        |
 
-O artigo porém não se contém somente em discutir os algoritmos completos de mineração de padrões, mas também, reconhecendo a importância de representações com um nível maior de significado. É nesse ponto em que são apresentados os algoritmos que mineram representações concisas dos subconjuntos de alta utilidade:
+O artigo porém não se contém somente em discutir os algoritmos completos de mineração de padrões, mas também reconhece a importância de representações com um nível maior de significado. É nesse ponto em que são apresentados os algoritmos que mineram representações concisas dos subconjuntos de alta utilidade:
 
 | Algoritmo   | Padrões   | Fases | Representação dos Dados        | Extende    |
 |-------------|-----------|-------|--------------------------------|------------|
@@ -179,11 +179,11 @@ Outra questão relevante é a elisão fiscal, na qual empresas utilizam o conhec
 ## Como usar  
 Neste guia iremos ensinar o passo a passo para poder executar o SPMF, um software livre que tem implementado vários algoritmos de mineração de itemsets de alta qualidade.
 
-A execução do SPMF exige o JAVA versão mínima 1.8, aqui iremos mostrar a instalação tanto do JAVA quanto do SPMF para o Windows, o processo de instalação do programa deve ser o mesmo no Linux, já que o programa é baseado em JAVA, a diferença se dará na instalação do JAVA.
+A execução do SPMF exige o JAVA versão mínima 1.8. Aqui, iremos mostrar a instalação tanto do JAVA quanto do SPMF para o Windows, o processo de instalação do programa deve ser o mesmo no Linux, já que o programa é baseado em JAVA, a diferença se dará na instalação do JAVA.
 
 ### Instalação
 
-Inicialmente segui o guia de instalação do JAVA [deste link](https://www.java.com/pt-BR/download/help/download_options_pt-br.html), mas na hora de execução do SPMF o programa não funcionou e a solução foi reinstalar o JAVA de outra forma. Apenas a fim de documentar um possível erro que você encontre ao tentar executar o SPMF, fica aqui o vídeo do processo de instalação que **não funcionou**.
+Com o fim de documetar o processo de instalação do Java, foi seguido o tutorial [deste link](https://www.java.com/pt-BR/download/help/download_options_pt-br.html). Entretanto, no momento da execução do SPMF o programa não funcionou e a solução foi reinstalar o JAVA de outra forma. Apenas a fim de registrar um possível erro que possa ser encontrado ao tentar executar o SPMF, fica aqui o vídeo do processo de instalação que **não funcionou**.
 <figure align="center">
   <video width="480" height="360" controls>
     <source src="img/Instalacao_JAVA18.mp4" type="video/mp4">
