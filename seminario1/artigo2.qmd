@@ -1,6 +1,6 @@
 ---
 title: 'Artigo 2: Finding Local Groupings of Time Series'
-# title: "Investigação do Algoritmo Z-Grouping para Mineração de Padrões Frequentes em Séries Temporais"
+page-layout: full
 crossref:
     lof-title: "List of Figures"
 format: 
