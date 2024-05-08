@@ -1,0 +1,238 @@
+---
+title: "Investigação do Algoritmo Z-Grouping para Mineração de Padrões Frequentes em Séries Temporais"
+crossref:
+    lof-title: "List of Figures"
+format: 
+    html:
+        code-fold: true
+jupyter: python3
+---
+
+# 1. Introdução
+
+O estudo e a análise de séries temporais desempenham um papel crucial em uma ampla gama de campos, desde o monitoramento do varejo até a detecção de anomalias de segurança. Ao longo do tempo, observações contínuas capturam nuances e padrões que podem revelar insights valiosos sobre o comportamento de sistemas complexos. Neste contexto, a capacidade de agrupar séries temporais com base em padrões similares torna-se fundamental para extrair conhecimento significativo.
+
+## 1.1 Contextualização do Problema 
+
+A motivação por trás dessa abordagem é multifacetada. No setor de varejo, por exemplo, a identificação de tendências locais de compra, como picos de vendas durante períodos festivos, pode ser crucial para otimizar estratégias de marketing e estoque. Da mesma forma, em análises financeiras, compreender as tendências de mercado pode orientar decisões de investimento. Em setores como saúde e biomedicina, a análise de variações sazonais e padrões de sono pode contribuir para o desenvolvimento de tratamentos mais eficazes. Além disso, o planejamento de recursos, a detecção de anomalias de segurança e a análise de dados ambientais e climáticos também se beneficiam significativamente da capacidade de identificar e compreender padrões em séries temporais. 
+
+Neste contexto, este artigo aborda a importância da abordagem de agrupamento de séries temporais, com foco no algoritmo Z-groupings. Exploraremos como esse método oferece uma perspectiva única para a identificação de grupos locais em séries temporais, destacando sua relevância e aplicabilidade em diversas áreas de estudo e prática. Ao compreendermos melhor as nuances e potenciais aplicações do Z-groupings, podemos abrir novas oportunidades para análises mais precisas e insights mais profundos em uma variedade de domínios. 
+
+## 1.2 Relacionamento com Métodos Clássicos
+
+O algoritmo Z-groupings não possui comparativos diretos. No entanto, existem alguns métodos clássicos que realizam tarefas comparáveis:
+
+* K-means: Este método particiona séries temporais em k clusters, onde os clusters representam grupos locais análogos aos encontrados pelo Z-groupings. 
+
+* Agrupamento Hierárquico: Neste método, as séries temporais são hierarquicamente divididas com base em uma métrica de similaridade. Os grupos resultantes são comparáveis aos grupos locais identificados pelo Z-groupings. 
+
+Contudo, é importante ressaltar que esses algoritmos não são diretamente comparáveis, pois se limitam a encontrar similaridades dentro de uma única série temporal, não considerando relações entre diferentes séries. 
+
+Já em relação aos algoritmos de mineração de sequências, fica evidente que ambos compartilham diversas características fundamentais. Ambos os métodos têm a capacidade de identificar padrões sequenciais em conjuntos de dados, baseando-se na frequência de ocorrência desses padrões. Além disso, ambos utilizam o conceito de suporte para filtrar padrões menos frequentes, priorizando aqueles que são mais relevantes para a análise. 
+
+Entretanto, ao analisar as diferenças entre o Z-groupings e seus equivalentes na mineração de sequência, destacam-se aspectos distintivos que delineiam a aplicação específica do Z-groupings em contextos de séries temporais. Enquanto muitos algoritmos de mineração de sequência são aplicáveis a diversos tipos de dados, o Z-groupings é especialmente projetado para lidar com séries temporais. Sua funcionalidade principal reside na capacidade de agrupar sequências temporais em grupos locais, visando identificar associações significativas entre os padrões temporais presentes nos dados. Essa abordagem mais focalizada confere ao Z-groupings uma vantagem significativa em cenários onde a compreensão das relações temporais é crucial para a análise e interpretação dos dados. 
+
+Essas nuances ressaltam a importância do Z-groupings como uma ferramenta especializada e eficaz para a análise de séries temporais, oferecendo insights valiosos e facilitando a descoberta de padrões e associações relevantes nos dados. 
+
+## 1.3 Impacto Social e Potenciais Aplicações 
+
+Serão examinados três casos específicos que destacam a versatilidade e utilidade do Z-groupings: o agrupamento de séries temporais de consumo de energia elétrica em residências, a análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais, e a análise de consumo de medicamentos para otimização da logística de distribuição. Cada uma dessas aplicações oferece uma perspectiva única sobre como o Z-groupings pode ser empregado para abordar desafios complexos e promover impactos significativos em diversos setores.
+
+### 1.3.1 Agrupamento de séries temporais de consumo de energia elétrica em residências
+
+O agrupamento de séries temporais de consumo de energia elétrica em residências é uma aplicação-chave das redes inteligentes, impulsionadas pela convergência de sistemas computacionais, de medição e de comunicação. Os medidores inteligentes, responsáveis por capturar e transmitir dados de consumo em intervalos regulares, geram uma quantidade substancial de informações. A análise desses dados, conhecida como agrupamento de curvas de carga, é essencial para extrair insights relevantes. Neste contexto, o Z-groupings e outros algoritmos semelhantes emergem como ferramentas valiosas. 
+
+As implicações dessa aplicação são diversas: 
+
+* Previsão de demanda de energia: Identificar padrões de consumo semelhantes entre diferentes regiões possibilita prever com mais precisão a demanda futura de energia. Isso facilita o planejamento da produção e distribuição de eletricidade pelas empresas de energia. 
+
+* Detecção de anomalias: Ao conhecer os padrões de consumo típicos, torna-se mais fácil detectar anomalias que possam indicar falhas nos equipamentos, problemas de eficiência energética ou atividades suspeitas, como roubo de energia. 
+
+* Potencial para discriminação: O uso das informações sobre padrões de consumo para segmentar clientes ou estabelecer tarifas diferenciadas pode levar à discriminação. Alguns grupos demográficos podem ser penalizados ou excluídos, aumentando as desigualdades. 
+
+* Risco de monopólio: Empresas de distribuição de energia com acesso a recursos computacionais avançados para análise de dados têm uma vantagem competitiva significativa. Isso pode resultar em um desequilíbrio de mercado, com grandes empresas dominando e marginalizando empresas menores.
+
+Essas consequências ressaltam a importância não apenas da aplicação eficaz de algoritmos de agrupamento de séries temporais, como o Z-groupings, mas também da consideração cuidadosa dos impactos sociais e éticos das decisões baseadas em dados no setor de energia elétrica.
+
+### 1.3.2 Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais 
+
+A análise da relação entre manejos madeireiros e desmatamento na Amazônia, por meio do agrupamento de séries temporais, destaca-se como uma aplicação vital dessa técnica analítica. Ao examinar as mudanças no índice de cobertura vegetal ao longo do tempo, é possível identificar padrões e tendências cruciais para o monitoramento e prevenção do desmatamento, bem como para o planejamento estratégico de políticas de conservação. 
+
+As consequências potenciais desse enfoque são variadas:
+
+* Monitoramento e prevenção eficazes do desmatamento: O uso do agrupamento de séries temporais pode melhorar substancialmente as estratégias de prevenção do desmatamento, identificando áreas em risco e facilitando intervenções preventivas. 
+
+* Planejamento de políticas de conservação: A identificação de áreas com alto risco de desmatamento possibilita o direcionamento eficiente de recursos e esforços para medidas preventivas, como programas de educação ambiental e reforço da fiscalização. 
+
+* Riscos à privacidade: O monitoramento detalhado pode levantar preocupações de privacidade, revelando informações sensíveis sobre padrões de vida e comportamentos das comunidades locais. 
+
+* Desigualdade e discriminação: Restrições ao uso da terra e acesso limitado às ferramentas de análise podem resultar em desigualdades na distribuição de recursos para a conservação. 
+
+* Impacto nos meios de subsistência locais: As políticas de conservação devem considerar os impactos nas comunidades locais, garantindo que sejam justas e equitativas. 
+
+Essas considerações destacam a importância de uma abordagem ética e abrangente no uso do agrupamento de séries temporais para a análise da relação entre manejos madeireiros e desmatamento na Amazônia. 
+
+### 1.3.3 Análise de consumo de medicamentos para otimização da logística de distribuição 
+
+A aplicação do método Z-Grouping na análise do consumo e distribuição de medicamentos apresenta uma oportunidade significativa para aprimorar a gestão de recursos farmacêuticos, especialmente sob a perspectiva da saúde pública, com foco na atuação da Agência Nacional de Vigilância Sanitária (ANVISA). Ao identificar padrões temporais e regionais no uso de medicamentos, essa abordagem oferece insights valiosos para intervenções estratégicas na logística de distribuição. 
+
+As aplicações práticas dessa análise são amplas: 
+
+* Refinamento da Logística de Distribuição: A identificação de agrupamentos locais de consumo permite ajustes precisos na cadeia de suprimentos, garantindo a disponibilidade adequada de medicamentos essenciais nas regiões com maior demanda, o que é crucial para garantir a continuidade dos tratamentos, especialmente em contextos de doenças crônicas ou surtos de doenças infecciosas. 
+
+* Projeção de Demandas Futuras: O Z-Grouping possibilita a projeção de demandas com base em tendências históricas, permitindo a antecipação de necessidades, como vacinas ou medicamentos antivirais. Essa capacidade preditiva é fundamental para evitar escassez ou excesso de estoques, possibilitando uma resposta eficiente às flutuações do mercado e demandas emergentes. 
+
+* Diagnóstico de Desperdícios e Ineficiências: Além disso, essa abordagem revela padrões de subutilização ou desperdício de medicamentos, indicando áreas potenciais para otimização das políticas de distribuição e uso racional de recursos farmacêuticos.
+
+Entretanto, a implementação dessas análises não está isenta de desafios e consequências, como: 
+
+* Integridade e Segurança dos Dados: A gestão cuidadosa da integridade e segurança dos dados é essencial para prevenir riscos de comprometimento das análises, garantindo o cumprimento das normativas de proteção de dados, como a LGPD. 
+
+* Justiça na Distribuição de Medicamentos: Há o risco de que análises baseadas em dados não reflitam com precisão a distribuição demográfica, resultando em alocações de recursos que perpetuam desequilíbrios existentes. Portanto, é crucial que as decisões de política farmacêutica considerem profundamente as necessidades locais. 
+
+* Riscos da Dependência de Modelos Quantitativos: Apesar da robustez do Z-Grouping, sua aplicação deve ser complementada por análises qualitativas e conhecimento especializado em saúde pública para evitar decisões que não considerem a complexidade dos padrões de saúde específicos. 
+
+Essas considerações destacam a importância de uma abordagem holística e cuidadosa na utilização do Z-Grouping para análise de consumo de medicamentos e sua distribuição, visando garantir benefícios significativos sem comprometer a integridade dos dados ou perpetuar desigualdades existentes. 
+
+
+# 2. Desenvolvimento 
+
+## 2.1 Conceitos Chave 
+
+Para compreender o algoritmo Z-Grouping, é fundamental dominar alguns conceitos fundamentais: 
+
+I) Séries Temporais: Uma série temporal consiste em observações coletadas sequencialmente ao longo do tempo. Cada observação está vinculada a um instante específico, sendo a ordem das observações de crucial importância.
+Exemplo: Uma série temporal pode registrar as vendas diárias de um produto ao longo de um período, como as vendas diárias de um modelo de smartphone em uma loja.
+
+II) Abstração Temporal: A abstração temporal é o processo de simplificar ou extrair características mais significativas de uma série temporal, facilitando sua análise. Exemplo: A aplicação do Symbolic Aggregate Approximation (SAX) para converter uma série temporal de vendas diárias em uma sequência de símbolos que representam padrões de vendas ao longo do tempo.
+
+III) Eventos em Séries Temporais: Um evento em uma série temporal é uma ocorrência distinta ou uma característica identificável nos dados ao longo do tempo, como picos, vales, transições ou padrões recorrentes. 
+
+IV) Rótulos de Eventos: Os rótulos de eventos são atributos simbólicos ou categorizações aplicadas aos eventos em uma série temporal para representá-los de maneira simplificada e compreensível. Exemplo: Os rótulos podem ser escolhidos de um conjunto discreto de símbolos ou categorias, como letras, números ou outros identificadores simbólicos. 
+
+V) Matriz de Sequência de Eventos: Uma matriz que representa a sequência de rótulos de eventos derivados das séries temporais após a abstração temporal. Cada entrada na matriz representa um evento em uma série temporal específica. 
+
+VI) Agrupamento Local: O agrupamento local refere-se à identificação de subconjuntos de séries temporais que exibem padrões semelhantes em intervalos específicos de tempo. No contexto do Z-Grouping, os agrupamentos locais são identificados em cada canal de rótulo de evento. 
+
+VII) Associação de Agrupamentos Locais: Associações são identificadas entre agrupamentos locais consecutivos ou sobrepostos que compartilham instâncias de séries temporais semelhantes. O objetivo é descobrir padrões mais amplos e complexos que não seriam detectados apenas nos agrupamentos locais individuais. 
+
+VIII) Semigeometric Tiling: Um algoritmo utilizado para identificar padrões ou agrupamentos em matrizes binárias, considerando combinações de intervalos de tempo e contagens de eventos. 
+
+IX) Matriz de Associação e Validação: Uma representação matricial usada para identificar e validar associações entre agrupamentos locais. Essa matriz registra as relações entre os agrupamentos locais e os agrupamentos globais pré-definidos. 
+
+## 2.2 Apresentação do Algoritmo 
+
+O algoritmo Z-Grouping é composto por quatro passos distintos, cada um focado em uma etapa específica do processo de análise de séries temporais. São eles: 
+
+(@) Geração da Matriz de Sequência de Eventos
+
+    Neste passo, uma coleção de séries temporais é convertida em uma matriz de eventos, utilizando técnicas de abstração temporal como o método SAX. Isso permite uma representação mais simplificada dos dados, facilitando a análise subsequente.
+
+(@) Geração de Agrupamentos Locais
+
+    O próximo passo envolve a identificação de agrupamentos locais em cada canal de rótulo de evento da matriz de eventos. Esse processo é conduzido pelo algoritmo de semigeometric tiling, que busca candidatos a agrupamentos locais com base na contagem de eventos em intervalos de tempo específicos. Além disso, o algoritmo utiliza um parâmetro 𝝰, variando de 0 a 1, para determinar a pureza de um agrupamento local. Por exemplo, ao definir 𝝰 como 0.75, estamos estabelecendo que pelo menos 75% dos elementos do agrupamento devem conter o evento analisado.
+
+(@) Identificação de Associações entre Agrupamentos Locais 
+
+    Nesta etapa, o algoritmo procura associações entre os agrupamentos locais identificados. Isso é feito através da análise de candidatos a associações consecutivas, verificando a proximidade entre elas e identificando instâncias de séries temporais compartilhadas. 
+
+(@) Validação dos Agrupamentos Locais 
+
+    Por fim, os agrupamentos locais são validados em relação aos agrupamentos globais pré-definidos. Isso é feito calculando uma pontuação de validade com base na proporção de instâncias de séries temporais em comum e utilizando um parâmetro de densidade para controlar a validade dos agrupamentos locais. 
+
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/6QRyPGWH/algoritmo.png)
+
+::: {#fig-steps fig-align='center'}
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/sgjQv2Jx/figura-1-steps.png){fig-align="center"}
+
+Um exemplo dos quatro passos do Z-grouping
+::: 
+
+## 2.3 Metodologia Experimental
+
+A metodologia experimental da pesquisa visa avaliar o desempenho do método Z-Grouping na identificação de agrupamentos locais em séries temporais. Para isso, foi utilizada uma abordagem abrangente que inclui a análise de conjuntos de dados reais de diferentes setores, bem como um conjunto de dados sintético para investigação detalhada dos parâmetros do método. Além disso, alguns métodos foram adaptados para efeitos de comparação. Abaixo, é fornecida uma descrição mais detalhada da metodologia utilizada. 
+
+(@) **Datasets:** Os conjuntos de dados reais utilizados abrangem três setores diferentes: indústria de varejo, mercado de ações e epidemias de COVID-19. Além disso, um conjunto de dados sintético foi gerado para investigação detalhada dos parâmetros do método. Este conjunto de dados sintético simula a presença de similaridade local em meio a padrões sinusoidais com diferentes frequências e amplitudes, além de incorporar ruído e outliers para refletir cenários do mundo real.
+
+(@) **Concorrentes:** Como não existe um concorrente direto para o problema, foram feitas adaptações nos métodos semigeometric tiling, kmeans, kmeans-FLEX e kNN para identificar agrupamentos locais em séries temporais. 
+
+(@) **Protocolo do Experimento:** Para avaliar o desempenho do método Z-Grouping, foi desenvolvido um protocolo de experimento que envolve a divisão dos dados em conjuntos de treinamento e teste. Durante a fase de treinamento, os agrupamentos locais são identificados nos dados de treinamento. Na fase de teste, o objetivo é determinar se os agrupamentos identificados podem identificar padrões de similaridade local em novas instâncias não vistas. Para cada amostra de teste, o agrupamento global correspondente é usado como referência. Isso simula situações do mundo real, como identificar padrões de vendas de um novo produto com base em produtos existentes. 
+
+(@) **Métricas de Avaliação:** Os resultados são avaliados em termos de erros de predição, como erro quadrático médio (MSE) e erro absoluto médio (MAE), bem como a cobertura dos agrupamentos, ou seja, a fração de séries temporais cobertas pelos agrupamentos identificados.  
+
+
+## 2.4 Análise Crítica dos Resultados 
+
+Em relação aos resultados alcançados, todos foram validados 10 vezes, e os seguintes parâmetros foram utilizados: 
+
+**α:** Este é um parâmetro que controla o nível de "pureza" dos agrupamentos.  
+
+**λ:** Este parâmetro controla o número de rótulos de abstração que o algoritmo pode usar. 
+
+**η:** Este parâmetro define o número mínimo de amostras necessárias para que um agrupamento seja considerado válido. 
+
+**w:** Este é o intervalo de tempo (em número de amostras) que esses algoritmos usam para identificar os agrupamentos locais. 
+
+**k:** Este é o número de agrupamentos (clusters) que esses algoritmos tentam formar. 
+
+**Corte de silhueta:** Este é um parâmetro que define um valor de corte para a métrica de silhueta.
+
+Os algoritmos testados utilizaram os seguintes parâmetros: 
+
+**Z-Grouping:** α = {0.8, 0.9, 1}, λ = {3, 5, 10}, e η = {1, 1.5, 2}. 
+
+**Semigeometric:** α = {0.8, 0.9, 1}, e η = {1, 1.5, 2}. 
+
+**kmeans:** intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}. 
+
+**kNN:** intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}. 
+
+**kmeans-FLEX:** corte de silhueta de 0,1 até falha em detectar quaisquer agrupamentos válidos.
+
+Em relação aos resultados no conjunto de dados sintéticos, pode-se analisar através da tabela 2 os erros de teste médios do Z-Grouping e seus quatro competidores. Através dela podemos chegar a algumas conclusões em relação ao Z-Grouping e seus concorrentes:
+
+* O Z-Grouping sempre consegue encontrar agrupamentos locais válidos de baixos erros considerando MSE e MAE; 
+
+* Semigeometric sofre com sua falta de poder de representação com uma forte suposição binária superado pelo Z-Grouping em relação aos agrupamentos locais; 
+
+* kNN atinge seu melhor escore com {w: 180, k: 3};  
+
+* kmeans não mostra diferenças notáveis com várias configurações de parâmetros, e é geralmente pior do que seus concorrentes;
+
+* Kmeans-FLEX tem seu menor MSE sendo apenas 3,4% menor que o menor erro do kmeans; 
+
+* O Semigeometric, kmeans, kNN e kmeans-FLEX são piores do que o Z-Grouping em todas as situações. 
+
+Além disso, utilizando os dados de UCR o Z-Grouping apresentou dificuldade para encontrar padrões para o agrupamento, performando de forma semelhante aos competidores devido a perda de informação pelo SAX em conjuntos mais uniformes. 
+
+Já em relação aos resultados no conjunto de dados reais, com os dados de GARMENT e STOCK o Z-Grouping apresentou resultados com diferença de 44.3% (MSE) e 25.2% (MAE) com cobertura de 88% dos dados, sendo superior aos competidores. E com os dados da COVID pode-se perceber que o trade-off de minimização do erro por perda de cobertura acabou levando o algoritmo a desempenhar com pouca melhora, sacrificando bastante da cobertura, cobrindo apenas 40% dos dados.
+
+Por fim, ao analisarmos o efeito dos parâmetros, um λ maior pode levar a uma menor cobertura, um α maior leva a agrupamentos mais puros o que permite um número menor de rótulos de evento diferentes, e um η maior exige mais amostras no agrupamento local para validade resultando em menos agrupamentos. Os parâmetros mais altos fazem com que o algoritmo perca sua capacidade de crescer mostrando aproximadamente só 10% de cobertura, além de gerar erros mais altos devido à ausência de pontos de dados para comparação. Por isso as associações dos agrupamentos são utilizadas para aumentar a cobertura preenchendo as lacunas criadas pelos altos valores dos parâmetros.
+
+::: {#tbl-steps tbl-align='center'}
+![Fonte:  Z. Lee et al. (2022)](https://i.postimg.cc/wjwtJdWV/tabela-teste.png){tbl-align="center"}
+
+Erros médios de teste dos algoritmos no banco de dados Sintético (CV: Covarege(%))
+:::
+
+# 3. Conclusão 
+
+Este artigo revela dois problemas inéditos no âmbito de mineração de agrupamentos de séries temporais, abrangendo tanto agrupamentos locais quanto globais, e propõe o Z-Grouping como o algoritmo estado-da-arte na solução de ambos. Os problemas evidenciados, bem como a solução proposta no artigo, apresentam aplicabilidade prática em múltiplas áreas, como a prevenção do desmatamento, o manejo de demandas de consumo de energia elétrica e a distribuição de medicamentos.  
+
+Além disso, duas vantagens significativas de aplicabilidade do método Z-Grouping devem ser destacadas. Primeiramente, o método permite a análise das séries temporais ao longo do tempo, sem a necessidade de ter a série completa de dados de uma vez. Isso significa que é possível analisar os dados à medida que eles se tornam disponíveis, o que é especialmente útil em cenários onde os dados são gerados continuamente. Em segundo lugar, o método não exige conhecimento prévio sobre quais dados investigar. Ele é capaz de identificar agrupamentos locais e globais nas séries temporais sem a necessidade de informações prévias sobre padrões ou características específicas dos dados. Com isso, o Z-Grouping emerge como uma ferramenta poderosa para a descoberta de padrões temporais em diferentes áreas de pesquisa e indústrias.
+
+## 3.1 Sumário dos Resultados 
+
+O Z-Grouping foi testado contra quatro soluções alternativas para o problema de agrupamentos locais, baseadas em adaptações para o problema específico proposto no artigo de abordagens utilizadas de maneira geral em agrupamentos de séries temporais. Os cinco foram avaliados em três datasets com dados do mundo real, um dataset gerado sinteticamente e os 128 datasets clássicos de séries temporais da UCR (University of California, Riverside). O resultado dos experimentos constatou que o Z-Grouping atingiu taxas de erro menores do que seus competidores, e ao mesmo tempo gerou agrupamentos locais sem limitações no tamanho dos intervalos de tempo, o que não pode ser feito utilizando as demais abordagens.
+
+## 3.2 Considerações Finais e Sugestões para Futuras Pesquisas
+
+Possíveis abordagens de pesquisas futuras podem incluir o uso de outras funções de abstração temporal (além da SAX, utilizada no artigo), a aplicação de técnicas e heurísticas de otimização global na criação dos agrupamentos locais e o estudo de adaptações do algoritmo para séries temporais multivariadas, isto é, para a geração de agrupamentos multidimensionais.
+
+# 4. Referências
+
+Lee, Z., Trincavelli, M., Papapetrou, P. (2023). Finding Local Groupings of Time Series. In: Amini, MR., Canu, S., Fischer, A., Guns, T., Kralj Novak, P., Tsoumakas, G. (eds) Machine Learning and Knowledge Discovery in Databases. ECML PKDD 2022. Lecture Notes in Computer Science, vol 13718. Springer, Cham. https://doi.org/10.1007/978-3-031-26422-1_5  
+
+ALMEIDA, Dayse S.; NONATO, Luis Gustavo. Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais. Anais, 2021.  
+
+SILVA, P. L. P. Um Estudo sobre o Agrupamento de Séries Temporais e sua Aplicação em Curvas de Carga Residenciais. Universidade Federal de Minas Gerais, 2016.
