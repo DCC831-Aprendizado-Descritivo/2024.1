@@ -6,7 +6,7 @@ crossref:
 format: 
     html:
         code-fold: true
-jupyter: artigo2-venv
+jupyter: python3
 ---
 
 # 1. Introdução
