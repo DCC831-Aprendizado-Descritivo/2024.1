@@ -17,7 +17,7 @@ O estudo e a análise de séries temporais desempenham um papel crucial em uma a
 
 A motivação por trás dessa abordagem é multifacetada. No setor de varejo a identificação de tendências locais de compra, como picos de vendas durante períodos festivos, pode ser crucial para otimizar estratégias de marketing e estoque. Da mesma forma, em análises financeiras, compreender as tendências de mercado pode orientar decisões de investimento. Em setores como saúde e biomedicina, a análise de variações sazonais e padrões de sono pode contribuir para o desenvolvimento de tratamentos mais eficazes. Além disso, o planejamento de recursos, a detecção de anomalias de segurança e a análise de dados ambientais e climáticos também se beneficiam significativamente da capacidade de identificar e compreender padrões em séries temporais. 
 
-Neste contexto, este artigo aborda a importância do agrupamento de séries temporais, com foco no algoritmo Z-Grouping. Exploraremos como esse método oferece uma perspectiva única para a identificação de grupos locais em séries temporais, destacando sua relevância e aplicabilidade em diversas áreas de estudo e prática. Entender melhor o Z-groupings nos permite fazer análises mais precisas e obter insights mais profundos em diferentes áreas.
+Neste contexto, este artigo aborda a importância do agrupamento de séries temporais, com foco no algoritmo Z-Grouping. Exploraremos como esse método oferece uma perspectiva única para a identificação de grupos locais em séries temporais, destacando sua relevância e aplicabilidade em diversas áreas de estudo e prática. Entender melhor o Z-Grouping nos permite fazer análises mais precisas e obter insights mais profundos em diferentes áreas.
 
 ## 1.2 Relacionamento com Métodos Clássicos
 
