@@ -7,6 +7,8 @@ format:
     html:
         code-fold: true
 jupyter: python3
+execute:
+    freeze: true
 ---
 
 # 1. Introdução
