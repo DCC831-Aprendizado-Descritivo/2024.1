@@ -413,9 +413,9 @@ A variável `groupings` resultante é uma lista de objetos, onde cada objeto rep
  Agora, para melhor visualização dos resultados, foi feita uma função que desenha os gráficos de algumas das séries temporais pertencentes a um determinado agrupamento e destaca o padrão detectado. 
 
  ```{python}
-import random
+import  random
 
-def print_3_examples(data, grouping, number_prints): 
+def  print_3_examples(data, grouping, number_prints): 
     mask = [(index, value) for (index, value) in enumerate(grouping['members'])] 
     members = list(filter(lambda tuple : tuple[1], mask)) 
     
