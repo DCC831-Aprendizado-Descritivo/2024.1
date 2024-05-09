@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -117,11 +180,47 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">1. Introdução</a>
+  <ul class="collapse">
+  <li><a href="#contextualização-do-problema" id="toc-contextualização-do-problema" class="nav-link" data-scroll-target="#contextualização-do-problema">1.1 Contextualização do Problema</a></li>
+  <li><a href="#relacionamento-com-métodos-clássicos" id="toc-relacionamento-com-métodos-clássicos" class="nav-link" data-scroll-target="#relacionamento-com-métodos-clássicos">1.2 Relacionamento com Métodos Clássicos</a></li>
+  <li><a href="#impacto-social-e-potenciais-aplicações" id="toc-impacto-social-e-potenciais-aplicações" class="nav-link" data-scroll-target="#impacto-social-e-potenciais-aplicações">1.3 Impacto Social e Potenciais Aplicações</a>
+  <ul class="collapse">
+  <li><a href="#agrupamento-de-séries-temporais-de-consumo-de-energia-elétrica-em-residências" id="toc-agrupamento-de-séries-temporais-de-consumo-de-energia-elétrica-em-residências" class="nav-link" data-scroll-target="#agrupamento-de-séries-temporais-de-consumo-de-energia-elétrica-em-residências">1.3.1 Agrupamento de séries temporais de consumo de energia elétrica em residências</a></li>
+  <li><a href="#análise-da-relação-entre-manejos-madeireiros-e-desmatamento-usando-agrupamento-de-séries-temporais" id="toc-análise-da-relação-entre-manejos-madeireiros-e-desmatamento-usando-agrupamento-de-séries-temporais" class="nav-link" data-scroll-target="#análise-da-relação-entre-manejos-madeireiros-e-desmatamento-usando-agrupamento-de-séries-temporais">1.3.2 Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais</a></li>
+  <li><a href="#análise-de-consumo-de-medicamentos-para-otimização-da-logística-de-distribuição" id="toc-análise-de-consumo-de-medicamentos-para-otimização-da-logística-de-distribuição" class="nav-link" data-scroll-target="#análise-de-consumo-de-medicamentos-para-otimização-da-logística-de-distribuição">1.3.3 Análise de consumo de medicamentos para otimização da logística de distribuição</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#desenvolvimento" id="toc-desenvolvimento" class="nav-link" data-scroll-target="#desenvolvimento">2. Desenvolvimento</a>
+  <ul class="collapse">
+  <li><a href="#conceitos-chave" id="toc-conceitos-chave" class="nav-link" data-scroll-target="#conceitos-chave">2.1 Conceitos Chave</a></li>
+  <li><a href="#apresentação-do-algoritmo" id="toc-apresentação-do-algoritmo" class="nav-link" data-scroll-target="#apresentação-do-algoritmo">2.2 Apresentação do Algoritmo</a></li>
+  <li><a href="#metodologia-experimental" id="toc-metodologia-experimental" class="nav-link" data-scroll-target="#metodologia-experimental">2.3 Metodologia Experimental</a></li>
+  <li><a href="#análise-crítica-dos-resultados" id="toc-análise-crítica-dos-resultados" class="nav-link" data-scroll-target="#análise-crítica-dos-resultados">2.4 Análise Crítica dos Resultados</a></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">3. Conclusão</a>
+  <ul class="collapse">
+  <li><a href="#sumário-dos-resultados" id="toc-sumário-dos-resultados" class="nav-link" data-scroll-target="#sumário-dos-resultados">3.1 Sumário dos Resultados</a></li>
+  <li><a href="#considerações-finais-e-sugestões-para-futuras-pesquisas" id="toc-considerações-finais-e-sugestões-para-futuras-pesquisas" class="nav-link" data-scroll-target="#considerações-finais-e-sugestões-para-futuras-pesquisas">3.2 Considerações Finais e Sugestões para Futuras Pesquisas</a></li>
+  </ul></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">4. Referências</a></li>
+  <li><a href="#apêndice-roteiro-de-instalação-do-z-grouping" id="toc-apêndice-roteiro-de-instalação-do-z-grouping" class="nav-link" data-scroll-target="#apêndice-roteiro-de-instalação-do-z-grouping">5. Apêndice: Roteiro de Instalação do Z-Grouping</a>
+  <ul class="collapse">
+  <li><a href="#instalação" id="toc-instalação" class="nav-link" data-scroll-target="#instalação">5.1 Instalação</a></li>
+  <li><a href="#utilização-do-algoritmo-z-grouping" id="toc-utilização-do-algoritmo-z-grouping" class="nav-link" data-scroll-target="#utilização-do-algoritmo-z-grouping">5.2 Utilização do Algoritmo Z-Grouping</a></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">5.3 <em>Datasets</em></a></li>
+  <li><a href="#exemplo-de-uso" id="toc-exemplo-de-uso" class="nav-link" data-scroll-target="#exemplo-de-uso">5.4 Exemplo de Uso</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -130,7 +229,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -142,8 +241,466 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introdução" class="level1">
+<h1>1. Introdução</h1>
+<p>O estudo e a análise de séries temporais desempenham um papel crucial em uma ampla gama de campos, desde o monitoramento do varejo até a detecção de anomalias de segurança. Ao longo do tempo, observações contínuas capturam nuances e padrões que podem revelar insights valiosos sobre o comportamento de sistemas complexos. Neste contexto, a capacidade de agrupar séries temporais com base em padrões similares torna-se fundamental para extrair conhecimento significativo.</p>
+<section id="contextualização-do-problema" class="level2">
+<h2 class="anchored" data-anchor-id="contextualização-do-problema">1.1 Contextualização do Problema</h2>
+<p>A motivação por trás dessa abordagem é multifacetada. No setor de varejo, por exemplo, a identificação de tendências locais de compra, como picos de vendas durante períodos festivos, pode ser crucial para otimizar estratégias de marketing e estoque. Da mesma forma, em análises financeiras, compreender as tendências de mercado pode orientar decisões de investimento. Em setores como saúde e biomedicina, a análise de variações sazonais e padrões de sono pode contribuir para o desenvolvimento de tratamentos mais eficazes. Além disso, o planejamento de recursos, a detecção de anomalias de segurança e a análise de dados ambientais e climáticos também se beneficiam significativamente da capacidade de identificar e compreender padrões em séries temporais.</p>
+<p>Neste contexto, este artigo aborda a importância da abordagem de agrupamento de séries temporais, com foco no algoritmo Z-groupings. Exploraremos como esse método oferece uma perspectiva única para a identificação de grupos locais em séries temporais, destacando sua relevância e aplicabilidade em diversas áreas de estudo e prática. Ao compreendermos melhor as nuances e potenciais aplicações do Z-groupings, podemos abrir novas oportunidades para análises mais precisas e insights mais profundos em uma variedade de domínios.</p>
+</section>
+<section id="relacionamento-com-métodos-clássicos" class="level2">
+<h2 class="anchored" data-anchor-id="relacionamento-com-métodos-clássicos">1.2 Relacionamento com Métodos Clássicos</h2>
+<p>O algoritmo Z-groupings não possui comparativos diretos. No entanto, existem alguns métodos clássicos que realizam tarefas comparáveis:</p>
+<ul>
+<li><p>K-means: Este método particiona séries temporais em k clusters, onde os clusters representam grupos locais análogos aos encontrados pelo Z-groupings.</p></li>
+<li><p>Agrupamento Hierárquico: Neste método, as séries temporais são hierarquicamente divididas com base em uma métrica de similaridade. Os grupos resultantes são comparáveis aos grupos locais identificados pelo Z-groupings.</p></li>
+</ul>
+<p>Contudo, é importante ressaltar que esses algoritmos não são diretamente comparáveis, pois se limitam a encontrar similaridades dentro de uma única série temporal, não considerando relações entre diferentes séries.</p>
+<p>Já em relação aos algoritmos de mineração de sequências, fica evidente que ambos compartilham diversas características fundamentais. Ambos os métodos têm a capacidade de identificar padrões sequenciais em conjuntos de dados, baseando-se na frequência de ocorrência desses padrões. Além disso, ambos utilizam o conceito de suporte para filtrar padrões menos frequentes, priorizando aqueles que são mais relevantes para a análise.</p>
+<p>Entretanto, ao analisar as diferenças entre o Z-groupings e seus equivalentes na mineração de sequência, destacam-se aspectos distintivos que delineiam a aplicação específica do Z-groupings em contextos de séries temporais. Enquanto muitos algoritmos de mineração de sequência são aplicáveis a diversos tipos de dados, o Z-groupings é especialmente projetado para lidar com séries temporais. Sua funcionalidade principal reside na capacidade de agrupar sequências temporais em grupos locais, visando identificar associações significativas entre os padrões temporais presentes nos dados. Essa abordagem mais focalizada confere ao Z-groupings uma vantagem significativa em cenários onde a compreensão das relações temporais é crucial para a análise e interpretação dos dados.</p>
+<p>Essas nuances ressaltam a importância do Z-groupings como uma ferramenta especializada e eficaz para a análise de séries temporais, oferecendo insights valiosos e facilitando a descoberta de padrões e associações relevantes nos dados.</p>
+</section>
+<section id="impacto-social-e-potenciais-aplicações" class="level2">
+<h2 class="anchored" data-anchor-id="impacto-social-e-potenciais-aplicações">1.3 Impacto Social e Potenciais Aplicações</h2>
+<p>Serão examinados três casos específicos que destacam a versatilidade e utilidade do Z-groupings: o agrupamento de séries temporais de consumo de energia elétrica em residências, a análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais, e a análise de consumo de medicamentos para otimização da logística de distribuição. Cada uma dessas aplicações oferece uma perspectiva única sobre como o Z-groupings pode ser empregado para abordar desafios complexos e promover impactos significativos em diversos setores.</p>
+<section id="agrupamento-de-séries-temporais-de-consumo-de-energia-elétrica-em-residências" class="level3">
+<h3 class="anchored" data-anchor-id="agrupamento-de-séries-temporais-de-consumo-de-energia-elétrica-em-residências">1.3.1 Agrupamento de séries temporais de consumo de energia elétrica em residências</h3>
+<p>O agrupamento de séries temporais de consumo de energia elétrica em residências é uma aplicação-chave das redes inteligentes, impulsionadas pela convergência de sistemas computacionais, de medição e de comunicação. Os medidores inteligentes, responsáveis por capturar e transmitir dados de consumo em intervalos regulares, geram uma quantidade substancial de informações. A análise desses dados, conhecida como agrupamento de curvas de carga, é essencial para extrair insights relevantes. Neste contexto, o Z-groupings e outros algoritmos semelhantes emergem como ferramentas valiosas.</p>
+<p>As implicações dessa aplicação são diversas:</p>
+<ul>
+<li><p>Previsão de demanda de energia: Identificar padrões de consumo semelhantes entre diferentes regiões possibilita prever com mais precisão a demanda futura de energia. Isso facilita o planejamento da produção e distribuição de eletricidade pelas empresas de energia.</p></li>
+<li><p>Detecção de anomalias: Ao conhecer os padrões de consumo típicos, torna-se mais fácil detectar anomalias que possam indicar falhas nos equipamentos, problemas de eficiência energética ou atividades suspeitas, como roubo de energia.</p></li>
+<li><p>Potencial para discriminação: O uso das informações sobre padrões de consumo para segmentar clientes ou estabelecer tarifas diferenciadas pode levar à discriminação. Alguns grupos demográficos podem ser penalizados ou excluídos, aumentando as desigualdades.</p></li>
+<li><p>Risco de monopólio: Empresas de distribuição de energia com acesso a recursos computacionais avançados para análise de dados têm uma vantagem competitiva significativa. Isso pode resultar em um desequilíbrio de mercado, com grandes empresas dominando e marginalizando empresas menores.</p></li>
+</ul>
+<p>Essas consequências ressaltam a importância não apenas da aplicação eficaz de algoritmos de agrupamento de séries temporais, como o Z-groupings, mas também da consideração cuidadosa dos impactos sociais e éticos das decisões baseadas em dados no setor de energia elétrica.</p>
+</section>
+<section id="análise-da-relação-entre-manejos-madeireiros-e-desmatamento-usando-agrupamento-de-séries-temporais" class="level3">
+<h3 class="anchored" data-anchor-id="análise-da-relação-entre-manejos-madeireiros-e-desmatamento-usando-agrupamento-de-séries-temporais">1.3.2 Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais</h3>
+<p>A análise da relação entre manejos madeireiros e desmatamento na Amazônia, por meio do agrupamento de séries temporais, destaca-se como uma aplicação vital dessa técnica analítica. Ao examinar as mudanças no índice de cobertura vegetal ao longo do tempo, é possível identificar padrões e tendências cruciais para o monitoramento e prevenção do desmatamento, bem como para o planejamento estratégico de políticas de conservação.</p>
+<p>As consequências potenciais desse enfoque são variadas:</p>
+<ul>
+<li><p>Monitoramento e prevenção eficazes do desmatamento: O uso do agrupamento de séries temporais pode melhorar substancialmente as estratégias de prevenção do desmatamento, identificando áreas em risco e facilitando intervenções preventivas.</p></li>
+<li><p>Planejamento de políticas de conservação: A identificação de áreas com alto risco de desmatamento possibilita o direcionamento eficiente de recursos e esforços para medidas preventivas, como programas de educação ambiental e reforço da fiscalização.</p></li>
+<li><p>Riscos à privacidade: O monitoramento detalhado pode levantar preocupações de privacidade, revelando informações sensíveis sobre padrões de vida e comportamentos das comunidades locais.</p></li>
+<li><p>Desigualdade e discriminação: Restrições ao uso da terra e acesso limitado às ferramentas de análise podem resultar em desigualdades na distribuição de recursos para a conservação.</p></li>
+<li><p>Impacto nos meios de subsistência locais: As políticas de conservação devem considerar os impactos nas comunidades locais, garantindo que sejam justas e equitativas.</p></li>
+</ul>
+<p>Essas considerações destacam a importância de uma abordagem ética e abrangente no uso do agrupamento de séries temporais para a análise da relação entre manejos madeireiros e desmatamento na Amazônia.</p>
+</section>
+<section id="análise-de-consumo-de-medicamentos-para-otimização-da-logística-de-distribuição" class="level3">
+<h3 class="anchored" data-anchor-id="análise-de-consumo-de-medicamentos-para-otimização-da-logística-de-distribuição">1.3.3 Análise de consumo de medicamentos para otimização da logística de distribuição</h3>
+<p>A aplicação do método Z-Grouping na análise do consumo e distribuição de medicamentos apresenta uma oportunidade significativa para aprimorar a gestão de recursos farmacêuticos, especialmente sob a perspectiva da saúde pública, com foco na atuação da Agência Nacional de Vigilância Sanitária (ANVISA). Ao identificar padrões temporais e regionais no uso de medicamentos, essa abordagem oferece insights valiosos para intervenções estratégicas na logística de distribuição.</p>
+<p>As aplicações práticas dessa análise são amplas:</p>
+<ul>
+<li><p>Refinamento da Logística de Distribuição: A identificação de agrupamentos locais de consumo permite ajustes precisos na cadeia de suprimentos, garantindo a disponibilidade adequada de medicamentos essenciais nas regiões com maior demanda, o que é crucial para garantir a continuidade dos tratamentos, especialmente em contextos de doenças crônicas ou surtos de doenças infecciosas.</p></li>
+<li><p>Projeção de Demandas Futuras: O Z-Grouping possibilita a projeção de demandas com base em tendências históricas, permitindo a antecipação de necessidades, como vacinas ou medicamentos antivirais. Essa capacidade preditiva é fundamental para evitar escassez ou excesso de estoques, possibilitando uma resposta eficiente às flutuações do mercado e demandas emergentes.</p></li>
+<li><p>Diagnóstico de Desperdícios e Ineficiências: Além disso, essa abordagem revela padrões de subutilização ou desperdício de medicamentos, indicando áreas potenciais para otimização das políticas de distribuição e uso racional de recursos farmacêuticos.</p></li>
+</ul>
+<p>Entretanto, a implementação dessas análises não está isenta de desafios e consequências, como:</p>
+<ul>
+<li><p>Integridade e Segurança dos Dados: A gestão cuidadosa da integridade e segurança dos dados é essencial para prevenir riscos de comprometimento das análises, garantindo o cumprimento das normativas de proteção de dados, como a LGPD.</p></li>
+<li><p>Justiça na Distribuição de Medicamentos: Há o risco de que análises baseadas em dados não reflitam com precisão a distribuição demográfica, resultando em alocações de recursos que perpetuam desequilíbrios existentes. Portanto, é crucial que as decisões de política farmacêutica considerem profundamente as necessidades locais.</p></li>
+<li><p>Riscos da Dependência de Modelos Quantitativos: Apesar da robustez do Z-Grouping, sua aplicação deve ser complementada por análises qualitativas e conhecimento especializado em saúde pública para evitar decisões que não considerem a complexidade dos padrões de saúde específicos.</p></li>
+</ul>
+<p>Essas considerações destacam a importância de uma abordagem holística e cuidadosa na utilização do Z-Grouping para análise de consumo de medicamentos e sua distribuição, visando garantir benefícios significativos sem comprometer a integridade dos dados ou perpetuar desigualdades existentes.</p>
+</section>
+</section>
+</section>
+<section id="desenvolvimento" class="level1">
+<h1>2. Desenvolvimento</h1>
+<section id="conceitos-chave" class="level2">
+<h2 class="anchored" data-anchor-id="conceitos-chave">2.1 Conceitos Chave</h2>
+<p>Para compreender o algoritmo Z-Grouping, é fundamental dominar alguns conceitos fundamentais.</p>
+<div id="ee7ae2cf" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zgrouping.zgrouping <span class="im">import</span> grouping, syntheticGenerator, utils</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<ol type="I">
+<li>Séries Temporais: Uma série temporal consiste em observações coletadas sequencialmente ao longo do tempo. Cada observação está vinculada a um instante específico, sendo a ordem das observações de crucial importância. Exemplo: Uma série temporal pode registrar as vendas diárias de um produto ao longo de um período, como as vendas diárias de um modelo de smartphone em uma loja.</li>
+</ol>
+<div id="7ed60ffb" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tc <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tl <span class="op">=</span> <span class="dv">365</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>no_outliers <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>outlier_size <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># GROUPING GENERATION</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.9</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>X_raw, y <span class="op">=</span> syntheticGenerator.createSyntheticData(tc <span class="op">=</span> tc, tl<span class="op">=</span>tl, c <span class="op">=</span> c, no_outliers <span class="op">=</span> no_outliers, outlier_size<span class="op">=</span>outlier_size)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.plot(X_raw[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="artigo2_files/figure-html/cell-3-output-1.png" width="577" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="I">
+<li><p>Abstração Temporal: A abstração temporal é o processo de simplificar ou extrair características mais significativas de uma série temporal, facilitando sua análise. Exemplo: A aplicação do Symbolic Aggregate Approximation (SAX) para converter uma série temporal de vendas diárias em uma sequência de símbolos que representam padrões de vendas ao longo do tempo.</p></li>
+<li><p>Eventos em Séries Temporais: Um evento em uma série temporal é uma ocorrência distinta ou uma característica identificável nos dados ao longo do tempo, como picos, vales, transições ou padrões recorrentes.</p></li>
+<li><p>Rótulos de Eventos: Os rótulos de eventos são atributos simbólicos ou categorizações aplicadas aos eventos em uma série temporal para representá-los de maneira simplificada e compreensível. Exemplo: Os rótulos podem ser escolhidos de um conjunto discreto de símbolos ou categorias, como letras, números ou outros identificadores simbólicos.</p></li>
+<li><p>Matriz de Sequência de Eventos: Uma matriz que representa a sequência de rótulos de eventos derivados das séries temporais após a abstração temporal. Cada entrada na matriz representa um evento em uma série temporal específica.</p></li>
+<li><p>Agrupamento Local: O agrupamento local refere-se à identificação de subconjuntos de séries temporais que exibem padrões semelhantes em intervalos específicos de tempo. No contexto do Z-Grouping, os agrupamentos locais são identificados em cada canal de rótulo de evento.</p></li>
+<li><p>Associação de Agrupamentos Locais: Associações são identificadas entre agrupamentos locais consecutivos ou sobrepostos que compartilham instâncias de séries temporais semelhantes. O objetivo é descobrir padrões mais amplos e complexos que não seriam detectados apenas nos agrupamentos locais individuais.</p></li>
+<li><p>Semigeometric Tiling: Um algoritmo utilizado para identificar padrões ou agrupamentos em matrizes binárias, considerando combinações de intervalos de tempo e contagens de eventos.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://media.springernature.com/lw685/springer-static/image/chp%3A10.1007%2F978-3-319-46128-1_21/MediaObjects/431503_1_En_21_Fig2_HTML.gif" class="img-fluid figure-img"></p>
+<figcaption>Fonte: Z. Lee et al.&nbsp;(2022)</figcaption>
+</figure>
+</div>
+<ol start="9" type="I">
+<li>Matriz de Associação e Validação: Uma representação matricial usada para identificar e validar associações entre agrupamentos locais. Essa matriz registra as relações entre os agrupamentos locais e os agrupamentos globais pré-definidos.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./imgs/grouping.png" class="img-fluid figure-img"></p>
+<figcaption>Fonte: Z. Lee et al.&nbsp;(2022)</figcaption>
+</figure>
+</div>
+</section>
+<section id="apresentação-do-algoritmo" class="level2">
+<h2 class="anchored" data-anchor-id="apresentação-do-algoritmo">2.2 Apresentação do Algoritmo</h2>
+<p>O algoritmo Z-Grouping é composto por quatro passos distintos, cada um focado em uma etapa específica do processo de análise de séries temporais. São eles:</p>
+<ol class="example" type="1">
+<li><p>Geração da Matriz de Sequência de Eventos</p>
+<p>Neste passo, uma coleção de séries temporais é convertida em uma matriz de eventos, utilizando técnicas de abstração temporal como o método SAX. Isso permite uma representação mais simplificada dos dados, facilitando a análise subsequente.</p></li>
+</ol>
+<div id="4fdc7999" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> utils.znorm(X_raw)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>X_sax <span class="op">=</span> utils.SAXify(X, n_bins <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_sax[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>array([2, 2, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 4, 4, 4,
+       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 4, 4, 4,
+       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+       4, 4, 4, 4, 4, 4, 4, 3, 4, 3, 3, 3, 3, 3, 3, 3, 3, 3, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+       0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 1, 0, 0, 0, 4, 4, 4, 4, 0, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+       4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 3, 3, 3, 3, 3, 3, 3,
+       3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2,
+       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])</code></pre>
+</div>
+</div>
+<div id="6b49dc89" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plt.plot(X_raw[<span class="dv">0</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plt.plot(X_sax[<span class="dv">0</span>])</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="artigo2_files/figure-html/cell-5-output-1.png" width="577" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" class="example" type="1">
+<li><p>Criação de canais de rótulos</p>
+<p>A matriz de eventos em seguida é subdividida em uma matriz binária de mesmo tamanho para cada rótulo</p></li>
+</ol>
+<div id="6d6c8c4d" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>matrices <span class="op">=</span> utils.createChannels(X_sax)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>matrices[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>array([[0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       ...,
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0],
+       [0, 0, 0, ..., 0, 0, 0]], dtype=int32)</code></pre>
+</div>
+</div>
+<ol start="3" class="example" type="1">
+<li><p>Geração de Agrupamentos Locais</p>
+<p>O próximo passo envolve a identificação de agrupamentos locais em cada canal de rótulo de evento da matriz de eventos. Esse processo é conduzido pelo algoritmo de semigeometric tiling, que busca candidatos a agrupamentos locais com base na contagem de eventos em intervalos de tempo específicos. Além disso, o algoritmo utiliza um parâmetro 𝝰, variando de 0 a 1, para determinar a pureza de um agrupamento local. Por exemplo, ao definir 𝝰 como 0.75, estamos estabelecendo que pelo menos 75% dos elementos do agrupamento devem conter o evento analisado.</p></li>
+<li><p>Identificação de Associações entre Agrupamentos Locais</p>
+<p>Nesta etapa, o algoritmo procura associações entre os agrupamentos locais identificados. Isso é feito através da análise de candidatos a associações consecutivas, verificando a proximidade entre elas e identificando instâncias de séries temporais compartilhadas.</p></li>
+<li><p>Validação dos Agrupamentos Locais</p>
+<p>Por fim, os agrupamentos locais são validados em relação aos agrupamentos globais pré-definidos. Isso é feito calculando uma pontuação de validade com base na proporção de instâncias de séries temporais em comum e utilizando um parâmetro de densidade para controlar a validade dos agrupamentos locais.</p></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.postimg.cc/6QRyPGWH/algoritmo.png" class="img-fluid figure-img"></p>
+<figcaption>Fonte: Z. Lee et al.&nbsp;(2022)</figcaption>
+</figure>
+</div>
+<div id="fig-steps" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.postimg.cc/sgjQv2Jx/figura-1-steps.png" class="img-fluid figure-img"></p>
+<figcaption>Fonte: Z. Lee et al.&nbsp;(2022)</figcaption>
+</figure>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Um exemplo dos quatro passos do Z-grouping
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="metodologia-experimental" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia-experimental">2.3 Metodologia Experimental</h2>
+<p>A metodologia experimental da pesquisa visa avaliar o desempenho do método Z-Grouping na identificação de agrupamentos locais em séries temporais. Para isso, foi utilizada uma abordagem abrangente que inclui a análise de conjuntos de dados reais de diferentes setores, bem como um conjunto de dados sintético para investigação detalhada dos parâmetros do método. Além disso, alguns métodos foram adaptados para efeitos de comparação. Abaixo, é fornecida uma descrição mais detalhada da metodologia utilizada.</p>
+<ol start="6" class="example" type="1">
+<li><p><strong>Datasets:</strong> Os conjuntos de dados reais utilizados abrangem três setores diferentes: indústria de varejo, mercado de ações e epidemias de COVID-19. Além disso, um conjunto de dados sintético foi gerado para investigação detalhada dos parâmetros do método. Este conjunto de dados sintético simula a presença de similaridade local em meio a padrões sinusoidais com diferentes frequências e amplitudes, além de incorporar ruído e outliers para refletir cenários do mundo real.</p></li>
+<li><p><strong>Concorrentes:</strong> Como não existe um concorrente direto para o problema, foram feitas adaptações nos métodos semigeometric tiling, kmeans, kmeans-FLEX e kNN para identificar agrupamentos locais em séries temporais.</p></li>
+<li><p><strong>Protocolo do Experimento:</strong> Para avaliar o desempenho do método Z-Grouping, foi desenvolvido um protocolo de experimento que envolve a divisão dos dados em conjuntos de treinamento e teste. Durante a fase de treinamento, os agrupamentos locais são identificados nos dados de treinamento. Na fase de teste, o objetivo é determinar se os agrupamentos identificados podem identificar padrões de similaridade local em novas instâncias não vistas. Para cada amostra de teste, o agrupamento global correspondente é usado como referência. Isso simula situações do mundo real, como identificar padrões de vendas de um novo produto com base em produtos existentes.</p></li>
+<li><p><strong>Métricas de Avaliação:</strong> Os resultados são avaliados em termos de erros de predição, como erro quadrático médio (MSE) e erro absoluto médio (MAE), bem como a cobertura dos agrupamentos, ou seja, a fração de séries temporais cobertas pelos agrupamentos identificados.</p></li>
+</ol>
+</section>
+<section id="análise-crítica-dos-resultados" class="level2">
+<h2 class="anchored" data-anchor-id="análise-crítica-dos-resultados">2.4 Análise Crítica dos Resultados</h2>
+<p>Em relação aos resultados alcançados, todos foram validados 10 vezes, e os seguintes parâmetros foram utilizados:</p>
+<p><strong>α:</strong> Este é um parâmetro que controla o nível de “pureza” dos agrupamentos.</p>
+<p><strong>λ:</strong> Este parâmetro controla o número de rótulos de abstração que o algoritmo pode usar.</p>
+<p><strong>η:</strong> Este parâmetro define o número mínimo de amostras necessárias para que um agrupamento seja considerado válido.</p>
+<p><strong>w:</strong> Este é o intervalo de tempo (em número de amostras) que esses algoritmos usam para identificar os agrupamentos locais.</p>
+<p><strong>k:</strong> Este é o número de agrupamentos (clusters) que esses algoritmos tentam formar.</p>
+<p><strong>Corte de silhueta:</strong> Este é um parâmetro que define um valor de corte para a métrica de silhueta.</p>
+<p>Os algoritmos testados utilizaram os seguintes parâmetros:</p>
+<p><strong>Z-Grouping:</strong> α = {0.8, 0.9, 1}, λ = {3, 5, 10}, e η = {1, 1.5, 2}.</p>
+<p><strong>Semigeometric:</strong> α = {0.8, 0.9, 1}, e η = {1, 1.5, 2}.</p>
+<p><strong>kmeans:</strong> intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}.</p>
+<p><strong>kNN:</strong> intervalo de tempo w = {30, 60, 180} e k = {3, 5, 10}.</p>
+<p><strong>kmeans-FLEX:</strong> corte de silhueta de 0,1 até falha em detectar quaisquer agrupamentos válidos.</p>
+<p>Em relação aos resultados no conjunto de dados sintéticos, pode-se analisar através da tabela 2 os erros de teste médios do Z-Grouping e seus quatro competidores. Através dela podemos chegar a algumas conclusões em relação ao Z-Grouping e seus concorrentes:</p>
+<ul>
+<li><p>O Z-Grouping sempre consegue encontrar agrupamentos locais válidos de baixos erros considerando MSE e MAE;</p></li>
+<li><p>Semigeometric sofre com sua falta de poder de representação com uma forte suposição binária superado pelo Z-Grouping em relação aos agrupamentos locais;</p></li>
+<li><p>kNN atinge seu melhor escore com {w: 180, k: 3};</p></li>
+<li><p>kmeans não mostra diferenças notáveis com várias configurações de parâmetros, e é geralmente pior do que seus concorrentes;</p></li>
+<li><p>Kmeans-FLEX tem seu menor MSE sendo apenas 3,4% menor que o menor erro do kmeans;</p></li>
+<li><p>O Semigeometric, kmeans, kNN e kmeans-FLEX são piores do que o Z-Grouping em todas as situações.</p></li>
+</ul>
+<p>Além disso, utilizando os dados de UCR o Z-Grouping apresentou dificuldade para encontrar padrões para o agrupamento, performando de forma semelhante aos competidores devido a perda de informação pelo SAX em conjuntos mais uniformes.</p>
+<p>Já em relação aos resultados no conjunto de dados reais, com os dados de GARMENT e STOCK o Z-Grouping apresentou resultados com diferença de 44.3% (MSE) e 25.2% (MAE) com cobertura de 88% dos dados, sendo superior aos competidores. E com os dados da COVID pode-se perceber que o trade-off de minimização do erro por perda de cobertura acabou levando o algoritmo a desempenhar com pouca melhora, sacrificando bastante da cobertura, cobrindo apenas 40% dos dados.</p>
+<p>Por fim, ao analisarmos o efeito dos parâmetros, um λ maior pode levar a uma menor cobertura, um α maior leva a agrupamentos mais puros o que permite um número menor de rótulos de evento diferentes, e um η maior exige mais amostras no agrupamento local para validade resultando em menos agrupamentos. Os parâmetros mais altos fazem com que o algoritmo perca sua capacidade de crescer mostrando aproximadamente só 10% de cobertura, além de gerar erros mais altos devido à ausência de pontos de dados para comparação. Por isso as associações dos agrupamentos são utilizadas para aumentar a cobertura preenchendo as lacunas criadas pelos altos valores dos parâmetros.</p>
+<div id="tbl-steps" class="quarto-float anchored" data-tbl-align="center">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Erros médios de teste dos algoritmos no banco de dados Sintético (CV: Covarege(%))
+</figcaption>
+<div aria-describedby="tbl-steps-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://i.postimg.cc/wjwtJdWV/tabela-teste.png" class="img-fluid figure-img" data-tbl-align="center"></p>
+<figcaption>Fonte: Z. Lee et al.&nbsp;(2022)</figcaption>
+</figure>
+</div>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="conclusão" class="level1">
+<h1>3. Conclusão</h1>
+<p>Este artigo revela dois problemas inéditos no âmbito de mineração de agrupamentos de séries temporais, abrangendo tanto agrupamentos locais quanto globais, e propõe o Z-Grouping como o algoritmo estado-da-arte na solução de ambos. Os problemas evidenciados, bem como a solução proposta no artigo, apresentam aplicabilidade prática em múltiplas áreas, como a prevenção do desmatamento, o manejo de demandas de consumo de energia elétrica e a distribuição de medicamentos.</p>
+<p>Além disso, duas vantagens significativas de aplicabilidade do método Z-Grouping devem ser destacadas. Primeiramente, o método permite a análise das séries temporais ao longo do tempo, sem a necessidade de ter a série completa de dados de uma vez. Isso significa que é possível analisar os dados à medida que eles se tornam disponíveis, o que é especialmente útil em cenários onde os dados são gerados continuamente. Em segundo lugar, o método não exige conhecimento prévio sobre quais dados investigar. Ele é capaz de identificar agrupamentos locais e globais nas séries temporais sem a necessidade de informações prévias sobre padrões ou características específicas dos dados. Com isso, o Z-Grouping emerge como uma ferramenta poderosa para a descoberta de padrões temporais em diferentes áreas de pesquisa e indústrias.</p>
+<section id="sumário-dos-resultados" class="level2">
+<h2 class="anchored" data-anchor-id="sumário-dos-resultados">3.1 Sumário dos Resultados</h2>
+<p>O Z-Grouping foi testado contra quatro soluções alternativas para o problema de agrupamentos locais, baseadas em adaptações para o problema específico proposto no artigo de abordagens utilizadas de maneira geral em agrupamentos de séries temporais. Os cinco foram avaliados em três datasets com dados do mundo real, um dataset gerado sinteticamente e os 128 datasets clássicos de séries temporais da UCR (University of California, Riverside). O resultado dos experimentos constatou que o Z-Grouping atingiu taxas de erro menores do que seus competidores, e ao mesmo tempo gerou agrupamentos locais sem limitações no tamanho dos intervalos de tempo, o que não pode ser feito utilizando as demais abordagens.</p>
+</section>
+<section id="considerações-finais-e-sugestões-para-futuras-pesquisas" class="level2">
+<h2 class="anchored" data-anchor-id="considerações-finais-e-sugestões-para-futuras-pesquisas">3.2 Considerações Finais e Sugestões para Futuras Pesquisas</h2>
+<p>Possíveis abordagens de pesquisas futuras podem incluir o uso de outras funções de abstração temporal (além da SAX, utilizada no artigo), a aplicação de técnicas e heurísticas de otimização global na criação dos agrupamentos locais e o estudo de adaptações do algoritmo para séries temporais multivariadas, isto é, para a geração de agrupamentos multidimensionais.</p>
+</section>
+</section>
+<section id="referências" class="level1">
+<h1>4. Referências</h1>
+<p>Lee, Z., Trincavelli, M., Papapetrou, P. (2023). Finding Local Groupings of Time Series. In: Amini, MR., Canu, S., Fischer, A., Guns, T., Kralj Novak, P., Tsoumakas, G. (eds) Machine Learning and Knowledge Discovery in Databases. ECML PKDD 2022. Lecture Notes in Computer Science, vol 13718. Springer, Cham. https://doi.org/10.1007/978-3-031-26422-1_5</p>
+<p>ALMEIDA, Dayse S.; NONATO, Luis Gustavo. Análise da relação entre manejos madeireiros e desmatamento usando agrupamento de séries temporais. Anais, 2021.</p>
+<p>SILVA, P. L. P. Um Estudo sobre o Agrupamento de Séries Temporais e sua Aplicação em Curvas de Carga Residenciais. Universidade Federal de Minas Gerais, 2016.</p>
+</section>
+<section id="apêndice-roteiro-de-instalação-do-z-grouping" class="level1">
+<h1>5. Apêndice: Roteiro de Instalação do Z-Grouping</h1>
+<p>O Z-Grouping é uma ferramenta poderosa para análise de séries temporais, oferecendo uma implementação eficiente e robusta disponível no repositório oficial dos autores do artigo: https://github.com/zedshape/zgrouping/.</p>
+<section id="instalação" class="level2">
+<h2 class="anchored" data-anchor-id="instalação">5.1 Instalação</h2>
+<p>Para utilizar o Z-Grouping, é necessário ter instaladas as extensões <a href="https://numba.pydata.org/">numba</a>, <a href="https://numpy.org/">numpy</a>, <a href="https://pyts.readthedocs.io/en/stable/">pyts</a> e o <a href="https://www.python.org/">Python</a> em sua versão 3.7 ou superior. Devido às dependências utilizadas, recomenda-se a utilização do Python 3.8 ou superior para evitar conflitos de versão.</p>
+<p>Para instalar o Python 3.8, siga os passos abaixo:</p>
+<ol type="1">
+<li>Instale as dependências necessárias:</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libsqlite3-dev <span class="co">## (ou sqlite-devel dependendo do SO). </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /opt/ </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> wget https://www.python.org/ftp/python/3.8.3/Python-3.8.3.tgz </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tar <span class="at">-xzf</span> Python-3.8.3.tgz </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Python-3.8.3 </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./configure <span class="at">--enable-optimizations</span> <span class="at">--enable-loadable-sqlite-extensions</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make altinstall </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Ative o ambiente com Python 3.8:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3.8</span> <span class="at">-m</span> venv ./.venv </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="at">--upgrade</span> pip </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install numba numpy==1.19.5 pyts matplotlib==3.3.1 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="3" type="1">
+<li>Por fim, para instalar o Z-Grouping, siga estas instruções:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/zedshape/zgrouping.git </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> zgrouping </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Certifique-se de seguir esses passos com atenção para garantir uma instalação bem-sucedida do Z-Grouping em seu ambiente de desenvolvimento.</p>
+</section>
+<section id="utilização-do-algoritmo-z-grouping" class="level2">
+<h2 class="anchored" data-anchor-id="utilização-do-algoritmo-z-grouping">5.2 Utilização do Algoritmo Z-Grouping</h2>
+<p>O algoritmo pode ser facilmente executado importando o método createGroupings do repositório fornecido:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zgrouping.syntheticGenerator <span class="im">import</span> createSyntheticData </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ele recebe os seguintes parâmetros: * <code>matrices</code>: matriz de labels de evento. Essa matriz pode ser gerada utilizando o método <code>utils.createChannel</code> sobre as séries temporais de entrada. * <code>alpha</code>: o limiar de pureza. * <code>debug</code>: opções de <em>print</em> e debug. * <code>accept</code>: habilita a função de validação da qualidade dos agrupamentos.</p>
+</section>
+<section id="datasets" class="level2">
+<h2 class="anchored" data-anchor-id="datasets">5.3 <em>Datasets</em></h2>
+<p>O repositório do Z-Grouping já contém bases de dados para teste e avaliação do algoritmo, localizadas na pasta <code>datasets</code>. Algumas das bases de dados incluem: * <code>Covid-19</code>: Base de dados referente ao continente do país, país e contagem de casos de covid no país de 22/01/2020 até 30/09/2021. * <code>Stocks</code>: Base de dados de ações contendo informações como data do registro, valor de abertura do dia, maior valor no dia, menor valor no dia, volume e TAG (nome) da ação.</p>
+<p>Além disso, o repositório inclui um gerador de bases de dados sintéticas, que cria padrões entre séries temporais. Este gerador pode ser utilizado importando o método <code>createSyntheticData</code> do repositório:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zgrouping.syntheticGenerator <span class="im">import</span> createSyntheticData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>O método <code>syntheticGenerator.createSyntheticData</code> requer os seguintes argumentos: * <code>c</code>: Número de agrupamentos globais. * <code>tc</code>: Número de membros da instância por agrupamento. * <code>tl</code>: Tamanho de cada série temporal. * <code>no_outliers</code>: Número de outliers. * <code>outlier_size</code>: Tamanho do outlier. * <code>amp</code>: Amplitude. * <code>lineranges</code>: Comprimento de linhas retas. * <code>lineheights</code>: Altura das linhas retas.</p>
+<p>Esses <em>datasets</em> sintéticos podem ser utilizados como substitutos para os <em>datasets</em> reais mencionados anteriormente. No entanto, ainda é necessário passar essas bases pelo método de criação de canais, que é o dado de entrada para o algoritmo de agrupamento.</p>
+</section>
+<section id="exemplo-de-uso" class="level2">
+<h2 class="anchored" data-anchor-id="exemplo-de-uso">5.4 Exemplo de Uso</h2>
+<p>Para ilustrar o uso do Z-Grouping, apresentamos a seguir um exemplo prático de execução do algoritmo. Os passos a seguir demonstram como gerar dados sintéticos, aplicar transformações e finalmente executar o Z-Grouping para obter os agrupamentos desejados.</p>
+<p>Após a geração e transformação dos dados, será obtida uma matriz com padrões simbólicos, representando séries temporais. A seguir, é apresentado um exemplo dos dados antes e depois da transformação.</p>
+<div id="6b927d2b" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> zgrouping.zgrouping <span class="im">import</span> grouping, syntheticGenerator, utils </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Synthetic generator </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>tc <span class="op">=</span> <span class="dv">50</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>tl <span class="op">=</span> <span class="dv">365</span> </span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">20</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>no_outliers <span class="op">=</span> <span class="dv">10</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>outlier_size <span class="op">=</span> <span class="dv">10</span> </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouping generation </span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>n_bins <span class="op">=</span> <span class="dv">5</span> </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.9</span> </span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>eta <span class="op">=</span> <span class="fl">1.5</span> </span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>X_raw, y <span class="op">=</span> syntheticGenerator.createSyntheticData(tc<span class="op">=</span>tc, tl<span class="op">=</span>tl, c<span class="op">=</span>c, no_outliers<span class="op">=</span>no_outliers, outlier_size<span class="op">=</span>outlier_size) </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalização e Transformação </span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> utils.znorm(X_raw)  </span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>X_sax <span class="op">=</span> utils.SAXify(X, n_bins<span class="op">=</span><span class="dv">5</span>) </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualização dos dados </span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>plt.plot(X_raw[<span class="dv">150</span>], label<span class="op">=</span><span class="st">'antes'</span>) </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>plt.plot(X_sax[<span class="dv">150</span>], label<span class="op">=</span><span class="st">'depois'</span>)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Dados sintéticos antes e depois da transformação'</span>)</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_sax[<span class="dv">150</span>]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="artigo2_files/figure-html/cell-7-output-1.png" width="577" height="432" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[2 2 2 2 2 2 2 2 3 3 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 0 4 4 4 4 4 4
+ 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 3
+ 3 3 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1
+ 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 2 1 2 2 2 2 2 2 2
+ 2 2 2 2 2 2 3 3 2 3 3 3 3 3 3 3 3 3 3 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4
+ 0 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 4 3 3 4 3 3
+ 3 3 3 3 3 3 3 2 2 2 2 2 2 2 2 2 2 2 2 2 0 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 4 1 1 1 1 1 1 1 1 1 2 1 2 2 2]</code></pre>
+</div>
+</div>
+<p>Após a preparação dos dados, eles serão utilizados como entrada para a criação dos canais do Z-Grouping. A matriz resultante deve ter dimensões <span class="math inline">\(S \times T\)</span>, onde <span class="math inline">\(S\)</span> é o número de séries temporais e <span class="math inline">\(T\)</span> é o tamanho de cada série temporal. Isso significa que cada linha da matriz representa uma série temporal e cada coluna representa o valor daquela série temporal em um determinado tempo.</p>
+<div id="9fdd7c61" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>matrices <span class="op">=</span> utils.createChannels(X_sax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Com os canais devidamente criados, será utilizado o Z-Grouping para obter os agrupamentos desejados. O código a seguir demonstra como executar o algoritmo e obter os agrupamentos:</p>
+<div id="1528b11c" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>groupings, associations <span class="op">=</span> grouping.createGroupings(matrices, alpha<span class="op">=</span>alpha, accept<span class="op">=</span><span class="va">False</span>, debug<span class="op">=</span><span class="va">True</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[DEBUG] BEGIN Local grouping generation
+[DEBUG] Generating local grouping candidates from one event label channel - time taken: 44.951890109000004
+[DEBUG] Generating local grouping candidates from one event label channel - time taken: 36.923591759
+[DEBUG] Generating local grouping candidates from one event label channel - time taken: 26.490854166999995
+[DEBUG] Generating local grouping candidates from one event label channel - time taken: 36.19687330400001
+[DEBUG] Generating local grouping candidates from one event label channel - time taken: 29.767859024000018
+[DEBUG] BEGIN Association generation</code></pre>
+</div>
+</div>
+<p>A variável <code>groupings</code> resultante é uma lista de objetos, onde cada objeto representa um agrupamento detectado. Cada agrupamento contém dois campos importantes: * <code>members</code>: um vetor de booleanos indicando se uma série temporal pertence ou não a esse agrupamento, funcionando como uma máscara. * <code>range</code>: o intervalo de tempo no qual o padrão se repete entre as séries temporais.</p>
+<p>Agora, para melhor visualização dos resultados, foi feita uma função que desenha os gráficos de algumas das séries temporais pertencentes a um determinado agrupamento e destaca o padrão detectado.</p>
+<p>::: {#409c2256 .cell execution_count=9} ``` {.python .cell-code} import random</p>
+<p>def print_3_examples(data, grouping, number_prints): mask = [(index, value) for (index, value) in enumerate(grouping[‘members’])] members = list(filter(lambda tuple : tuple[1], mask))</p>
+<pre><code>randIndexList = [random.randint(0, len(members) -1) for i in range(number_prints)] 
+choosedMembers = [members[index][0] for index in randIndexList] 
+
+interval = grouping['range'][0:number_prints] 
+
+fig, axs = plt.subplots(nrows=number_prints, ncols=1) 
+fig.set_figheight(15) 
+i = 0 
+for ax, i in zip(axs, choosedMembers): 
+    thisData = data[i] 
+    patternData = list(filter(lambda tuple: interval[0] &lt;= tuple[0] &lt;= interval[1], enumerate(thisData))) 
+    patternX = [pattern[0] for pattern in patternData] 
+    patternY = [pattern[1] for pattern in patternData] 
+    ax.plot(thisData) 
+    ax.plot(patternX, patternY, 'r') 
+    i += 1 
+
+plt.subplots_adjust(hspace=0.0) 
+plt.show() 
+
+print(choosedMembers) </code></pre>
+<p>print_3_examples(X_raw,groupings[13], 6) ```</p>
+<p>::: {.cell-output .cell-output-display} <img src="artigo2_files/figure-html/cell-10-output-1.png" width="577" height="1150"> :::</p>
+<p>::: {.cell-output .cell-output-stdout} <code>[602, 801, 702, 230, 437, 916]</code> ::: :::</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -117,11 +117,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#técnicas-e-algoritmos-usados" id="toc-técnicas-e-algoritmos-usados" class="nav-link active" data-scroll-target="#técnicas-e-algoritmos-usados">Técnicas e Algoritmos usados</a>
+  <ul class="collapse">
+  <li><a href="#algoritmos-de-duas-fases" id="toc-algoritmos-de-duas-fases" class="nav-link" data-scroll-target="#algoritmos-de-duas-fases">Algoritmos de duas fases</a></li>
+  <li><a href="#algoritmos-de-uma-fase" id="toc-algoritmos-de-uma-fase" class="nav-link" data-scroll-target="#algoritmos-de-uma-fase">Algoritmos de uma fase</a></li>
+  </ul></li>
+  <li><a href="#metodologia-do-artigo" id="toc-metodologia-do-artigo" class="nav-link" data-scroll-target="#metodologia-do-artigo">Metodologia do artigo</a></li>
+  <li><a href="#aplicações-e-desafios-éticos-e-sociais" id="toc-aplicações-e-desafios-éticos-e-sociais" class="nav-link" data-scroll-target="#aplicações-e-desafios-éticos-e-sociais">Aplicações e Desafios Éticos e Sociais</a></li>
+  <li><a href="#como-usar" id="toc-como-usar" class="nav-link" data-scroll-target="#como-usar">Como usar</a>
+  <ul class="collapse">
+  <li><a href="#instalação" id="toc-instalação" class="nav-link" data-scroll-target="#instalação">Instalação</a></li>
+  <li><a href="#execução" id="toc-execução" class="nav-link" data-scroll-target="#execução">Execução</a></li>
+  </ul></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -130,7 +148,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -142,8 +160,491 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>No campo da mineração e análise de dados, a mineração de padrões frequentes possui uma relevância bastante significativa, sendo importante para encontrar associações e correlações entre diferentes variáveis. Essa área de estudo surgiu juntamente com o crescimento exponencial da quantidade de dados disponíveis em diversos setores da vida cotidiana, em especial o comércio, tendo sido batizada com o nome de “Analise da cesta de compras”.</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/32526767-ceb1-4aff-a196-bd750f7b571b" class="figure-img">
+<figcaption>
+Ilustração da análise de cesta de compras.
+</figcaption>
+</figure>
+<p>Para dar seguimento a este artigo, é necessário definir (ou relembrar) alguns conceitos:</p>
+<blockquote class="blockquote">
+<p><strong>Item:</strong> Um item é todo elemento de interesse que possui significado próprio e pode ser associado a <em>n</em> outros itens formando um padrão, ou conjunto. Para a mineração de padrões frequentes, é definido um universo finito dos itens na área em que se deseja empregar a técnica. Um item pode ser, por exemplo, uma garrafa de água no contexto de análises de comércio, ou uma ação tomada no contexto de análises comportamentais.<br>
+<strong>Transação:</strong> Uma transação é uma coleção de itens que foram adquiridos em conjunto de uma única vez, por uma única pessoa. O conjunto de transações é o que forma a base de dados utilizada para a análise, sendo que em quanto mais transações um padrão ocorrer, mais frequente ele é.<br>
+<strong>Padrão (<em>Itemset</em>):</strong> Os padrões são o que se espera encontrar ao fim do algoritmo, eles são conjuntos de itens (<em>itemsets</em>) que ocorrem dentro das transações, podendo englobar todos os itens de uma transação, ou ser um subconjunto dela.<br>
+<strong>Suporte mínimo:</strong> O suporte mínimo é a quantidade mínima de vezes que um padrão deve ocorrer nas transações para que ele seja considerado frequente.</p>
+</blockquote>
+<p>A análise final dos padrões identificados como frequentes através da mineração executada pode muitas vezes ser complicada, por se tratar de uma técnica de aprendizado não supervisionado. Mas além da complexidade inata da análise de resultados, existe também a possibilidade dos padrões obtidos não significarem nada, ou simplesmente serem pouco úteis para os objetivos do negócio.</p>
+<p>Por exemplo, considere que na análise de uma papelaria os itens “lápis” e “borracha” são frequentemente incluídos em uma mesma transação, o preço final pago pelo consumidor por apenas esse conjunto de itens será muito baixo, não trazendo os benefícios esperados da análise. Porém, na mesma papelaria, pode ser que os itens impressora e cartucho de tinta também são frequentemente comprados juntos, o que leva a um preço final maior pago pelo consumidor.</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/348ce1ff-9a39-4797-94f1-822b7f2d5a03" class="figure-img">
+<figcaption>
+Comparação entre padrões frequentes e padrões úteis.
+</figcaption>
+</figure>
+<p>O exemplo anterior é básico, mas ilustra a ideia de que os itens serem apenas frequentes pode não ser o suficiente, sendo necessário que as combinações analisadas sejam também úteis para o analista. É nesse contexto que surge a mineração de padrões frequentes de alta utilidade, tratada no artigo “<strong><em>A Survey of High Utility Itemset Mining</em></strong>”, que aborda diferentes algoritmos para resolver esse problema.</p>
+<p>Para entender esses algoritmos, é primeiro necessário fazer uma segunda leva de definições sobre o assunto, dessa vez mais específicas ao escopo de mineração de padrões de alta utilidade:</p>
+<blockquote class="blockquote">
+<p><strong>Utilidade interna:</strong> Se refere à utilidade de um item quando comparado com os outros dentro de uma mesma transação, podendo ser contabilizada como a quantidade de ocorrências daquele item dentro da transação. Note que essa medida é específica para cada uma das transações, com um item podendo ter uma alta utilidade interna em uma e uma baixa em outra.<br>
+<strong>Utilidade externa:</strong> Se refere à utilidade de um item quando comparado com todos os outros itens em um âmbito mais geral, podendo ser representado como o preço dele, o peso, ou outra medida importante.<br>
+<strong>Utilidade total do item:</strong> Calculada como a multiplicação da utilidade interna e externa do item na transação em específico.<br>
+<strong>Utilidade total do padrão (<em>itemset</em>):</strong> Calculada como a soma da utilidade total de todos os itens que componham o padrão, note que se um item não está presente em uma transação, a utilidade total dele automaticamente é zero.</p>
+</blockquote>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/a770b686-5b9d-440c-bbbf-85a7dc3896fd" width="800px" height="400px" class="figure-img">
+<figcaption>
+Ilustração das utilidades.
+</figcaption>
+</figure>
+<p>Perceba que, de acordo com essas definições, todos os algoritmos que são utilizados para mineração de padrões frequentes de alta utilidade podem também ser utilizados para minerar padrões frequentes, basta que a utilidade interna e externa de todos os itens seja definida com o mesmo valor, preferencialmente “1”. Para entender melhor as semelhanças e diferenças entre as duas técnicas de mineração de dados, verifique a tabela a seguir:</p>
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Semelhanças</th>
+<th>Diferenças</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Objetivo:</strong> ambas as técnicas buscam</td>
+<td><strong>Medida de importância:</strong> na mineração de</td>
+</tr>
+<tr class="even">
+<td>identificar padrões significativos em grandes</td>
+<td>itens frequentes, a importância é medida pela</td>
+</tr>
+<tr class="odd">
+<td>conjuntos de dados para auxiliar decisões de</td>
+<td>frequência; na de alta utilidade,</td>
+</tr>
+<tr class="even">
+<td>negócios.</td>
+<td>considera-se o valor econômico ou estratégico</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>dos itens (função de utilidade).</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Limite mínimo:</strong> ambas utilizam a ideia de</td>
+<td><strong>Complexidade algorítmica:</strong> algoritmos de</td>
+</tr>
+<tr class="even">
+<td>limiar mínimo para filtrar padrões</td>
+<td>alta utilidade são mais complexos devido à</td>
+</tr>
+<tr class="odd">
+<td>significativos.</td>
+<td>ausência de propriedades de monotonicidade,</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>que são úteis na mineração de itens</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>frequentes para reduzir o espaço de busca.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><strong>Processamento de dados:</strong> as duas técnicas</td>
+<td><strong>Aplicações:</strong> a mineração de itens de alta</td>
+</tr>
+<tr class="even">
+<td>operam frequentemente sobre dados</td>
+<td>utilidade é ideal em cenários onde a</td>
+</tr>
+<tr class="odd">
+<td>transacionais, que registram itens associados</td>
+<td>maximização do lucro e utilidade dos itens é</td>
+</tr>
+<tr class="even">
+<td>conjuntamente.</td>
+<td>essencial, enquanto a mineração de itens</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>frequentes se aplica melhor a análises de</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>co-ocorrência de itens de interesse.</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Redução de dimensionalidade:</strong> ambas as</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>abordagens reduzem o espaço de busca</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>eliminando itens que não atendem aos critérios</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>mínimos.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="técnicas-e-algoritmos-usados" class="level2">
+<h2 class="anchored" data-anchor-id="técnicas-e-algoritmos-usados">Técnicas e Algoritmos usados</h2>
+<p>O artigo estudado tem por objetivo apresentar a área de mineração de padrões frequentes de alta utilidade, além de mostrar ao leitor diferentes algoritmos para realizar essa mineração. As principais técnicas para a confecção dos algoritmos são a de “Duas fases” e de “Uma fase”, essas técnicas serão explicadas nas próximas subseções, juntamente com um algoritmo representante de cada classe.</p>
+<section id="algoritmos-de-duas-fases" class="level3">
+<h3 class="anchored" data-anchor-id="algoritmos-de-duas-fases">Algoritmos de duas fases</h3>
+<p>Algoritmos que seguem essa técnica usam o conceito de “<strong>Utilidade da transação</strong>”, ou <em>Transaction Utility</em> (<em>TU</em>), que pode ser definido como a soma da utilidade de todos os itens que estão presentes em uma transação, para definir limites superiores do quão alta a utilidade de um subconjunto dessa transação pode ser. Esse limite superior é calculado para cada um dos padrões (<em>itemsets</em>) candidatos através de uma “<strong>Utilidade com peso em transações</strong>”, ou <em>Transaction Weighted Utility</em> (<em>TWU</em>), que é definida como a soma da utilidade de todas as transações que contêm o padrão em evidência.</p>
+<p>O valor obtido de <em>TWU</em> para um <em>itemset</em>, é o limite superior para todos os superconjuntos que possam ser formados a partir dele. Por exemplo, suponha a existência de um <em>itemset</em> base <code>{a, b}</code> que possui <em>TWU</em> igual a 10, isso significa que qualquer itemset da forma <code>{a, b, _}</code>, onde o terceiro e último item pode ser qualquer um do universo de itens disponívei, terá necessariamente uma utilidade menor que 10. A aplicação dessa propriedade nos algoritmos traz um importante avanço, que é o estabelecimento de um <strong>decrescimento monotônico do TWU</strong> de acordo com o aumento dos itens em um <em>itemset</em>.</p>
+<p>A partir dessas propriedades, é definido um <strong>suporte de utilidade mínimo</strong> que elimina todos os itemsets que tenham TWU abaixo desse limiar assim que são identificados, evitando a geração de superconjuntos que não têm chances de serem de alta utilidade.</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/8a7b57f4-490d-47d2-a4ee-6229d8931788" class="figure-img">
+<figcaption>
+Exemplo de cálculo do <i>TWU</i>.
+</figcaption>
+</figure>
+<p>A <strong>primeira fase</strong> dos algoritmos consiste em gerar o <em>TWU</em> de todos os itens disponíveis, já que eles são o menor <em>itemset</em> possível (excluindo o conjunto vazio). Após o cálculo, todos os <em>itemsets</em> unitários que tenham um <em>TWU</em> que estejam abaixo do suporte de utilidade mínimo definido são eliminados do espaço de busca, evitando que candidatos infrutíferos sejam gerados. Em seguida, a geração de candidatos continua para os <em>itemsets</em> de dois elementos gerados a partir dos remanescentes do filtro anterior, sendo que esses novos candidatos serão também removidos no caso de terem <em>TWU</em> menor que o suporte mínimo. Essa sequência de ações continua em repetição até que já não seja mais possível gerar novos candidatos.</p>
+<blockquote class="blockquote">
+<p>Note que nessa primeira fase está sendo calculado o <em>TWU</em>, que é o limite superior de utilidade, e não a utilidade dos itemsets em si</p>
+</blockquote>
+<p>A <strong>segunda fase</strong> do algoritmo consiste em calcular a utilidade de todos os candidatos que sobraram da fase anterior, eliminando aqueles que tenham utilidade menor que o limite inferior estabelecido.</p>
+<p>O primeiro algoritmo desenvolvido para essa técnica se chama <strong><em>Two-Phase Algorithm</em></strong>, tendo sido baseado no algoritmo <strong><em>Apriori</em></strong> para mineração de padrões frequentes. É possível ver uma imagem do pseudocódigo desse algoritmo a seguir:</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/ab3ed3cc-7409-4bce-962f-51c0e8d72cca" class="figure-img">
+<figcaption>
+Pseudocódigo do algoritmo <strong><em>Two-Phase</em></strong>.
+</figcaption>
+</figure>
+<p>Perceba que a função <strong><em>ITEMSETGENERATION()</em></strong> recebe apenas o conjunto de candidatos da iteração anterior como parâmetro, não verificando a base de dados de transação para gerar os candidatos, o que pode levar a <em>itemsets</em> que não ocorrem em nenhuma transação, resultando em um desperdício de tempo considerável para os cálculos deles.</p>
+<p>Outra limitação do algoritmo é que ele itera pelo conjunto de dados várias vezes para calcular o TWU dos itemsets, elevando o custo do algoritmo. Note que a exploração do espaço de busca desse algoritmo segue a técnica de <em>Breadth First Search</em> (<em>BFS</em>), o que leva a uma maior demora para eliminação de candidatos infrutíferos, principalmente pelo fato de que o <em>TWU</em> é uma métrica de limite extrapolada.</p>
+</section>
+<section id="algoritmos-de-uma-fase" class="level3">
+<h3 class="anchored" data-anchor-id="algoritmos-de-uma-fase">Algoritmos de uma fase</h3>
+<p>Esses algoritmos são mais diretos, fazendo o cálculo da utilidade de cada padrão considerado no espaço de busca, o que permite identificar imediatamente se um <em>itemset</em> é de alta ou baixa utilidade sem a necessidade de guardá-lo em memória principal (RAM).</p>
+<p>Outra novidade desses algoritmos é que eles trazem uma nova forma de calcular os limites superiores de utilidade, sendo mais próxima à utilidade real dos itemsets do que o <em>TWU</em> usado nos algoritmos de duas fases. Como exemplo de algoritmo dessa técnica, será utilizado o <strong><em>Fast High-Utility Miner (FHM)</em></strong>, que introduz o conceito de Listas de Utilidade, ou <strong><em>Utility List (UL)</em></strong>, para representar o banco de dados das transações.</p>
+<p>Considerando um <em>itemset</em> <code>X</code>, a lista de utilidade <code>UL(X)</code> será uma lista de tuplas para todas as ocorrências de <code>X</code> nas transações do banco, sendo que cada tupla armazenará o <strong>ID da transação</strong> em que o <em>itemset</em> está presente, a <strong>utilidade do itemset</strong> naquela transação e a <strong>soma da utilidade de todos os itens com ordem lexicográfica superior aos itens de <code>X</code></strong>. O algoritmo se inicia calculando as listas de utilidade de todos os itemsets de um único elemento, sendo que as listas de utilidades dos superconjuntos desses itemsets será calculada a partir dos componentes delas.</p>
+<p>Por exemplo, suponha as listas de utilidade dos conjuntos unitários <code>UL({a})</code> e <code>UL({d})</code>, para gerar a lista de utilidade e calcular a utilidade do <em>itemset</em> <code>{a, d}</code>, será calculada a interseção das transações que estão em <code>UL({a})</code> e <code>UL({d})</code>. A utilidade do novo itemset será simplesmente a soma das utilidades dos <em>itemsets</em> geradores, enquanto a utilidade dos itens com ordem lexicográfica superior será igual a presente no <em>itemset</em> gerador de maior ordem lexicográfica, no caso do exemplo, será o mesmo de <code>{b}</code>.</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/ce870a3f-41ae-4292-abe5-eaa4fabb6e0d" width="800px" height="500px" class="figure-img">
+<figcaption>
+Exemplo de cálculo das listas de utilidade.
+</figcaption>
+</figure>
+<p>O cálculo do limite superior para esse algoritmo é chamado de “<strong>Limite Superior por Utilidade Residual</strong>”, ou <strong><em>Remaining Utility Upper-Bound</em></strong>, é feito somando a utilidade de um item (<em>iutil</em>) com a utilidade dos itens residuais de ordem lexicográfica maior (<em>rutil</em>) para todas as transações presentes na lista de utilidade. Caso esse resultado final seja menor que a utilidade mínima definida, aquele itemset é eliminado do espaço de busca, evitando que novos candidatos sejam gerados. A figura a seguir mostra o pseudocódigo para o algoritmo <strong><em>FHM</em></strong>:</p>
+<figure align="center" class="figure">
+<img src="https://github.com/DCC831-Aprendizado-Descritivo/2024.1/assets/72149404/39093f0c-9952-4096-b7ab-69421ffaf05a" class="figure-img">
+<figcaption>
+Pseudocódigo do algoritmo FHM.
+</figcaption>
+</figure>
+<p>Algoritmos baseados em listas de utilidade, como o <strong><em>FHM</em></strong>, são até duas ordens de magnitude mais rápidos que os algoritmos de duas fases. Porém, a geração de candidatos ainda é baseada em itemsets anteriores, sem verificar o banco de dados de transações, o que pode levar a candidatos inexistentes e aumento no custo total do algoritmo por gastar recursos verificando possibilidades desnecessárias.</p>
+<p>Além disso, o custo de memória para o armazenamento das listas de utilidade de cada itemset verificado pode vir a ser preocupante. Outro ponto de atenção de algoritmos que seguem essa estratégia é o fato de que são feitas muitas comparações com listas de utilidade anteriores no processo de geração de candidatos, já que um candidato com <code>k</code> itens deverá fazer comparações com <code>k-1</code> listas de utilidade anteriores.</p>
+</section>
+</section>
+<section id="metodologia-do-artigo" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia-do-artigo">Metodologia do artigo</h2>
+<p>O artigo adota uma abordagem metodológica baseada em Survey, delineando inicialmente o problema em questão e, em seguida, apresentando algoritmos destinados à sua resolução. Uma filtragem criteriosa de artigos relevantes no domínio da mineração de itemsets de alta utilidade foi realizada, seguida pela compilação e síntese dos algoritmos destacados, abordando suas estruturas e conceitos fundamentais.</p>
+<p>Os primeiros algoritmos abrangentes para identificar conjuntos de itens de alta utilidade operam em duas fases distintas: primeiro, geram-se candidatos que são subsequentemente avaliados quanto à sua utilidade efetiva. Esses algoritmos introduziram uma inovação crucial ao estabelecer uma medida monótona que serviria como limite superior para a utilidade dos conjuntos de itens. Uma dessas medidas pioneiras foi a TWU (Transaction-Weighted Utilization), a qual permitiu uma poda eficiente do espaço de busca. Em estágios posteriores, surgiram algoritmos de uma única fase, cujo propósito é economizar tempo ao integrar a geração e avaliação de candidatos em um único passo. Vale ressaltar que muitos desses algoritmos propostos representam generalizações de técnicas de mineração de conjuntos de itens frequentes estabelecidas, como o Two Phase (uma extensão do Apriori) e o UP-Growth (uma extensão do FP-Growth).</p>
+<p>Dentre os algoritmos apresentados para a mineração de padrões frequentes de alta utilidade são destacados os seguintes:</p>
+<table class="table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 26%">
+<col style="width: 8%">
+<col style="width: 37%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algoritmo</th>
+<th>Tipo de Busca</th>
+<th>Fases</th>
+<th>Representação dos Dados</th>
+<th>Extende</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Two-Phase</td>
+<td>Busca em Largura</td>
+<td>Duas</td>
+<td>Horizontal</td>
+<td>Apriori</td>
+</tr>
+<tr class="even">
+<td>HUP-Growth</td>
+<td>Busca em Profundidade</td>
+<td>Duas</td>
+<td>Horizontal (Árvore de Prefixos)</td>
+<td>FP-Growth</td>
+</tr>
+<tr class="odd">
+<td>D2HUP</td>
+<td>Busca em Profundidade</td>
+<td>Uma</td>
+<td>Vertical (Hiperestrutura)</td>
+<td>H-Mine</td>
+</tr>
+<tr class="even">
+<td>FHM</td>
+<td>Busca em Profundidade</td>
+<td>Uma</td>
+<td>Vertical (Listas de Utilidade)</td>
+<td>Eclat</td>
+</tr>
+<tr class="odd">
+<td>EFIM</td>
+<td>Busca em Profundidade</td>
+<td>Uma</td>
+<td>Vertical (com fusões)</td>
+<td>LCM</td>
+</tr>
+</tbody>
+</table>
+<p>O artigo porém não se contém somente em discutir os algoritmos completos de mineração de padrões, mas também, reconhecendo a importância de representações com um nível maior de significado. É nesse ponto em que são apresentados os algoritmos que mineram representações concisas dos subconjuntos de alta utilidade:</p>
+<table class="table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 14%">
+<col style="width: 9%">
+<col style="width: 42%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algoritmo</th>
+<th>Padrões</th>
+<th>Fases</th>
+<th>Representação dos Dados</th>
+<th>Extende</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>MinFHM</td>
+<td>MinUIs</td>
+<td>Uma</td>
+<td>Vertical (Listas de Utilidade)</td>
+<td>FHM</td>
+</tr>
+<tr class="even">
+<td>CHUD</td>
+<td>CHUIs</td>
+<td>Duas</td>
+<td>Vertical (Listas de Utilidade)</td>
+<td>DCI Closed</td>
+</tr>
+<tr class="odd">
+<td>EFIM-CLOSED​</td>
+<td>CHUIs</td>
+<td>Uma</td>
+<td>Horizontal (com fusões)</td>
+<td>EFM</td>
+</tr>
+<tr class="even">
+<td>GUIDE</td>
+<td>MHUIs One</td>
+<td>Uma</td>
+<td>Stream</td>
+<td>UpGrowth</td>
+</tr>
+</tbody>
+</table>
+<p>Por fim, são apresentados algoritmos que retornam apenas os K subconjuntos de alta utilidade mais frequentes no conjunto de transações:</p>
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 27%">
+<col style="width: 8%">
+<col style="width: 38%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Algoritmo</th>
+<th>Tipo de Busca</th>
+<th>Fases</th>
+<th>Representação dos Dados</th>
+<th>Extende</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>TKU​</td>
+<td>Busca em Profundidade​</td>
+<td>Duas</td>
+<td>Horizontal (Árvore de Prefixos)</td>
+<td>​ UP-Growth​</td>
+</tr>
+<tr class="even">
+<td>TKO​</td>
+<td>Busca em Profundidade​</td>
+<td>Uma</td>
+<td>Vertical (Listas de Utilidade)</td>
+<td>HUI-Miner​</td>
+</tr>
+<tr class="odd">
+<td>REPT​</td>
+<td>Busca em Profundidade​</td>
+<td>Uma</td>
+<td>Horizontal (Árvore de Prefixos)​</td>
+<td>MU-Growth​</td>
+</tr>
+<tr class="even">
+<td>kHMC​</td>
+<td>Busca em Profundidade​</td>
+<td>Uma</td>
+<td>Vertical (Listas de Utilidade)​</td>
+<td>FHM​</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="aplicações-e-desafios-éticos-e-sociais" class="level2">
+<h2 class="anchored" data-anchor-id="aplicações-e-desafios-éticos-e-sociais">Aplicações e Desafios Éticos e Sociais</h2>
+<p>Há uma vasta gama de problemas do mundo real que podem se beneficiar significativamente do uso de algoritmos de mineração de subconjuntos frequentes de alta utilidade. Entre eles:</p>
+<ul>
+<li><em>Mercado de Varejo:</em> Potencial para aumentar os lucros ao impulsionar as vendas de produtos mais rentáveis.</li>
+<li><em>Mercado de Compra Conjunta:</em> Oportunidade de melhorar a lucratividade ao associar produtos visando redução de impostos.</li>
+<li><em>Sistema de Recomendação:</em> Aprimoramento da capacidade de gerar lucro ao focar em produtos mais rentáveis.</li>
+<li><em>Cross-Selling e Up-Selling:</em> Estímulo para compras de produtos complementares e promoção de vendas casadas.</li>
+<li><em>Tratamento de Saúde:</em> Desenvolvimento de conjuntos de tratamentos visando maior eficiência.</li>
+<li><em>Detecção de Fraudes:</em> Identificação de padrões pouco frequentes, porém altamente úteis, na detecção de fraudes. Uso da Internet:__ Análise do comportamento dos usuários para aprimorar a importância do site.</li>
+<li><em>Telecomunicações:</em> Utilização na identificação de padrões de comunicação que resultam em maior lucratividade.</li>
+<li><em>Mineração de Texto:</em> Identificação de textos com elevado valor agregado.</li>
+</ul>
+<p>No entanto, a implementação de algoritmos de mineração de alta utilidade suscita preocupações sociais e éticas que demandam uma atenção cuidadosa. Um ponto crucial é a ameaça à privacidade, uma vez que a identificação de indivíduos a partir de dados aparentemente anônimos pode comprometer a segurança dos mesmos. Ademais, há o risco de manipulação do mercado e do comportamento do consumidor, onde o conhecimento de padrões de consumo pode ser utilizado de maneira indevida para influenciar escolhas.</p>
+<p>Outra questão relevante é a elisão fiscal, na qual empresas utilizam o conhecimento de padrões de alta utilidade para minimizar suas obrigações fiscais de forma legal, mas questionável do ponto de vista ético. Esses desafios destacam a importância de regulamentações sólidas e transparência no uso de algoritmos de mineração de dados, garantindo que o impacto social e ético seja considerado em todas as etapas, desde a implementação até a operação dessas ferramentas avançadas.</p>
+</section>
+<section id="como-usar" class="level2">
+<h2 class="anchored" data-anchor-id="como-usar">Como usar</h2>
+<p>Neste guia iremos ensinar o passo a passo para poder executar o SPMF, um software livre que tem implementado vários algoritmos de mineração de itemsets de alta qualidade.</p>
+<p>A execução do SPMF exige o JAVA versão mínima 1.8, aqui iremos mostrar a instalação tanto do JAVA quanto do SPMF para o Windows, o processo de instalação do programa deve ser o mesmo no Linux, já que o programa é baseado em JAVA, a diferença se dará na instalação do JAVA.</p>
+<section id="instalação" class="level3">
+<h3 class="anchored" data-anchor-id="instalação">Instalação</h3>
+Inicialmente segui o guia de instalação do JAVA <a href="https://www.java.com/pt-BR/download/help/download_options_pt-br.html">deste link</a>, mas na hora de execução do SPMF o programa não funcionou e a solução foi reinstalar o JAVA de outra forma. Apenas a fim de documentar um possível erro que você encontre ao tentar executar o SPMF, fica aqui o vídeo do processo de instalação que <strong>não funcionou</strong>.
+<figure align="center" class="figure">
+<video width="480" height="360" controls="">
+<source src="img/Instalacao_JAVA18.mp4" type="video/mp4">
+</video>
+<figcaption>
+Instalação da versão errada do JAVA
+</figcaption>
+</figure>
+A instalação do SPMF é simples e se encontra <a href="https://www.philippe-fournier-viger.com/spmf/index.php?link=download.php">neste link</a>. O vídeo a seguir mostra o processo inteiro:
+<figure align="center" class="figure">
+<video width="480" height="360" controls="">
+<source src="img/Instalacao_SPMF.mp4" type="video/mp4">
+</video>
+<figcaption>
+Instalação do software SPMF
+</figcaption>
+</figure>
+Como dito anteriormente, no final obtemos um erro do JAVA que é concertado pela re-instalação de uma versão atual <a href="https://www.oracle.com/java/technologies/downloads/">neste link</a>, tal processo é mostrado no vídeo a seguir:
+<figure align="center" class="figure">
+<video width="480" height="360" controls="">
+<source src="img/Instalacao_JAVA22.mp4" type="video/mp4">
+</video>
+<figcaption>
+Instalação da versão mais recente do JAVA
+</figcaption>
+</figure>
+</section>
+<section id="execução" class="level3">
+<h3 class="anchored" data-anchor-id="execução">Execução</h3>
+<section id="arquivo-de-entrada" class="level4">
+<h4 class="anchored" data-anchor-id="arquivo-de-entrada">Arquivo de Entrada</h4>
+<p>O SPMF suporta arquivos de entrada no formato <em>.txt</em>.</p>
+<p>A primeira parte do arquivo de entrada é opcional e é usada para nomear os itens presentes no banco de dados.</p>
+<ul>
+<li>Linhas começando com @​.</li>
+<li>Primeira linha com “<span class="citation" data-cites="CONVERTED_FROM_TEXT">@CONVERTED_FROM_TEXT</span>”​</li>
+<li>Demais linhas fazem a ligação do item com sua descrição no formato <span class="citation" data-cites="ITEM">@ITEM</span>={ID}={DESCRICAO}
+<ul>
+<li>{ID} é o número do item</li>
+<li>{DESCRICAO} é o nome do item</li>
+</ul></li>
+</ul>
+<figure align="center" class="figure">
+<img src="img\Entrada_pt1.png" class="figure-img">
+<figcaption>
+Primira parte do arquivo de entrada (opcional)
+</figcaption>
+</figure>
+<p>A segunda parte contém os dados das transações, com cada linha representando uma transação e cada coluna separada por “:” contendo o itemset, a utilidade total do itemset e a utilidade de cada item do itemset, respectivamente.</p>
+<ul>
+<li>Linhas representam as transações​</li>
+<li>Cada linha possui 3 colunas separadas pelo caractere ‘:’​
+<ol type="1">
+<li>Coluna 1: itemset com os ids dos itens separados por espaço simples.</li>
+<li>Coluna 2: utilidade total do itemset.</li>
+<li>Coluna 3: utilidade respectiva de cada item do itemset separadas por espaço simples.​</li>
+</ol></li>
+</ul>
+<figure align="center" class="figure">
+<img src="img\Entrada_pt2.png" class="figure-img">
+<figcaption>
+Segunda parte do arquivo de entrada
+</figcaption>
+</figure>
+</section>
+<section id="execução-do-software" class="level4">
+<h4 class="anchored" data-anchor-id="execução-do-software">Execução do Software</h4>
+Vídeo tutorial de como se deve executar o programa a partir do dado de entrada, o algoritmo escolhido no tutorial foi o <em>Two-Phase</em>:
+<figure align="center" class="figure">
+<video width="480" height="360" controls="">
+<source src="img/Execucao_SPMF.mp4" type="video/mp4">
+</video>
+</figure>
+<p>Apesar de no tutorial ser mostrado a execução com o algoritmo <em>Two-Phase</em>, temos várias opções de algoritmos para mineração de itensets de alta utilidade, como <em>UP-Growth</em>, <em>UP-Growth+</em>, <em>FHM</em> e <em>HUI-Miner</em>.</p>
+</section>
+<section id="arquivo-de-saída" class="level4">
+<h4 class="anchored" data-anchor-id="arquivo-de-saída">Arquivo de Saída</h4>
+<p>A saída do algoritmo também é um arquivo <em>.txt</em>, contendo os itemsets de alta utilidade encontrados, o suporte do itemset (nem todos os algoritmos geram esse valor) e a utilidade do itemset.</p>
+<ul>
+<li>Linhas representam itemsets de alta utilidade encontrados.​</li>
+<li>Cada linha possui 3 seções:​
+<ol type="1">
+<li>O itemset, com os ids ou nomes dos itens separados por espaço simples, depende da existência da 1ª parte do arquivo de entrada.​</li>
+<li>“#SUP: {VALOR}” onde {VALOR} é o suporte do itemset (nem todos os algoritmos geram esse valor)​</li>
+<li>“#UTIL: {VALOR}” onde {VALOR} é a utilidade do itemset.</li>
+</ol></li>
+</ul>
+<figure align="center" class="figure">
+<img src="img\Saida.png" class="figure-img">
+<figcaption>
+Arquivo de saída
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="referências" class="level2">
+<h2 class="anchored" data-anchor-id="referências">Referências</h2>
+<ul>
+<li>Fournier-Viger, P., Chun-Wei Lin, J., Truong-Chi, T., Nkambou, R. (2019). A Survey of High Utility Itemset Mining. In: Fournier-Viger, P., Lin, JW., Nkambou, R., Vo, B., Tseng, V. (eds) High-Utility Pattern Mining. Studies in Big Data, vol 51. Springer, Cham. <a href="https://doi.org/10.1007/978-3-030-04921-8_1" class="uri">https://doi.org/10.1007/978-3-030-04921-8_1</a></li>
+<li>FOURNIER-VIGER, P. et al.&nbsp;FHM: Faster High-Utility Itemset Mining Using Estimated Utility Co-occurrence Pruning. ReserachGate, Taiwan, jul./2014. Disponível em: <a href="https://www.researchgate.net/publication/263696687" class="uri">https://www.researchgate.net/publication/263696687</a>. Acesso em: 23 abr. 2024.<br>
+</li>
+<li>Fournier-Viger, Philippe. “SPMF: A Java Open-Source Pattern Mining Library.” Disponível em: <a href="https://www.philippe-fournier-viger.com/spmf/index.php" class="uri">https://www.philippe-fournier-viger.com/spmf/index.php</a>. Acesso em: 22 de Abril de 2024.</li>
+<li>LIU, Mengchi; QU, Junfeng. Mining High Utility Itemsets without Candidate Generation. ResearchGate, Wuhan, nov./2020. Disponível em: <a href="https://www.researchgate.net/publication/262369808" class="uri">https://www.researchgate.net/publication/262369808</a>. Acesso em: 23 abr. 2024.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
