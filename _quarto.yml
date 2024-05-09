@@ -26,4 +26,4 @@ format:
 #    linkcolor: "#666666"
     
 execute:
-  freeze: auto    
+  freeze: true    
