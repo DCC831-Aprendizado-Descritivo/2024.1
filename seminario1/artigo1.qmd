@@ -186,7 +186,7 @@ A execução do SPMF exige o JAVA versão mínima 1.8, aqui iremos mostrar a ins
 Inicialmente segui o guia de instalação do JAVA [deste link](https://www.java.com/pt-BR/download/help/download_options_pt-br.html), mas na hora de execução do SPMF o programa não funcionou e a solução foi reinstalar o JAVA de outra forma. Apenas a fim de documentar um possível erro que você encontre ao tentar executar o SPMF, fica aqui o vídeo do processo de instalação que **não funcionou**.
 <figure align="center">
   <video width="480" height="360" controls>
-    <source src="img/Instalacao_JAVA18.mp4" type="video/mp4">
+    <source src="imgs/artigo1/Instalacao_JAVA18.mp4" type="video/mp4">
   </video>
     <figcaption>Instalação da versão errada do JAVA</figcaption>
 </figure>
@@ -194,7 +194,7 @@ Inicialmente segui o guia de instalação do JAVA [deste link](https://www.java.
 A instalação do SPMF é simples e se encontra [neste link](https://www.philippe-fournier-viger.com/spmf/index.php?link=download.php). O vídeo a seguir mostra o processo inteiro:
 <figure align="center">
   <video width="480" height="360" controls>
-    <source src="img/Instalacao_SPMF.mp4" type="video/mp4">
+    <source src="imgs/artigo1/Instalacao_SPMF.mp4" type="video/mp4">
   </video>
     <figcaption>Instalação do software SPMF</figcaption>
 </figure>
@@ -202,7 +202,7 @@ A instalação do SPMF é simples e se encontra [neste link](https://www.philipp
 Como dito anteriormente, no final obtemos um erro do JAVA que é concertado pela re-instalação de uma versão atual [neste link](https://www.oracle.com/java/technologies/downloads/), tal processo é mostrado no vídeo a seguir:
 <figure align="center">
   <video width="480" height="360" controls>
-    <source src="img/Instalacao_JAVA22.mp4" type="video/mp4">
+    <source src="imgs/artigo1/Instalacao_JAVA22.mp4" type="video/mp4">
   </video>
     <figcaption>Instalação da versão mais recente do JAVA</figcaption>
 </figure>
@@ -243,7 +243,7 @@ A segunda parte contém os dados das transações, com cada linha representando 
 Vídeo tutorial de como se deve executar o programa a partir do dado de entrada, o algoritmo escolhido no tutorial foi o *Two-Phase*:
 <figure align="center">
   <video width="480" height="360" controls>
-    <source src="img/Execucao_SPMF.mp4" type="video/mp4">
+    <source src="imgs/artigo1/Execucao_SPMF.mp4" type="video/mp4">
   </video>
 </figure>
 Apesar de no tutorial ser mostrado a execução com o algoritmo *Two-Phase*, temos várias opções de algoritmos para mineração de itensets de alta utilidade, como *UP-Growth*, *UP-Growth+*, *FHM* e *HUI-Miner*.
