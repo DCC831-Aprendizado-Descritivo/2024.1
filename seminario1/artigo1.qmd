@@ -222,7 +222,7 @@ A primeira parte do arquivo de entrada é opcional e é usada para nomear os ite
   * {DESCRICAO} é o nome do item
 
 <figure align="center">
-    <img src="img\Entrada_pt1.png">
+    <img src="imgs/artigo1/Entrada_pt1.png">
     <figcaption>Primira parte do arquivo de entrada (opcional)</figcaption>
 </figure>
 
@@ -235,7 +235,7 @@ A segunda parte contém os dados das transações, com cada linha representando 
   3. Coluna 3: utilidade respectiva de cada item do itemset separadas por espaço simples.​
 
 <figure align="center">
-    <img src="img\Entrada_pt2.png">
+    <img src="imgs/artigo1/Entrada_pt2.png">
     <figcaption>Segunda parte do arquivo de entrada</figcaption>
 </figure>
 
@@ -259,7 +259,7 @@ A saída do algoritmo também é um arquivo *.txt*, contendo os itemsets de alta
   3. “#UTIL: {VALOR}” onde {VALOR} é a utilidade do itemset.
 
 <figure align="center">
-    <img src="img\Saida.png">
+    <img src="imgs/artigo1/Saida.png">
     <figcaption>Arquivo de saída</figcaption>
 </figure>
 
