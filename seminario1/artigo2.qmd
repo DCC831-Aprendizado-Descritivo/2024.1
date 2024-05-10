@@ -103,7 +103,7 @@ Essas considerações destacam a importância de uma abordagem holística e cuid
 Para compreender o algoritmo Z-Grouping, é fundamental dominar alguns conceitos fundamentais.
 ```{python}
 from zgrouping.zgrouping import grouping, syntheticGenerator, utils
-#Essa biblioteca zgrouping não ta sendo encontrada
+
 import matplotlib.pyplot as plt
 ```
 
