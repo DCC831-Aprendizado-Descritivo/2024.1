@@ -117,11 +117,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contextualização-do-problema" id="toc-contextualização-do-problema" class="nav-link active" data-scroll-target="#contextualização-do-problema">Contextualização do Problema</a></li>
+  <li><a href="#algoritmos-clássicos" id="toc-algoritmos-clássicos" class="nav-link" data-scroll-target="#algoritmos-clássicos">Algoritmos Clássicos</a></li>
+  <li><a href="#spminer" id="toc-spminer" class="nav-link" data-scroll-target="#spminer">SPMiner</a></li>
+  <li><a href="#o-algoritmo-do-spminer" id="toc-o-algoritmo-do-spminer" class="nav-link" data-scroll-target="#o-algoritmo-do-spminer">O Algoritmo do SPMiner</a></li>
+  <li><a href="#metodologia-experimental" id="toc-metodologia-experimental" class="nav-link" data-scroll-target="#metodologia-experimental">Metodologia Experimental</a></li>
+  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados">Resultados</a></li>
+  <li><a href="#aplicações-e-desafios" id="toc-aplicações-e-desafios" class="nav-link" data-scroll-target="#aplicações-e-desafios">Aplicações e Desafios</a></li>
+  <li><a href="#como-usar-o-spminer" id="toc-como-usar-o-spminer" class="nav-link" data-scroll-target="#como-usar-o-spminer">Como Usar o SPMiner</a>
+  <ul class="collapse">
+  <li><a href="#dados-de-entrada" id="toc-dados-de-entrada" class="nav-link" data-scroll-target="#dados-de-entrada">Dados de entrada</a></li>
+  </ul></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -130,7 +147,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -142,8 +159,184 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>A mineração de dados é uma área de estudo e pesquisa cada vez mais frequente devido ao seu forte impacto e poder de extrair informações relevantes em grandes conjuntos de dados. Nesse sentido, uma das principais subáreas de mineração de dados é a de mineração de subgrafos frequentes. Em termos gerais, dado um grafo, essa área de pesquisa se concentra em descobrir algoritmos e heurísticas que permitam descobrir quais são os subgrafos de maior importância (motif) e que ocorrem com maior frequência dentro desse grafo. Sabe-se que esse é um problema de natureza difícil, devido à alta explosão combinatória do espaço de solução. Por isso, muitos estudos são feitos para encontrar uma abordagem eficiente de solução do problema.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/introducao.png" style="max-width: 100%;" class="figure-img">
+</figure>
+<section id="contextualização-do-problema" class="level2">
+<h2 class="anchored" data-anchor-id="contextualização-do-problema">Contextualização do Problema</h2>
+<p>A motivação por trás de encontrar soluções para esse problema é diversa. Muitos setores, se não todos, podem ser beneficiados por esse tipo de algoritmo. Dentre eles, podemos destacar principalmente a biologia e a química, no estudo e pesquisa de fármacos e das relações entre átomos e ligações químicas, o setor de transporte, na análise de rotas mais eficientes e baratas para deslocamento, assim como redes de computadores, no estudo das conexões entre diferentes computadores e servidores de modo a encontrar redistribuições mais rápidas e eficientes de pacotes etc.</p>
+</section>
+<section id="algoritmos-clássicos" class="level2">
+<h2 class="anchored" data-anchor-id="algoritmos-clássicos">Algoritmos Clássicos</h2>
+<p>Os algoritmos clássicos vistos em sala de aula se baseiam fortemente nas abordagens também vistas na descoberta de conjuntos de itens frequentes. Em suma, as abordagens vistas consistem na geração de candidatos e no crescimento de padrões para encontrar os subgrafos que ocorrem de maneira frequente no grafo como um todo.</p>
+<p>Tais abordagens apresentam tanto vantagens como desvantagens, dentre as quais vale destacar:</p>
+<table class="table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 38%">
+<col style="width: 38%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Geração de Candidatos</th>
+<th>Crescimento de Padrões</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Vantagens</strong></td>
+<td>- Simples</td>
+<td>- Redução do espaço de busca por meio de podas</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>- Natural</td>
+<td>- Eliminação de redundâncias</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><strong>Desvantagens</strong></td>
+<td>- Explosão combinatória do número de candidatos</td>
+<td>- Alto custo na verificação dos subgrafos</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>- Extremamente ineficiente em grandes grafos</td>
+<td>- Ineficiente em grandes grafos</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>- Consome grande quantidade de recursos como memória</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="spminer" class="level2">
+<h2 class="anchored" data-anchor-id="spminer">SPMiner</h2>
+<p>Com o problema contextualizado, fica evidente a importância da pesquisa conduzida pelos autores do artigo. A abordagem proposta por eles consiste no uso de aprendizado profundo para tornar a computação dos subgrafos frequentes mais eficiente. A ideia principal é utilizar um Rede Neural em Grafos (GNN) para mapear subgrafos para um espaço ordenado de embeddings multidimensional de modo que a busca por subgrafos frequentes nesse espaço seja bem mais rápida e eficiente.</p>
+<p>A construção da rede neural foi feita justamente com esse objetivo em mente, de modo que toda a arquitetura e a função de perda utilizada possuem como objetivo garantir que a relação de ordem parcial entre subgrafos seja mantida. Em termos gerais, se um subgrafo A é subgrafo de B, então A se encontra no canto “inferior esquerdo” de B no espaço de embeddings citado.</p>
+</section>
+<section id="o-algoritmo-do-spminer" class="level2">
+<h2 class="anchored" data-anchor-id="o-algoritmo-do-spminer">O Algoritmo do SPMiner</h2>
+<p>Identificar subgrafos frequentes de importância, também chamados de Redes Funcionais do inglês (Network Motif), é crucial para analisar e prever propriedades de redes do mundo real. Contudo, encontrando grandes redes funcionais comuns é um problema desafiador não apenas devido à sua sub-rotina NP Difícil de contagem de subgrafos, mas também o crescimento exponencial do número de possíveis padrões de subgrafos.</p>
+<p>O algoritmo SPMiner alia o poder das seguintes áreas: redes neurais de grafos, espações latentes ordenados (order embedding space) e estratégia de busca eficiente no espaço de possibilidades para identificar padrões de subgrafos de rede que aparecem com mais frequência no grafo de destino.</p>
+<p>Para tal, de forma simplificada e ordenada, ele segue os seguintes passos:</p>
+<ol type="1">
+<li>Decomposição do grafo de destino em muitos subgrafos sobrepostos ancorados.</li>
+<li>Mapeia cada subgrafo do passo anterior em um espaço multidimensional latente ordenado.</li>
+<li>Utiliza um caminhamento monotônico no espaço multidimensional latente ordenado resultante do passo anterior.</li>
+<li>Identifica as Redes Funcionais frequentes.</li>
+</ol>
+<p>O algoritmo não é exato, porém o tempo de execução é mais de 100 vezes menor do que os algoritmos exatos, e sua precisão para subgrafos pequenos é muito boa. Como limitação ele não é capaz de retornar frequência dos elementos. De uma maneira geral ele representa um grande avanço na área e sua estrutura básica pode servir de inspiração para outros problemas de mesma magnitude a exemplo de problemas combinatoriais.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/passosspminer.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Diagrama representativo do encoder e decoder do SPMiner
+</figcaption>
+</figure>
+<p>Abaixo segue a descrição detalhada de cada passo.</p>
+<p>A decomposição do grafo inicial é baseada na definição de redes funcionais ancoradas. Para definir este conceito define-se GT o grafo inicial, decompostos em seus vértices VT e nós ET da seguinte forma GT = (VT,ET). Analogamente define-se GQ=(VQ, EQ) como sendo a busca de uma rede funcional. O problema é determinar se uma cópia isomórfica de GQ aparece em GT, ou seja, se existe uma função injetora entre os vértices e nós entre deles. A definição de um subgrafo ancorado é dada da seguinte forma: Seja (GQ, v) um padrão de subgrafo ancorado no nó v. A frequência do motivo GQ no conjunto de dados do gráfico GT , em relação anó âncora v, é o número de nós u, em GT para o qual existe um isomorfismo de subgrafo f: VQ → VT tal que f(v) = u. A frequência é medida da seguinte forma: é o número de subconjuntos exclusivos de nós S ⊂ VT para onde existe um isomorfismo de subgrafo f : VQ → VT cuja imagem é S. Comparado com o padrão esta medida é mais robusta a outliers, provê uma visão holística e satisfaz a propriedade de Downward Closure Property (DCP).</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/exemplospminer.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Diferença entre a frequência de subgrafos ancorados em nós e em nível de grafo.
+</figcaption>
+</figure>
+<p>Por exemplo na imagem acima, para o subgrafo a esquerda o número de subgrafos isomórfico ao da direita, utilizando as métricas de frequência seria a combinação de 100 6 a 6, para a medida ancorada o valor seria 1.</p>
+<p>Portanto, dado um grafo GT, um parâmetro de tamanho de subgrafo K e o número desejado de resultados R, o objetivo do SPMiner é identificar, dentre todas os possíveis grafos de K nós, os R subgrafos com a maior frequência em GT.</p>
+<p>Dada as definições a decomposição de GT é feita extraindo os k-hop vizinhos GV ancorada em cada nó v, ou seja, os que contém todos os nós que têm mais o caminho mais curto de no máximo k para o nó v.</p>
+<p>O processo de mapeamento para o espaço latente ordenado é feito por uma rede neural utilizando o nó ancora como uma featrue categórica. SPMiner usa essa Rede Neural de Grafo (GNN) para aprender uma função de incorporação φ, que mapeia os vizinhos ancorados em nós em pontos no espaço latente tal que a propriedade subgrafo é preservada. É importante ressaltar que o SPMiner GNN é treinado apenas uma vez e depois pode ser aplicado a qualquer gráfico de destino de qualquer domínio.</p>
+<p>Para caminhar no espaço latente trabalho sugere três estratégias, a heurística gulosa, a busca em feixes e o algoritmo Monte Carlo Tree Search (MTCS). Para a estratégia gulosa o trabalho apresenta a função de perda que será avaliada, para o algoritmo de busca em feixe ele concilia a busca em profundidade com a estratégia gulosa. Para o algoritmo MTCS o trabalha apresenta uma função objetivo com base no critério superior de confiança para árvores (UCT).</p>
+<p>Por fim, dado o resultado da exploração do espaço, ele informa os subgrafos mais frequentes.</p>
+</section>
+<section id="metodologia-experimental" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia-experimental">Metodologia Experimental</h2>
+<p>O SPMiner foi comparado com outros métodos aproximativos e, em alguns casos (quando era viável), com métodos de enumeração exata. As comparações podem ser divididas em 3 grupos: subgrafos pequenos, subgrafos grandes plantados e subgrafos grandes reais.</p>
+<p>Para os subgrafos pequenos, a comparação com métodos de enumeração exata é possível, o que torna a comparação de desempenho mais sólida. Os subgrafos grandes plantados são subgrafos gerados artificialmente. A ideia é ter um parâmetro um pouco mais realista do desempenho na prática. Essa abordagem é interessante, pois combina grafos maiores, que são o conjunto de interesse para aplicação, mas mantém permite avaliar o desempenho de forma mais objetiva. A última abordagem, de comparação com grafos grandes reais, é uma comparação relativa entre os métodos aproximativos, mas é a que melhor aproxima um uso prático. Os datasets utilizados nessa fase incluem aplicações em diversos domínios: biologia (ENZYMES), química (COX2) e imagens (MSRC).</p>
+<p>Também foi feita uma comparação do tempo de execução. Foram usados dois algoritmos como baseline: o MFInder (Kashtan et al., 2004) e o RAND-ESU (Wernicke, 2006). Os parâmetros foram tunados para se obter um número comparável de subgrafos e tempo de execução.</p>
+</section>
+<section id="resultados" class="level2">
+<h2 class="anchored" data-anchor-id="resultados">Resultados</h2>
+<p>O SPMiner tem uma acurácia quase perfeita na identificação de motifs nos subgrafos pequenos. O SPMiner encontra motifs de tamanho 5 e 6 em até 90% das vezes. A comparação de tempo de execução é drástica: o método de enumeração ESU (Wernicke, 2006) demora cerca de 10 horas, enquanto o SPMiner roda em apenas 5 minutos. Similarmente, para os subgrafos plantados, o desempenho também foi satisfatório.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/resultado1.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Comparação entre SPMiner e principais algoritmos aproximados de mineração de subgrafos. Os 10 principais motifs identificados pelo SPMiner têm frequência mais alta do que aqueles encontrados pelas baselines, para motifs de tamanho 5 e tamanho 6
+</figcaption>
+</figure>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/resultado4.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Comparação das frequências medianas de motifs identificados por diferentes estratégias de busca e baselines.O SPMiner encontra padrões com uma frequência ancorada em nós mais alta do que as baselines MLP neural ou as baseadas em amostragem Rand-ESU e MFinder, nos conjuntos de dados COX2 (A), ENZYMES (B) e ENZYMES (C)
+</figcaption>
+</figure>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/resultado2.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Frequência de motifs identificados por Gaston, gSpan, Motivo e SPMiner. O SPMiner é capaz de identificar motifs de alta frequência de grande tamanho
+</figcaption>
+</figure>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/resultado3.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Comparação de tempo de execução entre métodos não neurais e o SPMiner
+</figcaption>
+</figure>
+<p>Para os subgrafos grandes reais, a identificação dos motifs foi muito mais frequente. Da ordem de 10 a 100 vezes mais frequente. Além disso, o SPMiner consegue identificar motifs grandes, com até mais de 10 nós, enquanto a mediana dos baselines é 3. Uma das vantagens do SPMiner é o pré-treinamento, que é executado apenas uma vez e é generalizável para qualquer grafo. Amortizando-se, isso reduz drasticamente o tempo de execução, em particular se comparado aos métodos exatos.</p>
+<p>Apesar de todos esses pontos positivos, o algoritmo também possui suas o treino com grafos aleatórios pode limitar sua aplicabilidade em casos do mundo real. Além disso, o algoritmo só retorna o top k motifs, sem considerar a ordenação.</p>
+</section>
+<section id="aplicações-e-desafios" class="level2">
+<h2 class="anchored" data-anchor-id="aplicações-e-desafios">Aplicações e Desafios</h2>
+<p>O uso de algoritmos de recuperação de informação relacionados a sub grafos é amplamente difundido no meio industrial, acadêmico e social. No meio industrial destacam-se: a indústria química e farmacêutica na produção de elementos químicos específicos e fármacos, na área de Engenharia de Software para fluxo de controle de aplicações, na área de comércio eletrônico os sistemas de recomendação, no setor bancário existem formas de detecção de fraudes, na área de cadeia de suprimentos existe a detecção de rotas e identificação de padrões cadeias de suprimentos. No meio acadêmico, a área da bioinformática destaca-se questões ligadas a redes de proteínas e conjuntos de proteínas, na área de ciência ambiental existe a identificação de habitats críticos para a conservação. No meio social, destaca-se detecção de rotas frequentes para planejamento urbano e novos negócios e definição de rotas de fuga.</p>
+<p>O algoritmo pode levar também aos seguintes aspectos negativos: pela análise de redes sociais é possível propagar informações maliciosas, perda de privacidade e perda da autonomia individual, na área comercial é possível induzir consumo desnecessário.</p>
+<p>Sobre o uso específico do algoritmo, já existem artigos de aplicação do mesmo para a detecção de rumores/notícias falsas em redes sociais (Detecting rumours with latency guarantees using massive streaming data). E um novo algoritmo chamado Multi-SPMiner já foi proposto (Multi-SPMiner: A Deep Learning Framework for Multi-Graph Frequent Pattern Mining with Application to spatiotemporal Graphs).</p>
+</section>
+<section id="como-usar-o-spminer" class="level2">
+<h2 class="anchored" data-anchor-id="como-usar-o-spminer">Como Usar o SPMiner</h2>
+<p>Jure Leskovec, professor da Universidade Stanford e um dos autores do artigo que apresenta o SPMiner, comanda um projeto denominado <a href="http://snap.stanford.edu/index.html">Stanford Network Analysis Platform (SNAP)</a>. O projeto consiste no desenvolvimento e manutenção de um sistema de código aberto para a análise de redes complexas. Um dos módulos do SNAP, é o <a href="https://github.com/snap-stanford/neural-subgraph-learning-GNN">Neural Subgraph Learning (NSL)</a>, que consiste em uma biblioteca com várias rotinas dedicadas ao aprendizado de relações de subgrafos, e um dos algoritmos implementados é justamente o SPMiner.</p>
+<p>Desta forma, o grupo modificou a implementação disponibilizada pelo SNAP de forma a solucionar problemas de compatibilidade de bibliotecas e conflitos de instalação a fim de facilitar a execução do algoritmo. Além de corrigir erros de compatibilidade, o grupo disponibilizou um arquivo para criação de um ambiente Docker, para simplificar a execução do algoritmo em máquinas diferentes. O repositório completo, que inclui um pequeno tutorial para a execução do SPMiner via Docker, pode ser acessado neste <a href="https://github.com/maTh51/neural-subgraph-learning-GNN">link</a>. Além da implementação do SPMiner, o time de desenvolvimento do projeto SNAP também disponibilizou datasets que podem ser utilizados para testar o funcionamento do algoritmo, além de scripts para diferentes análises dos resultados. Experimentos locais utilizando o dataset COX2 executando o SPMiner sem GPU obtiveram tempo de execução próximo de 40 minutos.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo3/execucao.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Subgrafos frequentes de tamanho 5, 12 e 20, respectivamente, resultantes da mineração de padrões no dataset COX2, composto por 467 grafos. A mineração foi realizada utilizando a estratégia de pesquisa Greedy, com padrões identificados tendo tamanho mínimo de 5 e máximo de 20. O processo de mineração levou 40 minutos e 17 segundos
+</figcaption>
+</figure>
+<section id="dados-de-entrada" class="level3">
+<h3 class="anchored" data-anchor-id="dados-de-entrada">Dados de entrada</h3>
+<p>Há alguns datasets no repositório, mas para uma aplicação real, o usuário pode alterar o arquivo de entrada, bem como outros parâmetros: tamanho mínimo e/ou máximo dos subgrafos frequentes, estratégia de pesquisa, dentre outros.</p>
+<p>Os dados de entrada estão no formato txt:</p>
+<ul>
+<li><p>A representação de cada grafo é inicializada por uma linha do tipo:<br>
+<code>t # {id do grafo}</code></p></li>
+<li><p>Em seguida, n linhas, cada uma representa um vértice:<br>
+<code>v {id do vértice} {rótulo do vértice}</code></p></li>
+<li><p>E por fim, m arestas, novamente, uma por linha:<br>
+<code>e {id do vértice de origem} {id do vértice de destino} {rótulo da aresta}</code></p></li>
+</ul>
+<p>Contudo, o código aceita outras estruturações dos grafos (e.g.&nbsp;os dados do TUDataset tem um .txt com uma lista de adjacência, entre outros adicionais).​</p>
+</section>
+</section>
+<section id="referências" class="level2">
+<h2 class="anchored" data-anchor-id="referências">Referências</h2>
+<ul>
+<li>Ying, R., Fu, T., Wang, A., You, J., Wang, Y., &amp; Leskovec, J. (2024). Representation Learning for Frequent Subgraph Mining. arXiv preprint arXiv:2402.14367. https://doi.org/10.48550/arXiv.2402.14367​</li>
+<li>SIMPLEDATAMINING. Graph Pattern Mining (gSpan) - Introduction. Disponível em: https://simpledatamining.blogspot.com/2015/03/graph-pattern-mining-gspan-introduction.html. Acesso em: 19 abr. 2024.​</li>
+<li>J, Vamsi. GRAPH MINING. Disponível em: https://www.youtube.com/watch?v=KoG5lEAJmgI&amp;t=1694s. Acesso em: 18 abr. 2024.​</li>
+<li>Rex Ying et al.&nbsp;Frequent Subgraph Mining by Walking in Order Embedding Space. In: INTERNATIONAL CONFERENCE ON MACHINE LEARNING, 37., 2020, Virtual. Workshop details. Disponível em: https://icml.cc/virtual/2020/7061. Acesso em: 22 abr. 2024.​</li>
+<li>Frequent Subgraph Mining by Walking in Order Embedding Space. R. Ying<em>, A. Wang</em>, J. You, J. Leskovec, 2020. Disponível em:https://snap.stanford.edu/frequent-subgraph-mining/​</li>
+<li>Nguyen, T.T., Huynh, T.T., Yin, H. et al.&nbsp;Detecting rumours with latency guarantees using massive streaming data. The VLDB Journal 32, 369–387 (2023). https://doi.org/10.1007/s00778-022-00750-4​</li>
+<li>ZEGHINA, Assaad et al.&nbsp;Multi-SPMiner: A Deep Learning Framework for Multi-Graph Frequent Pattern Mining with Application to spatiotemporal Graphs. Procedia Computer Science, v. 225, p.&nbsp;1094-1103, 2023. ISSN 1877-0509. Disponível em: https://doi.org/10.1016/j.procs.2023.10.097. Acesso em: 22 abr. 2024.</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
