@@ -2,3 +2,140 @@
 title: 'Artigo 3: Representation Learning for Frequent Subgraph Mining'
 page-layout: full
 ---
+
+A mineração de dados é uma área de estudo e pesquisa cada vez mais frequente devido ao seu forte impacto e poder de extrair informações relevantes em grandes conjuntos de dados. Nesse sentido, uma das principais subáreas de mineração de dados é a de mineração de subgrafos frequentes. Em termos gerais, dado um grafo, essa área de pesquisa se concentra em descobrir algoritmos e heurísticas que permitam descobrir quais são os subgrafos de maior importância (motif) e que ocorrem com maior frequência dentro desse grafo. Sabe-se que esse é um problema de natureza difícil, devido à alta explosão combinatória do espaço de solução. Por isso, muitos estudos são feitos para encontrar uma abordagem eficiente de solução do problema. 
+
+<figure align="center">
+    <img src="imgs/artigo3/introducao.png" style="max-width: 100%;">
+</figure>
+
+## Contextualização do Problema 
+
+A motivação por trás de encontrar soluções para esse problema é diversa. Muitos setores, se não todos, podem ser beneficiados por esse tipo de algoritmo. Dentre eles, podemos destacar principalmente a biologia e a química, no estudo e pesquisa de fármacos e das relações entre átomos e ligações químicas, o setor de transporte, na análise de rotas mais eficientes e baratas para deslocamento, assim como redes de computadores, no estudo das conexões entre diferentes computadores e servidores de modo a encontrar redistribuições mais rápidas e eficientes de pacotes etc. 
+
+## Algoritmos Clássicos 
+
+Os algoritmos clássicos vistos em sala de aula se baseiam fortemente nas abordagens também vistas na descoberta de conjuntos de itens frequentes. Em suma, as abordagens vistas consistem na geração de candidatos e no crescimento de padrões para encontrar os subgrafos que ocorrem de maneira frequente no grafo como um todo. 
+
+Tais abordagens apresentam tanto vantagens como desvantagens, dentre as quais vale destacar: 
+
+|               | Geração de Candidatos   | Crescimento de Padrões |
+| ------------- | ----------------------- | ----------------------- |
+| **Vantagens** | - Simples               | - Redução do espaço de busca por meio de podas |
+|               | - Natural               | - Eliminação de redundâncias |
+|               |                         |                         |
+| **Desvantagens** | - Explosão combinatória do número de candidatos | - Alto custo na verificação dos subgrafos |
+|                 | - Extremamente ineficiente em grandes grafos | - Ineficiente em grandes grafos |
+|                 | - Consome grande quantidade de recursos como memória |   
+
+## SPMiner 
+
+Com o problema contextualizado, fica evidente a importância da pesquisa conduzida pelos autores do artigo. A abordagem proposta por eles consiste no uso de aprendizado profundo para tornar a computação dos subgrafos frequentes mais eficiente. A ideia principal é utilizar um Rede Neural em Grafos (GNN) para mapear subgrafos para um espaço ordenado de embeddings multidimensional de modo que a busca por subgrafos frequentes nesse espaço seja bem mais rápida e eficiente. 
+
+A construção da rede neural foi feita justamente com esse objetivo em mente, de modo que toda a arquitetura e a função de perda utilizada possuem como objetivo garantir que a relação de ordem parcial entre subgrafos seja mantida. Em termos gerais, se um subgrafo A é subgrafo de B, então A se encontra no canto “inferior esquerdo” de B no espaço de embeddings citado. 
+
+## O Algoritmo do SPMiner
+
+Identificar subgrafos frequentes de importância, também chamados de Redes Funcionais do inglês (Network Motif), é crucial para analisar e prever propriedades de redes do mundo real. Contudo, encontrando grandes redes funcionais comuns é um problema desafiador não apenas devido à sua sub-rotina NP Difícil de contagem de subgrafos, mas também o crescimento exponencial do número de possíveis padrões de subgrafos. 
+
+O algoritmo SPMiner alia o poder das seguintes áreas: redes neurais de grafos, espações latentes ordenados (order embedding space) e estratégia de busca eficiente no espaço de possibilidades para identificar padrões de subgrafos de rede que aparecem com mais frequência no grafo de destino. 
+
+Para tal, de forma simplificada e ordenada, ele segue os seguintes passos: 
+
+1. Decomposição do grafo de destino em muitos subgrafos sobrepostos ancorados. 
+2. Mapeia cada subgrafo do passo anterior em um espaço multidimensional latente ordenado. 
+3. Utiliza um caminhamento monotônico no espaço multidimensional latente ordenado resultante do passo anterior. 
+4. Identifica as Redes Funcionais frequentes. 
+
+O algoritmo não é exato, porém o tempo de execução é mais de 100 vezes menor do que os algoritmos exatos, e sua precisão para subgrafos pequenos é muito boa. Como limitação ele não é capaz de retornar frequência dos elementos. De uma maneira geral ele representa um grande avanço na área e sua estrutura básica pode servir de inspiração para outros problemas de mesma magnitude a exemplo de problemas combinatoriais. 
+
+<figure align="center">
+    <img src="imgs/artigo3/passosspminer.png" style="max-width: 100%;">
+    <figcaption>Diagrama representativo do encoder e decoder do SPMiner</figcaption>
+</figure>
+
+Abaixo segue a descrição detalhada de cada passo. 
+
+A decomposição do grafo inicial é baseada na definição de redes funcionais ancoradas. Para definir este conceito define-se GT o grafo inicial, decompostos em seus vértices VT e nós ET da seguinte forma GT = (VT,ET). Analogamente define-se GQ=(VQ, EQ) como sendo a busca de uma rede funcional.  O problema é determinar se uma cópia isomórfica de GQ aparece em GT, ou seja, se existe uma função injetora entre os vértices e nós entre deles. A definição de um subgrafo ancorado é dada da seguinte forma: Seja (GQ, v) um padrão de subgrafo ancorado no nó v. A frequência do motivo GQ no conjunto de dados do gráfico GT , em relação anó âncora v, é o número de nós u, em GT para o qual existe um isomorfismo de subgrafo f: VQ → VT tal que f(v) = u. A frequência é medida da seguinte forma: é o número de subconjuntos exclusivos de nós S ⊂ VT para onde existe um isomorfismo de subgrafo f : VQ → VT cuja imagem é S. Comparado com o padrão esta medida é mais robusta a outliers, provê uma visão holística e satisfaz a propriedade de Downward Closure Property (DCP). 
+
+<figure align="center">
+    <img src="imgs/artigo3/exemplospminer.png" style="max-width: 100%;">
+    <figcaption>Diferença entre a frequência de subgrafos ancorados em nós e em nível de grafo.</figcaption>
+</figure>
+
+Por exemplo na imagem acima, para o subgrafo a esquerda o número de subgrafos isomórfico ao da direita, utilizando as métricas de frequência seria a combinação de 100 6 a 6, para a medida ancorada o valor seria 1. 
+
+Portanto, dado um grafo GT, um parâmetro de tamanho de subgrafo K e o número desejado de resultados R, o objetivo do SPMiner é identificar, dentre todas os possíveis grafos de K nós, os R subgrafos com a maior frequência em GT. 
+
+Dada as definições a decomposição de GT é feita extraindo os k-hop vizinhos GV ancorada em cada nó v, ou seja, os que contém todos os nós que têm mais o caminho mais curto de no máximo k para o nó v. 
+
+O processo de mapeamento para o espaço latente ordenado é feito por uma rede neural utilizando o nó ancora como uma featrue categórica. SPMiner usa essa Rede Neural de Grafo (GNN) para aprender uma função de incorporação φ, que mapeia os vizinhos ancorados em nós em pontos no espaço latente tal que a propriedade subgrafo é preservada. É importante ressaltar que o SPMiner GNN é treinado apenas uma vez e depois pode ser aplicado a qualquer gráfico de destino de qualquer domínio. 
+
+Para caminhar no espaço latente trabalho sugere três estratégias, a heurística gulosa, a busca em feixes e o algoritmo Monte Carlo Tree Search (MTCS). Para a estratégia gulosa o trabalho apresenta a função de perda que será avaliada, para o algoritmo de busca em feixe ele concilia a busca em profundidade com a estratégia gulosa. Para o algoritmo MTCS o trabalha apresenta uma função objetivo com base no critério superior de confiança para árvores (UCT). 
+
+Por fim, dado o resultado da exploração do espaço, ele informa os subgrafos mais frequentes. 
+
+## Metodologia Experimental 
+
+O SPMiner foi comparado com outros métodos aproximativos e, em alguns casos (quando era viável), com métodos de enumeração exata. As comparações podem ser divididas em 3 grupos: subgrafos pequenos, subgrafos grandes plantados e subgrafos grandes reais. 
+
+Para os subgrafos pequenos, a comparação com métodos de enumeração exata é possível, o que torna a comparação de desempenho mais sólida. Os subgrafos grandes plantados são subgrafos gerados artificialmente. A ideia é ter um parâmetro um pouco mais realista do desempenho na prática. Essa abordagem é interessante, pois combina grafos maiores, que são o conjunto de interesse para aplicação, mas mantém permite avaliar o desempenho de forma mais objetiva. A última abordagem, de comparação com grafos grandes reais, é uma comparação relativa entre os métodos aproximativos, mas é a que melhor aproxima um uso prático. Os datasets utilizados nessa fase incluem aplicações em diversos domínios: biologia (ENZYMES), química (COX2) e imagens (MSRC). 
+
+Também foi feita uma comparação do tempo de execução. Foram usados dois algoritmos como baseline: o MFInder (Kashtan et al., 2004) e o RAND-ESU (Wernicke, 2006). Os parâmetros foram tunados para se obter um número comparável de subgrafos e tempo de execução.
+
+## Resultados 
+
+O SPMiner tem uma acurácia quase perfeita na identificação de motifs nos subgrafos pequenos. O SPMiner encontra motifs de tamanho 5 e 6 em até 90% das vezes. A comparação de tempo de execução é drástica: o método de enumeração ESU (Wernicke, 2006) demora cerca de 10 horas, enquanto o SPMiner roda em apenas 5 minutos. Similarmente, para os subgrafos plantados, o desempenho também foi satisfatório.
+
+<figure align="center">
+    <img src="imgs/artigo3/resultado1.png" style="max-width: 100%;">
+    <figcaption>Comparação entre SPMiner e principais algoritmos aproximados de mineração de subgrafos. Os 10 principais motifs identificados pelo SPMiner têm frequência mais alta do que aqueles encontrados pelas baselines, para motifs de tamanho 5 e tamanho 6</figcaption>
+</figure>
+
+<figure align="center">
+    <img src="imgs/artigo3/resultado4.png" style="max-width: 100%;">
+    <figcaption>Comparação das frequências medianas de motifs identificados por diferentes estratégias de busca e baselines.O SPMiner encontra padrões com uma frequência ancorada em nós mais alta do que as baselines MLP neural ou as baseadas em amostragem Rand-ESU e MFinder, nos conjuntos de dados COX2 (A), ENZYMES (B) e ENZYMES (C)</figcaption>
+</figure>
+
+<figure align="center">
+    <img src="imgs/artigo3/resultado2.png" style="max-width: 100%;">
+    <figcaption>Frequência de motifs identificados por Gaston, gSpan, Motivo e SPMiner. O SPMiner é capaz de identificar motifs de alta frequência de grande tamanho</figcaption>
+</figure>
+
+<figure align="center">
+    <img src="imgs/artigo3/resultado3.png" style="max-width: 100%;">
+    <figcaption>Comparação de tempo de execução entre métodos não neurais e o SPMiner</figcaption>
+</figure>
+
+Para os subgrafos grandes reais, a identificação dos motifs foi muito mais frequente. Da ordem de 10 a 100 vezes mais frequente. Além disso, o SPMiner consegue identificar motifs grandes, com até mais de 10 nós, enquanto a mediana dos baselines é 3. Uma das vantagens do SPMiner é o pré-treinamento, que é executado apenas uma vez e é generalizável para qualquer grafo. Amortizando-se, isso reduz drasticamente o tempo de execução, em particular se comparado aos métodos exatos. 
+
+Apesar de todos esses pontos positivos, o algoritmo também possui suas o treino com grafos aleatórios pode limitar sua aplicabilidade em casos do mundo real. Além disso, o algoritmo só retorna o top k motifs, sem considerar a ordenação. 
+
+## Aplicações e Desafios
+
+O uso de algoritmos de recuperação de informação relacionados a sub grafos é amplamente difundido no meio industrial, acadêmico e social. No meio industrial destacam-se: a indústria química e farmacêutica na produção de elementos químicos específicos e fármacos, na área de Engenharia de Software para fluxo de controle de aplicações, na área de comércio eletrônico os sistemas de recomendação, no setor bancário existem formas de detecção de fraudes, na área de cadeia de suprimentos existe a detecção de rotas e identificação de padrões cadeias de suprimentos. No meio acadêmico, a área da bioinformática destaca-se questões ligadas a redes de proteínas e conjuntos de proteínas, na área de ciência ambiental existe a identificação de habitats críticos para a conservação. No meio social, destaca-se detecção de rotas frequentes para planejamento urbano e novos negócios e definição de rotas de fuga. 
+
+O algoritmo pode levar também aos seguintes aspectos negativos: pela análise de redes sociais é possível propagar informações maliciosas, perda de privacidade e perda da autonomia individual, na área comercial é possível induzir consumo desnecessário. 
+
+Sobre o uso específico do algoritmo, já existem artigos de aplicação do mesmo para a detecção de rumores/notícias falsas em redes sociais (Detecting rumours with latency guarantees using massive streaming data). E um novo algoritmo chamado Multi-SPMiner já foi proposto (Multi-SPMiner: A Deep Learning Framework for Multi-Graph Frequent Pattern Mining with Application to spatiotemporal Graphs). 
+
+## Como Usar o SPMiner
+
+Jure Leskovec, professor da Universidade Stanford e um dos autores do artigo que apresenta o SPMiner, comanda um projeto denominado [Stanford Network Analysis Platform (SNAP)](http://snap.stanford.edu/index.html). O projeto consiste no desenvolvimento e manutenção de um sistema de código aberto para a análise de redes complexas. Um dos módulos do SNAP, é o [Neural Subgraph Learning (NSL)](https://github.com/snap-stanford/neural-subgraph-learning-GNN), que consiste em uma biblioteca com várias rotinas dedicadas ao aprendizado de relações de subgrafos, e um dos algoritmos implementados é justamente o SPMiner. 
+
+Desta forma, o grupo modificou a implementação disponibilizada pelo SNAP de forma a solucionar problemas de compatibilidade de bibliotecas e conflitos de instalação a fim de facilitar a execução do algoritmo. Além de corrigir erros de compatibilidade, o grupo disponibilizou um arquivo para criação de um ambiente Docker, para simplificar a execução do algoritmo em máquinas diferentes. O repositório completo, que inclui um pequeno tutorial para a execução do SPMiner via Docker, pode ser acessado neste [link](https://github.com/maTh51/neural-subgraph-learning-GNN). Além da implementação do SPMiner, o time de desenvolvimento do projeto SNAP também disponibilizou datasets que podem ser utilizados para testar o funcionamento do algoritmo, além de scripts para diferentes análises dos resultados. Experimentos locais utilizando o dataset COX2 executando o SPMiner sem GPU obtiveram tempo de execução próximo de 40 minutos.
+
+<figure align="center">
+    <img src="imgs/artigo3/execucao.png" style="max-width: 100%;">
+    <figcaption>Subgrafos frequentes de tamanho 5, 12 e 20, respectivamente, resultantes da mineração de padrões no dataset COX2, composto por 467 grafos. A mineração foi realizada utilizando a estratégia de pesquisa Greedy, com padrões identificados tendo tamanho mínimo de 5 e máximo de 20. O processo de mineração levou 40 minutos e 17 segundos</figcaption>
+</figure>
+
+## Referências
+
+* Ying, R., Fu, T., Wang, A., You, J., Wang, Y., & Leskovec, J. (2024). Representation Learning for Frequent Subgraph Mining. arXiv preprint arXiv:2402.14367. https://doi.org/10.48550/arXiv.2402.14367​
+* SIMPLEDATAMINING. Graph Pattern Mining (gSpan) - Introduction. Disponível em: https://simpledatamining.blogspot.com/2015/03/graph-pattern-mining-gspan-introduction.html. Acesso em: 19 abr. 2024.​
+* J, Vamsi. GRAPH MINING. Disponível em: https://www.youtube.com/watch?v=KoG5lEAJmgI&t=1694s. Acesso em: 18 abr. 2024.​
+* Rex Ying et al. Frequent Subgraph Mining by Walking in Order Embedding Space. In: INTERNATIONAL CONFERENCE ON MACHINE LEARNING, 37., 2020, Virtual. Workshop details. Disponível em: https://icml.cc/virtual/2020/7061. Acesso em: 22 abr. 2024.​
+* Frequent Subgraph Mining by Walking in Order Embedding Space. R. Ying*, A. Wang*, J. You, J. Leskovec, 2020. Disponível em:https://snap.stanford.edu/frequent-subgraph-mining/​
+* Nguyen, T.T., Huynh, T.T., Yin, H. et al. Detecting rumours with latency guarantees using massive streaming data. The VLDB Journal 32, 369–387 (2023). https://doi.org/10.1007/s00778-022-00750-4​
+* ZEGHINA, Assaad et al. Multi-SPMiner: A Deep Learning Framework for Multi-Graph Frequent Pattern Mining with Application to spatiotemporal Graphs. Procedia Computer Science, v. 225, p. 1094-1103, 2023. ISSN 1877-0509. Disponível em: https://doi.org/10.1016/j.procs.2023.10.097. Acesso em: 22 abr. 2024.
