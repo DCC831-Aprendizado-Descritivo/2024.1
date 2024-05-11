@@ -130,6 +130,23 @@ Desta forma, o grupo modificou a implementação disponibilizada pelo SNAP de fo
     <figcaption>Subgrafos frequentes de tamanho 5, 12 e 20, respectivamente, resultantes da mineração de padrões no dataset COX2, composto por 467 grafos. A mineração foi realizada utilizando a estratégia de pesquisa Greedy, com padrões identificados tendo tamanho mínimo de 5 e máximo de 20. O processo de mineração levou 40 minutos e 17 segundos</figcaption>
 </figure>
 
+### Dados de entrada
+
+Há alguns datasets no repositório, mas para uma aplicação real, o usuário pode alterar o arquivo de entrada, bem como outros parâmetros: tamanho mínimo e/ou máximo dos subgrafos frequentes, estratégia de pesquisa, dentre outros.
+
+Os dados de entrada estão no formato txt:
+
+- A representação de cada grafo é inicializada por uma linha do tipo:  
+  `t # {id do grafo}`
+
+- Em seguida, n linhas, cada uma representa um vértice:  
+  `v {id do vértice} {rótulo do vértice}`
+
+- E por fim, m arestas, novamente, uma por linha:  
+  `e {id do vértice de origem} {id do vértice de destino} {rótulo da aresta}`
+
+Contudo, o código aceita outras estruturações dos grafos (e.g. os dados do TUDataset tem um .txt com uma lista de adjacência, entre outros adicionais).​
+
 ## Referências
 
 * Ying, R., Fu, T., Wang, A., You, J., Wang, Y., & Leskovec, J. (2024). Representation Learning for Frequent Subgraph Mining. arXiv preprint arXiv:2402.14367. https://doi.org/10.48550/arXiv.2402.14367​
