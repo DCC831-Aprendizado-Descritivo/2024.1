@@ -122,7 +122,9 @@ Sobre o uso específico do algoritmo, já existem artigos de aplicação do mesm
 
 Jure Leskovec, professor da Universidade Stanford e um dos autores do artigo que apresenta o SPMiner, comanda um projeto denominado [Stanford Network Analysis Platform (SNAP)](http://snap.stanford.edu/index.html). O projeto consiste no desenvolvimento e manutenção de um sistema de código aberto para a análise de redes complexas. Um dos módulos do SNAP, é o [Neural Subgraph Learning (NSL)](https://github.com/snap-stanford/neural-subgraph-learning-GNN), que consiste em uma biblioteca com várias rotinas dedicadas ao aprendizado de relações de subgrafos, e um dos algoritmos implementados é justamente o SPMiner. 
 
-Desta forma, o grupo modificou a implementação disponibilizada pelo SNAP de forma a solucionar problemas de compatibilidade de bibliotecas e conflitos de instalação a fim de facilitar a execução do algoritmo. Além de corrigir erros de compatibilidade, o grupo disponibilizou um arquivo para criação de um ambiente Docker, para simplificar a execução do algoritmo em máquinas diferentes. O repositório completo, que inclui um pequeno tutorial para a execução do SPMiner via Docker, pode ser acessado neste [link](https://github.com/maTh51/neural-subgraph-learning-GNN). Além da implementação do SPMiner, o time de desenvolvimento do projeto SNAP também disponibilizou datasets que podem ser utilizados para testar o funcionamento do algoritmo, além de scripts para diferentes análises dos resultados. Experimentos locais utilizando o dataset COX2 executando o SPMiner sem GPU obtiveram tempo de execução próximo de 40 minutos.
+De forma a solucionar problemas de compatibilidade de bibliotecas e conflitos de instalação e facilitar a execução em ambientes diferentes, foram feitas modificações na implementação disponibilizada pelo SNAP e gerado um arquivo para a criação de um ambiente Docker. O repositório completo, que inclui um pequeno tutorial para a execução do SPMiner via Docker, pode ser acessado neste [link](https://github.com/maTh51/neural-subgraph-learning-GNN).  
+
+Além da implementação do SPMiner, o time de desenvolvimento do projeto SNAP também disponibilizou datasets que podem ser utilizados para testar o funcionamento do algoritmo, além de scripts para diferentes análises dos resultados. Experimentos locais utilizando o dataset COX2 executando o SPMiner sem GPU obtiveram tempo de execução próximo de 40 minutos.
 
 <figure align="center">
     <img src="imgs/artigo3/execucao.png" style="max-width: 100%;">
@@ -145,6 +147,9 @@ Os dados de entrada estão no formato txt:
   `e {id do vértice de origem} {id do vértice de destino} {rótulo da aresta}`
 
 Contudo, o código aceita outras estruturações dos grafos (e.g. os dados do TUDataset tem um .txt com uma lista de adjacência, entre outros adicionais).​
+
+##Conclusão
+O SPMiner está representa um avanço significativo para a mineração de subgrafos frequentes, oferecendo uma abordagem inovadora e eficiente para a identificação de padrões em dados complexos. Com seu potencial de aplicação em uma variedade de domínios, o SPMiner promete abrir novas oportunidades de pesquisa e inovação. Ao aproveitar o poder do aprendizado profundo, o SPMiner está preparado para desvendar padrões ocultos e oferecer insights valiosos em um mundo cada vez mais inundado de dados.
 
 ## Referências
 
