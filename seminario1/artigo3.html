@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -124,7 +153,7 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#contextualização-do-problema" id="toc-contextualização-do-problema" class="nav-link active" data-scroll-target="#contextualização-do-problema">Contextualização do Problema</a></li>
   <li><a href="#algoritmos-clássicos" id="toc-algoritmos-clássicos" class="nav-link" data-scroll-target="#algoritmos-clássicos">Algoritmos Clássicos</a></li>
-  <li><a href="#spminer" id="toc-spminer" class="nav-link" data-scroll-target="#spminer">SPMiner</a></li>
+  <li><a href="#spminer-uma-abordagem-inovadora" id="toc-spminer-uma-abordagem-inovadora" class="nav-link" data-scroll-target="#spminer-uma-abordagem-inovadora">SPMiner: Uma abordagem inovadora</a></li>
   <li><a href="#o-algoritmo-do-spminer" id="toc-o-algoritmo-do-spminer" class="nav-link" data-scroll-target="#o-algoritmo-do-spminer">O Algoritmo do SPMiner</a></li>
   <li><a href="#metodologia-experimental" id="toc-metodologia-experimental" class="nav-link" data-scroll-target="#metodologia-experimental">Metodologia Experimental</a></li>
   <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados">Resultados</a></li>
@@ -169,7 +198,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="algoritmos-clássicos" class="level2">
 <h2 class="anchored" data-anchor-id="algoritmos-clássicos">Algoritmos Clássicos</h2>
-<p>Os algoritmos clássicos vistos em sala de aula se baseiam fortemente nas abordagens também vistas na descoberta de conjuntos de itens frequentes. Em suma, as abordagens vistas consistem na geração de candidatos e no crescimento de padrões para encontrar os subgrafos que ocorrem de maneira frequente no grafo como um todo.</p>
+<p>Os algoritmos clássicos de mineração de subgrafos frequentes baseiam-se em abordagens similares àquelas usadas na descoberta de conjuntos de itens frequentes. Em suma, consistem na geração de candidatos e no crescimento de padrões para encontrar os subgrafos que ocorrem de maneira frequente no grafo como um todo.</p>
 <p>Tais abordagens apresentam tanto vantagens como desvantagens, dentre as quais vale destacar:</p>
 <table class="table">
 <colgroup>
@@ -218,18 +247,18 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 </section>
-<section id="spminer" class="level2">
-<h2 class="anchored" data-anchor-id="spminer">SPMiner</h2>
+<section id="spminer-uma-abordagem-inovadora" class="level2">
+<h2 class="anchored" data-anchor-id="spminer-uma-abordagem-inovadora">SPMiner: Uma abordagem inovadora</h2>
 <p>Com o problema contextualizado, fica evidente a importância da pesquisa conduzida pelos autores do artigo. A abordagem proposta por eles consiste no uso de aprendizado profundo para tornar a computação dos subgrafos frequentes mais eficiente. A ideia principal é utilizar um Rede Neural em Grafos (GNN) para mapear subgrafos para um espaço ordenado de embeddings multidimensional de modo que a busca por subgrafos frequentes nesse espaço seja bem mais rápida e eficiente.</p>
 <p>A construção da rede neural foi feita justamente com esse objetivo em mente, de modo que toda a arquitetura e a função de perda utilizada possuem como objetivo garantir que a relação de ordem parcial entre subgrafos seja mantida. Em termos gerais, se um subgrafo A é subgrafo de B, então A se encontra no canto “inferior esquerdo” de B no espaço de embeddings citado.</p>
 </section>
 <section id="o-algoritmo-do-spminer" class="level2">
 <h2 class="anchored" data-anchor-id="o-algoritmo-do-spminer">O Algoritmo do SPMiner</h2>
-<p>Identificar subgrafos frequentes de importância, também chamados de Redes Funcionais do inglês (Network Motif), é crucial para analisar e prever propriedades de redes do mundo real. Contudo, encontrando grandes redes funcionais comuns é um problema desafiador não apenas devido à sua sub-rotina NP Difícil de contagem de subgrafos, mas também o crescimento exponencial do número de possíveis padrões de subgrafos.</p>
-<p>O algoritmo SPMiner alia o poder das seguintes áreas: redes neurais de grafos, espações latentes ordenados (order embedding space) e estratégia de busca eficiente no espaço de possibilidades para identificar padrões de subgrafos de rede que aparecem com mais frequência no grafo de destino.</p>
+<p>Identificar subgrafos frequentes de importância, também chamados de Redes Funcionais do inglês (Network Motif), é crucial para analisar e prever propriedades de redes do mundo real. Contudo, encontrar grandes redes funcionais comuns é um problema desafiador não apenas devido à sua sub-rotina NP Difícil de contagem de subgrafos, mas também o crescimento exponencial do número de possíveis padrões de subgrafos.</p>
+<p>O algoritmo SPMiner alia o poder das seguintes áreas: redes neurais de grafos, espaços latentes ordenados (order embedding space) e estratégia de busca eficiente no espaço de possibilidades para identificar padrões de subgrafos de rede que aparecem com mais frequência no grafo de destino.</p>
 <p>Para tal, de forma simplificada e ordenada, ele segue os seguintes passos:</p>
 <ol type="1">
-<li>Decomposição do grafo de destino em muitos subgrafos sobrepostos ancorados.</li>
+<li>Decompõe o grafo de destino em muitos subgrafos sobrepostos ancorados.</li>
 <li>Mapeia cada subgrafo do passo anterior em um espaço multidimensional latente ordenado.</li>
 <li>Utiliza um caminhamento monotônico no espaço multidimensional latente ordenado resultante do passo anterior.</li>
 <li>Identifica as Redes Funcionais frequentes.</li>
@@ -242,17 +271,17 @@ Diagrama representativo do encoder e decoder do SPMiner
 </figcaption>
 </figure>
 <p>Abaixo segue a descrição detalhada de cada passo.</p>
-<p>A decomposição do grafo inicial é baseada na definição de redes funcionais ancoradas. Para definir este conceito define-se GT o grafo inicial, decompostos em seus vértices VT e nós ET da seguinte forma GT = (VT,ET). Analogamente define-se GQ=(VQ, EQ) como sendo a busca de uma rede funcional. O problema é determinar se uma cópia isomórfica de GQ aparece em GT, ou seja, se existe uma função injetora entre os vértices e nós entre deles. A definição de um subgrafo ancorado é dada da seguinte forma: Seja (GQ, v) um padrão de subgrafo ancorado no nó v. A frequência do motivo GQ no conjunto de dados do gráfico GT , em relação anó âncora v, é o número de nós u, em GT para o qual existe um isomorfismo de subgrafo f: VQ → VT tal que f(v) = u. A frequência é medida da seguinte forma: é o número de subconjuntos exclusivos de nós S ⊂ VT para onde existe um isomorfismo de subgrafo f : VQ → VT cuja imagem é S. Comparado com o padrão esta medida é mais robusta a outliers, provê uma visão holística e satisfaz a propriedade de Downward Closure Property (DCP).</p>
+<p>A decomposição do grafo inicial é baseada na definição de redes funcionais ancoradas. Para definir este conceito define-se <span class="math inline">\(G_T\)</span> o grafo inicial, decompostos em seus vértices <span class="math inline">\(V_T\)</span> e nós <span class="math inline">\(E_T\)</span> da seguinte forma <span class="math inline">\(G_T=(V_T,E_T)\)</span>. Analogamente define-se <span class="math inline">\(G_Q=(V_Q,E_Q)\)</span> como sendo a busca de uma rede funcional. O problema é determinar se uma cópia isomórfica de <span class="math inline">\(G_Q\)</span> aparece em <span class="math inline">\(G_T\)</span>, ou seja, se existe uma função injetora entre os vértices e nós entre deles. A definição de um subgrafo ancorado é dada da seguinte forma: Seja <span class="math inline">\((G_Q, v)\)</span> um padrão de subgrafo ancorado no nó <span class="math inline">\(v\)</span>. A frequência do motivo <span class="math inline">\(G_Q\)</span> no conjunto de dados do gráfico <span class="math inline">\(G_T\)</span> , em relação ao âncora <span class="math inline">\(v\)</span>, é o número de nós <span class="math inline">\(u\)</span>, em <span class="math inline">\(G_T\)</span> para o qual existe um isomorfismo de subgrafo <span class="math inline">\(f: V_Q→ V_T\)</span> tal que <span class="math inline">\(f(v) = u\)</span>. A frequência é medida da seguinte forma: é o número de subconjuntos exclusivos de nós <span class="math inline">\(S ⊂ V_T\)</span> para onde existe um isomorfismo de subgrafo <span class="math inline">\(f : V_Q → V_T\)</span> cuja imagem é <span class="math inline">\(S\)</span>. Comparado com o padrão, esta medida é mais robusta a outliers, provê uma visão holística e satisfaz a propriedade de Downward Closure Property (DCP).</p>
 <figure align="center" class="figure">
 <img src="imgs/artigo3/exemplospminer.png" style="max-width: 100%;" class="figure-img">
 <figcaption>
 Diferença entre a frequência de subgrafos ancorados em nós e em nível de grafo.
 </figcaption>
 </figure>
-<p>Por exemplo na imagem acima, para o subgrafo a esquerda o número de subgrafos isomórfico ao da direita, utilizando as métricas de frequência seria a combinação de 100 6 a 6, para a medida ancorada o valor seria 1.</p>
-<p>Portanto, dado um grafo GT, um parâmetro de tamanho de subgrafo K e o número desejado de resultados R, o objetivo do SPMiner é identificar, dentre todas os possíveis grafos de K nós, os R subgrafos com a maior frequência em GT.</p>
-<p>Dada as definições a decomposição de GT é feita extraindo os k-hop vizinhos GV ancorada em cada nó v, ou seja, os que contém todos os nós que têm mais o caminho mais curto de no máximo k para o nó v.</p>
-<p>O processo de mapeamento para o espaço latente ordenado é feito por uma rede neural utilizando o nó ancora como uma featrue categórica. SPMiner usa essa Rede Neural de Grafo (GNN) para aprender uma função de incorporação φ, que mapeia os vizinhos ancorados em nós em pontos no espaço latente tal que a propriedade subgrafo é preservada. É importante ressaltar que o SPMiner GNN é treinado apenas uma vez e depois pode ser aplicado a qualquer gráfico de destino de qualquer domínio.</p>
+<p>Por exemplo, na imagem acima, para o subgrafo à esquerda o número de subgrafos isomórficos ao da direita, utilizando as métricas de frequência seria a combinação de 100 6 a 6, para a medida ancorada o valor seria 1.</p>
+<p>Portanto, dado um grafo <span class="math inline">\(G_T\)</span>, um parâmetro de tamanho de subgrafo <span class="math inline">\(K\)</span> e o número desejado de resultados <span class="math inline">\(R\)</span>, o objetivo do SPMiner é identificar, dentre todas os possíveis grafos de <span class="math inline">\(K\)</span> nós, os <span class="math inline">\(R\)</span> subgrafos com a maior frequência em <span class="math inline">\(G_T\)</span>.</p>
+<p>Dadas as definições, a decomposição de <span class="math inline">\(G_T\)</span> é feita extraindo os k-hop vizinhos <span class="math inline">\(G_V\)</span> ancorada em cada nó <span class="math inline">\(v\)</span>, ou seja, os que contém todos os nós que têm mais o caminho mais curto de no máximo <span class="math inline">\(k\)</span> para o nó <span class="math inline">\(v\)</span>.</p>
+<p>O processo de mapeamento para o espaço latente ordenado é feito por uma rede neural utilizando o nó âncora como uma feature categórica. SPMiner usa essa Rede Neural de Grafo (GNN) para aprender uma função de incorporação φ, que mapeia os vizinhos ancorados em nós em pontos no espaço latente tal que a propriedade subgrafo é preservada. É importante ressaltar que o SPMiner GNN é treinado apenas uma vez e depois pode ser aplicado a qualquer gráfico de destino de qualquer domínio.</p>
 <p>Para caminhar no espaço latente trabalho sugere três estratégias, a heurística gulosa, a busca em feixes e o algoritmo Monte Carlo Tree Search (MTCS). Para a estratégia gulosa o trabalho apresenta a função de perda que será avaliada, para o algoritmo de busca em feixe ele concilia a busca em profundidade com a estratégia gulosa. Para o algoritmo MTCS o trabalha apresenta uma função objetivo com base no critério superior de confiança para árvores (UCT).</p>
 <p>Por fim, dado o resultado da exploração do espaço, ele informa os subgrafos mais frequentes.</p>
 </section>
@@ -290,11 +319,11 @@ Comparação de tempo de execução entre métodos não neurais e o SPMiner
 </figcaption>
 </figure>
 <p>Para os subgrafos grandes reais, a identificação dos motifs foi muito mais frequente. Da ordem de 10 a 100 vezes mais frequente. Além disso, o SPMiner consegue identificar motifs grandes, com até mais de 10 nós, enquanto a mediana dos baselines é 3. Uma das vantagens do SPMiner é o pré-treinamento, que é executado apenas uma vez e é generalizável para qualquer grafo. Amortizando-se, isso reduz drasticamente o tempo de execução, em particular se comparado aos métodos exatos.</p>
-<p>Apesar de todos esses pontos positivos, o algoritmo também possui suas o treino com grafos aleatórios pode limitar sua aplicabilidade em casos do mundo real. Além disso, o algoritmo só retorna o top k motifs, sem considerar a ordenação.</p>
+<p>Apesar de todos esses pontos positivos, o algoritmo também possui suas limitações. O treino com grafos aleatórios pode limitar sua aplicabilidade em casos do mundo real. Além disso, o algoritmo só retorna o top k motifs, sem considerar a ordenação.</p>
 </section>
 <section id="aplicações-e-desafios" class="level2">
 <h2 class="anchored" data-anchor-id="aplicações-e-desafios">Aplicações e Desafios</h2>
-<p>O uso de algoritmos de recuperação de informação relacionados a sub grafos é amplamente difundido no meio industrial, acadêmico e social. No meio industrial destacam-se: a indústria química e farmacêutica na produção de elementos químicos específicos e fármacos, na área de Engenharia de Software para fluxo de controle de aplicações, na área de comércio eletrônico os sistemas de recomendação, no setor bancário existem formas de detecção de fraudes, na área de cadeia de suprimentos existe a detecção de rotas e identificação de padrões cadeias de suprimentos. No meio acadêmico, a área da bioinformática destaca-se questões ligadas a redes de proteínas e conjuntos de proteínas, na área de ciência ambiental existe a identificação de habitats críticos para a conservação. No meio social, destaca-se detecção de rotas frequentes para planejamento urbano e novos negócios e definição de rotas de fuga.</p>
+<p>O uso de algoritmos de recuperação de informação relacionados a sub grafos é amplamente difundido no meio industrial, acadêmico e social. No meio industrial destacam-se a indústria química e farmacêutica na produção de elementos químicos específicos e fármacos, na área de Engenharia de Software para fluxo de controle de aplicações, na área de comércio eletrônico os sistemas de recomendação, no setor bancário existem formas de detecção de fraudes, na área de cadeia de suprimentos existe a detecção de rotas e identificação de padrões cadeias de suprimentos. No meio acadêmico, a área da bioinformática destaca-se em questões ligadas a redes de proteínas e conjuntos de proteínas, na área de ciência ambiental existe a identificação de habitats críticos para a conservação. No meio social, destaca-se detecção de rotas frequentes para planejamento urbano e novos negócios e definição de rotas de fuga.</p>
 <p>O algoritmo pode levar também aos seguintes aspectos negativos: pela análise de redes sociais é possível propagar informações maliciosas, perda de privacidade e perda da autonomia individual, na área comercial é possível induzir consumo desnecessário.</p>
 <p>Sobre o uso específico do algoritmo, já existem artigos de aplicação do mesmo para a detecção de rumores/notícias falsas em redes sociais (Detecting rumours with latency guarantees using massive streaming data). E um novo algoritmo chamado Multi-SPMiner já foi proposto (Multi-SPMiner: A Deep Learning Framework for Multi-Graph Frequent Pattern Mining with Application to spatiotemporal Graphs).</p>
 </section>
