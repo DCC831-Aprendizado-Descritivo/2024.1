@@ -1,0 +1,17 @@
+---
+title: 'Artigo 4: Anytime discovery of a diverse set of patterns with Monte Carlo tree search'
+page-layout: full
+---
+
+# Introdução
+
+A Descoberta de Subgrupos (SD), uma área de pesquisa dentro da Mineração de Dados e Aprendizado de Máquina, dedica-se à identificação de subgrupos relevantes em conjuntos de dados. Conforme definido por Stefan Wrobel (1997), o objetivo da SD é encontrar subgrupos com as características estatísticas mais incomuns em relação à propriedade de interesse, buscando padrões estatisticamente significantes e maximamente abrangentes. Diferentemente da mineração de itens frequentes, a SD geralmente emprega rótulos para caracterizar e comparar grupos, configurando-se como uma estratégia de aprendizado supervisionado. No entanto, desafios como a busca por resultados relevantes e a eficiência na exploração do espaço de busca são comuns a ambas as áreas. 
+
+Desde o final da década de 1990, diversas estratégias têm sido propostas para a SD, muitas adaptando conceitos da mineração de itens frequentes. Abordagens como o SD-Map, um método exaustivo baseado no FP-Growth, podem se mostrar inviável em espaços de busca extensos. A Busca em Feixe (Beam Search), uma heurística gulosa, expande os subgrupos mais promissores, porém, com potencial prejuízo à diversidade dos resultados. Algoritmos evolucionários, por sua vez, não garantem a obtenção de ótimos locais e frequentemente apresentam especificidades em relação à linguagem de representação dos dados. 
+
+Buscando superar tais limitações, o artigo em questão propõe o método MTCS4SD, que aplica a Árvore de Busca Monte Carlo (Monte Carlo Tree Search - MCTS) à descoberta de subgrupos. A MCTS, uma heurística de busca amplamente utilizada em jogos de tomada de decisão, constrói uma árvore que simula as etapas do problema. A cada iteração, a árvore é expandida por meio de amostragem aleatória e seus valores são atualizados via backpropagation, com base nos resultados obtidos. A aplicação da MCTS à SD permite explorar o espaço de busca de forma incremental e assimétrica, produzindo resultados a qualquer momento. Adicionalmente, a natureza da MCTS contribui para a obtenção de padrões mais diversos e de alta qualidade.  A principal contribuição do artigo reside na caracterização completa da MCTS para a descoberta de subgrupos, com experimentos demonstrando sua superioridade em relação a métodos tradicionais e heurísticas populares.
+
+<figure align="center">
+    <img src="imgs/artigo4/f1.png">
+    <figcaption>Ilustração de diferentes algoritmos de busca. a Redundancy problem. b Beam search. c Sampling exploration. d MCTS-based exploration.</figcaption>
+</figure>
