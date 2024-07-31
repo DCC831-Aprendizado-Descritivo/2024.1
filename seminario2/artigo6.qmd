@@ -21,3 +21,21 @@ Busca-se portanto encontrar correlações entre os rótulos, objetivando encontr
 Entre os métodos que realizam funções semelhantes a EPM, pode-se destacar o uso de regras de associação, proposto por Henzgen e Hullermeier, que faz uma busca por padrões de subranking.
 
 ## Conceitos importantes
+
+## Conceitos importantes
+
+## Entendendo os algoritmos usados
+
+## Estratégias de busca
+
+## Metodologia
+
+## Resultados obtidos
+
+## Aplicações e desafios
+
+## Execução dos algoritmos usados no artigo
+
+## Conclusão
+
+## Referências
