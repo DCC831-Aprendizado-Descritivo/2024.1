@@ -1,0 +1,23 @@
+---
+title: 'Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining'
+page-layout: full
+---
+
+Mineração de modelos excepcionais (Exceptional Model Mining - EMM) é um framework que tem como objetivo encontrar padrões locais, assim como a descoberta de subgrupos (Sbugroup Discovery - SD), porém EMM busca encontrar correlações entre variáveis alvo que podem ser consideradas interessantes/exepcionais. Já SD busca encontrar padrões, criando seletores nos atributos disponíveis, para encontrar individuos que atendam um padrão de qualidade em relação a distribuição de uma única variável alvo.
+
+O artigo aborda uma técnica chamada mineração de preferências exepcionais (Excepional Preference Mining - EPM), onde procura-se achar preferência sobre rótulos, ou seja, encontrar preferências excepcionais de diversas opções possíveis sobre uma variável.
+
+## Contextualização do problema
+
+Diversas linhas de pesquisa buscam construir modelos preditivos capazes de realizarem um ajuste global a um conjunto de dados, de forma fornecer resultados generalizados para todo o conjunto de dados que foi treinado, além de prever com acurácia novos conjuntos de dados. Esses modelos podem fornecer grande ajuda em tomadas de decisão, pois são capazes de preverem uma variável alvo. Contudo, pode-se extrair informações valiosas procurando padrões locais. Em casos como: eleições, market-places, restaurantes, sistemas de recomendação em redes sociais. O objetivo é tentar encontrar padrões de preferência, onde seria possível encontrar atributos de amostras que caracterizam essas preferências. 
+
+Busca-se portanto encontrar correlações entre os rótulos, objetivando encontrar uma preferência entre eles em grupos locais, considerados excepcionais.
+
+<figure align="center">
+    <img src="imgs/artigo6/image1.png" style="max-width: 100%;">
+    <figcaption>Descoberta de Modelos Excepcionais</figcaption>
+</figure>
+
+Entre os métodos que realizam funções semelhantes a EPM, pode-se destacar o uso de regras de associação, proposto por Henzgen e Hullermeier, que faz uma busca por padrões de subranking.
+
+## Conceitos importantes
