@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.55">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining – Aprendizado Descritivo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seminário-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Seminário 1</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seminário-1">    
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo1.html">
+ <span class="dropdown-text">Artigo 1: A Survey of High Utility Itemset Mining</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo2.html">
+ <span class="dropdown-text">Artigo 2: Finding Local Groupings of Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo3.html">
+ <span class="dropdown-text">Artigo 3: Representation Learning for Frequent Subgraph Mining</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seminário-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Seminário 2</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seminário-2">    
+        <li>
+    <a class="dropdown-item" href="../seminario2/artigo4.html">
+ <span class="dropdown-text">Artigo 4: Anytime discovery of a diverse set of patterns with Monte Carlo tree search</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contextualização-do-problema" id="toc-contextualização-do-problema" class="nav-link active" data-scroll-target="#contextualização-do-problema">Contextualização do problema</a></li>
+  <li><a href="#conceitos-importantes" id="toc-conceitos-importantes" class="nav-link" data-scroll-target="#conceitos-importantes">Conceitos importantes</a>
+  <ul class="collapse">
+  <li><a href="#label-ranking" id="toc-label-ranking" class="nav-link" data-scroll-target="#label-ranking">Label Ranking</a></li>
+  <li><a href="#descoberta-de-subgrupos-e-exceptional-model-mining" id="toc-descoberta-de-subgrupos-e-exceptional-model-mining" class="nav-link" data-scroll-target="#descoberta-de-subgrupos-e-exceptional-model-mining">Descoberta de Subgrupos e Exceptional Model Mining</a></li>
+  <li><a href="#estratégia-de-busca" id="toc-estratégia-de-busca" class="nav-link" data-scroll-target="#estratégia-de-busca">Estratégia de Busca</a></li>
+  <li><a href="#regras-de-distribuições" id="toc-regras-de-distribuições" class="nav-link" data-scroll-target="#regras-de-distribuições">Regras de Distribuições</a></li>
+  </ul></li>
+  <li><a href="#matriz-de-preferência" id="toc-matriz-de-preferência" class="nav-link" data-scroll-target="#matriz-de-preferência">Matriz de Preferência</a></li>
+  <li><a href="#entendendo-os-algoritmos-usados" id="toc-entendendo-os-algoritmos-usados" class="nav-link" data-scroll-target="#entendendo-os-algoritmos-usados">Entendendo os algoritmos usados</a>
+  <ul class="collapse">
+  <li><a href="#passo-a-passo-do-algoritmo" id="toc-passo-a-passo-do-algoritmo" class="nav-link" data-scroll-target="#passo-a-passo-do-algoritmo">Passo a Passo do Algoritmo</a></li>
+  </ul></li>
+  <li><a href="#metodologia" id="toc-metodologia" class="nav-link" data-scroll-target="#metodologia">Metodologia</a></li>
+  <li><a href="#resultados-obtidos" id="toc-resultados-obtidos" class="nav-link" data-scroll-target="#resultados-obtidos">Resultados obtidos</a>
+  <ul class="collapse">
+  <li><a href="#eleições-alemãs-2005-e-2009-germanelections2005" id="toc-eleições-alemãs-2005-e-2009-germanelections2005" class="nav-link" data-scroll-target="#eleições-alemãs-2005-e-2009-germanelections2005">1. Eleições Alemãs (2005 e 2009) GermanElections2005:</a></li>
+  <li><a href="#top7movies" id="toc-top7movies" class="nav-link" data-scroll-target="#top7movies">2. Top7Movies</a></li>
+  <li><a href="#algae" id="toc-algae" class="nav-link" data-scroll-target="#algae">3. Algae</a></li>
+  <li><a href="#sushi" id="toc-sushi" class="nav-link" data-scroll-target="#sushi">4. Sushi</a></li>
+  <li><a href="#cpu-small" id="toc-cpu-small" class="nav-link" data-scroll-target="#cpu-small">5. Cpu-small</a></li>
+  <li><a href="#comparação-de-métricas-de-qualidade" id="toc-comparação-de-métricas-de-qualidade" class="nav-link" data-scroll-target="#comparação-de-métricas-de-qualidade">6. Comparação de Métricas de Qualidade</a></li>
+  </ul></li>
+  <li><a href="#aplicações-e-desafios" id="toc-aplicações-e-desafios" class="nav-link" data-scroll-target="#aplicações-e-desafios">Aplicações e desafios</a></li>
+  <li><a href="#execução-dos-algoritmos-usados-no-artigo" id="toc-execução-dos-algoritmos-usados-no-artigo" class="nav-link" data-scroll-target="#execução-dos-algoritmos-usados-no-artigo">Execução dos algoritmos usados no artigo</a>
+  <ul class="collapse">
+  <li><a href="#repositório-md2s_musicproject" id="toc-repositório-md2s_musicproject" class="nav-link" data-scroll-target="#repositório-md2s_musicproject">Repositório MD2S_MusicProject</a></li>
+  <li><a href="#repositório-my-sushi-addiction" id="toc-repositório-my-sushi-addiction" class="nav-link" data-scroll-target="#repositório-my-sushi-addiction">Repositório My-Sushi-Addiction</a></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Mineração de modelos excepcionais (Exceptional Model Mining - EMM) é um framework que tem como objetivo encontrar padrões locais, assim como a descoberta de subgrupos (Sbugroup Discovery - SD), porém EMM busca encontrar correlações entre variáveis alvo que podem ser consideradas interessantes/exepcionais. Já SD busca encontrar padrões, criando seletores nos atributos disponíveis, para encontrar individuos que atendam um padrão de qualidade em relação a distribuição de uma única variável alvo.</p>
+<p>O artigo aborda uma técnica chamada mineração de preferências exepcionais (Excepional Preference Mining - EPM), onde procura-se achar preferência sobre rótulos, ou seja, encontrar preferências excepcionais de diversas opções possíveis sobre uma variável.</p>
+<section id="contextualização-do-problema" class="level2">
+<h2 class="anchored" data-anchor-id="contextualização-do-problema">Contextualização do problema</h2>
+<p>Diversas linhas de pesquisa buscam construir modelos preditivos capazes de realizarem um ajuste global a um conjunto de dados, de forma fornecer resultados generalizados para todo o conjunto de dados que foi treinado, além de prever com acurácia novos conjuntos de dados. Esses modelos podem fornecer grande ajuda em tomadas de decisão, pois são capazes de preverem uma variável alvo. Contudo, pode-se extrair informações valiosas procurando padrões locais. Em casos como: eleições, market-places, restaurantes, sistemas de recomendação em redes sociais. O objetivo é tentar encontrar padrões de preferência, onde seria possível encontrar atributos de amostras que caracterizam essas preferências.</p>
+<p>Busca-se portanto encontrar correlações entre os rótulos, objetivando encontrar uma preferência entre eles em grupos locais, considerados excepcionais.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/image1.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Descoberta de Modelos Excepcionais
+</figcaption>
+</figure>
+<p>Entre os métodos que realizam funções semelhantes a EPM, pode-se destacar o uso de regras de associação, proposto por Henzgen e Hullermeier, que faz uma busca por padrões de subranking.</p>
+</section>
+<section id="conceitos-importantes" class="level2">
+<h2 class="anchored" data-anchor-id="conceitos-importantes">Conceitos importantes</h2>
+<section id="label-ranking" class="level3">
+<h3 class="anchored" data-anchor-id="label-ranking">Label Ranking</h3>
+<p>Dada uma instância a <span class="math inline">\(x = \{a_1, a_2, \ldots, a_m, \pi\}\)</span> do espaço de instâncias <span class="math inline">\(\mathbb{X}\)</span>, o objetivo é prever o rank dos rótulos <span class="math inline">\(\mathbb{L} = \{\lambda_1, \ldots, \lambda_n\}\)</span> associados com <span class="math inline">\(x\)</span>. O ranking pode ser representado como uma <strong>strict total order</strong> sob <span class="math inline">\(\mathbb{L}\)</span>, definido no espaço de permutação <span class="math inline">\(\Omega\)</span>.</p>
+<p>O Label Ranking se assemelha às tarefas de classificação, mas ao invés de prever uma classe, deseja-se ranquear os rótulos. Na classificação, cada instância é associada a uma <strong>distribuição probabilística</strong> sob <span class="math inline">\(\Omega\)</span>. Isso significa que, para cada <span class="math inline">\(x \in \mathbb{X}\)</span>, existe uma distribuição de probabilidade <span class="math inline">\(\mathbb{P}(.|x)\)</span>, de forma que para cada <span class="math inline">\(\pi \in \Omega\)</span>, <span class="math inline">\(\mathbb{P}(\pi|x)\)</span> é a probabilidade de que <span class="math inline">\(\pi\)</span> está associado ao ranking de <span class="math inline">\(x\)</span>. O objetivo de Label Ranking é mapear <span class="math inline">\(\mathbb{X} \rightarrow \Omega\)</span>.</p>
+</section>
+<section id="descoberta-de-subgrupos-e-exceptional-model-mining" class="level3">
+<h3 class="anchored" data-anchor-id="descoberta-de-subgrupos-e-exceptional-model-mining">Descoberta de Subgrupos e Exceptional Model Mining</h3>
+<p>A linguagem usada para retornar um subgrupo é a seguinte:</p>
+<p><span class="math inline">\(𝐴𝑔𝑒 ≥ 30 ⋀ 𝐿𝑖𝑘𝑒𝑠 = 𝑆𝑎𝑙𝑚𝑜𝑛 𝑅𝑜𝑒 → 𝑈𝑛𝑢𝑠𝑢𝑎𝑙\)</span></p>
+<section id="métrica-de-qualidade" class="level4">
+<h4 class="anchored" data-anchor-id="métrica-de-qualidade">Métrica de Qualidade</h4>
+<p>Na mineração de padrões, o quão interessante um padrão pode ser é medido pela sua frequência; já em Subgroup Discovery (SD) essa métrica é estimada de forma supervisionada. Dada uma variável alvo <span class="math inline">\(t_1\)</span> identificada no dataset, o quão interessante um subgrupo nela for, é medido pelo quão não-usual a distribuição dele neste alvo.</p>
+<p>Se em uma população o comum é as pessoas gostarem de sushi <strong>chutoro</strong>, um subgrupo interessante seria de pessoas que gostam de <strong>Makizushi</strong>:</p>
+<p><span class="math inline">\(Age ≥ 30 ⋀ Lives in Region = Hokkaido → Makizushi\)</span></p>
+<p>Se ao invés de usar um único atributo alvo, múltiplos alvos <span class="math inline">\(t_1, \ldots, t_l\)</span> estão disponíveis, e se não estiver interessado em descobrir distribuições não usuais em um alvo, mas na interação entre alvos, pode-se então empregar o <strong>Exceptional Model Mining (EMM)</strong> no lugar do SD. Essa tarefa consiste em dois fatores: <strong>Model Class</strong> e <strong>Métrica de Qualidade</strong>.</p>
+<p>Model Class é definido para representar uma interação não comum entre múltiplos alvos que se esteja interessado. Já a métrica de qualidade é usada para definir o que não é usual e, portanto, interessante.</p>
+<p>Um exemplo seria tentar encontrar uma correlação entre a altura de uma pessoa <span class="math inline">\(( t_1 )\)</span> e a altura média dos avós <span class="math inline">\(( t_2 )\)</span>. Para isso, é necessário achar um coeficiente de correlação entre $t_1 $ e <span class="math inline">\(t_2\)</span>. Nesse caso aplica-se EMM com um <strong>correlation model class</strong>. No caso de subgrupos muito pequenos, o modelo pode acabar favorecendo-os por serem pouco usuais. Para favorecer subgrupos maiores, deve-se definir uma métrica de qualidade que balanceie o quão excepcional um subgrupo é, e o tamanho dele.</p>
+</section>
+</section>
+<section id="estratégia-de-busca" class="level3">
+<h3 class="anchored" data-anchor-id="estratégia-de-busca">Estratégia de Busca</h3>
+<p>Em EMM é explorado um amplo espaço de busca, guiado por uma métrica de qualidade para expressar a excepcionalidade buscada. Tipicamente, os subgrupos são buscados em uma busca por nível, combinando atributos da mesma forma que é feita uma combinação de itemsets para mineração de padrões frequentes.</p>
+<p>A maioria dos algoritmos de busca, fazem de forma generalista-para-específico, tratando o espaço de busca como um <strong>lattice</strong> cuja estrutura é definida por um <strong>refinement operator</strong> <span class="math inline">\(\eta: \mathbb{D} \rightarrow 2^\mathbb{D}\)</span>. Esse operador consegue determinar como descrições podem ser estendidas para descrições mais complexas por adições atômicas. A aplicação proposta no artigo assume que <span class="math inline">\(\eta\)</span> é um <strong>specialization operator</strong>: toda descrição $q $ é um elemento do conjunto <span class="math inline">\(\eta(p)\)</span>, o qual é mais especializada que a descrição <span class="math inline">\(p\)</span> em si. O algoritmo, portanto, retorna uma lista ranqueada de descrições que satisfazem as especificações do usuário.</p>
+<p>A estratégia de busca empregada foi um <strong>best first search</strong>, em cada nível as descrições são ordenadas pela métrica de qualidade <span class="math inline">\(\varphi\)</span>. O limite superior é o grau de complexidade, geralmente limitado por especialistas, para obter descrições com quantidades ideais de atributos para interpretação (profundidade da busca); e o limite inferior é o suporte dos subgrupos.</p>
+</section>
+<section id="regras-de-distribuições" class="level3">
+<h3 class="anchored" data-anchor-id="regras-de-distribuições">Regras de Distribuições</h3>
+<p>Regras de Distribuições (Distribution Rules, DR) é um método de SD para analisar uma única variável alvo. Ao invés de valores representativos (média, desvio-padrão etc.), DR identifica distribuições usuais do alvo, encontrando subgrupos expressados pelas regras de associação com a distribuição consequente:</p>
+<p><span class="math inline">\(S → t = Dist_t|S\)</span></p>
+<ul>
+<li><span class="math inline">\(S\)</span>: é um conjunto de condições correspondentes à parte antecedente do DR (um subgrupo).</li>
+<li><span class="math inline">\(t\)</span>: é a propriedade de interesse (ou o alvo).</li>
+<li><span class="math inline">\(Dist_t|S\)</span>: é uma distribuição empírica de <span class="math inline">\(t\)</span> quando <span class="math inline">\(S\)</span> é observado. Ela é representada por um conjunto de pares $t_i, freq(t_i) $, onde <span class="math inline">\(t_i\)</span> é um valor particular de <span class="math inline">\(t\)</span> encontrado quando <span class="math inline">\(S\)</span> é observado; <span class="math inline">\(freq(t_i)\)</span> é a frequência de <span class="math inline">\(t_i\)</span> quando os itens de <span class="math inline">\(S\)</span> são observados.</li>
+</ul>
+</section>
+</section>
+<section id="matriz-de-preferência" class="level2">
+<h2 class="anchored" data-anchor-id="matriz-de-preferência">Matriz de Preferência</h2>
+<p>Em EMP o conceito alvo consiste em um único alvo, o que faz sentido em SD. Contudo, o objeto alvo é um ranqueamento de rótulos, que pode ser representando como comparações em pares. Portanto, representa interações entre múltiplos rótulos individuais, o que é mais consistente no cenário do EMM.</p>
+<p>Ranqueamento de rótulos pode ser difícil de analisar e visualizar, quando há uma quantidade grande de rótulos. O apresentado Sushi dataset, que contém 5000 amostras de opiniões de pessoas e 10 tipos de sushi mostra um exemplo real. Até essa quantidade modesta de tipos de sushi diferentes pode ser ranqueado em diversas combinações. Isso pode ter um impacto significativo, onde mais de 98% dos 5000 rankings presentes no dataset são únicos.</p>
+<p>Por conta disso, os autores apresentaram uma alternativa para ranquear os rótulos, introduzindo as Matrizes de Preferência. A matriz de preferência (PM, preference matrix) é uma representação alternativa dos rankings em um conjunto de dados que facilita a análise de comportamentos de preferência excepcionais. Em vez de representar diretamente a ordenação dos rótulos, a matriz de preferência captura as comparações par a par entre rótulos, permitindo uma visão mais detalhada das relações de preferência.</p>
+<p>Representar um conjunto de rankings por PM tem certas vantagens sob as tradicionais representações por permutações. PM podem, naturalmente, derivar uma variedade de conjunto métricas para busca de padrões de preferência. Contudo, há certas limitações também, a escolha de agregação de métricas pode esconder informações relevantes nas PMs, por exemplo, escolhendo a média se metade dos rankings minerados forem opostos, o resultando em entradas na PM são iguais a zero. Por isso subgrupos com PM contendo apenas zeros nas entradas são ignorados.</p>
+</section>
+<section id="entendendo-os-algoritmos-usados" class="level2">
+<h2 class="anchored" data-anchor-id="entendendo-os-algoritmos-usados">Entendendo os algoritmos usados</h2>
+<p>O algoritmo <strong>EPM</strong> (Exceptional Preference Mining) tem como objetivo identificar subgrupos significativos em um dataset, utilizando uma medida de qualidade para avaliar a diferença entre as preferências do subgrupo e do dataset original.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>function EPM(dataset, quality_measure):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    dataset_pm <span class="op">=</span> compute_preference_matrix(dataset)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    candidate_subgroups <span class="op">=</span> generate_candidate_subgroups(dataset)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> subgroup <span class="kw">in</span> candidate_subgroups:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        subgroup_pm <span class="op">=</span> compute_preference_matrix(subgroup)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        distance <span class="op">=</span> calculate_distance(dataset_pm, subgroup_pm, quality_measure)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        subgroup.score <span class="op">=</span> calculate_score(distance, subgroup.size)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ranked_subgroups <span class="op">=</span> rank_subgroups(dataset_pm, candidate_subgroups)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    significant_subgroups <span class="op">=</span> validate_subgroups(ranked_subgroups)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> significant_subgroups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="passo-a-passo-do-algoritmo" class="level3">
+<h3 class="anchored" data-anchor-id="passo-a-passo-do-algoritmo">Passo a Passo do Algoritmo</h3>
+<p>Vamos apresentar o algoritmo EPM (Exceptional Preference Mining): 1. <strong>Função Principal</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>   function EPM(dataset, quality_measure):</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A função principal EPM recebe dois parâmetros:</p>
+<p><code>dataset</code>: o conjunto de dados a ser analisado.<br> <code>quality_measure</code>: a medida de qualidade utilizada para avaliar as preferências.</p>
+<ol start="2" type="1">
+<li><strong>Computação da Matriz de Preferência do Dataset</strong></li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset_pm <span class="op">=</span> compute_preference_matrix(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>compute_preference_matrix(dataset)</code>: Calcula a matriz de preferência para o dataset completo, que será utilizada como referência para comparar os subgrupos.</p>
+<ol type="1">
+<li><strong>Geração de Subgrupos Candidatos</strong></li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>candidate_subgroups <span class="op">=</span> generate_candidate_subgroups(dataset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>generate_candidate_subgroups(dataset)</code>: Gera uma lista de subgrupos candidatos a partir do dataset original. Esses subgrupos serão avaliados posteriormente.</p>
+<ol type="1">
+<li><strong>Avaliação dos Subgrupos Candidatos</strong> Para cada subgrupo na lista de candidatos, realiza-se os seguintes passos:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> subgroup <span class="kw">in</span> candidate_subgroups:</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    subgroup_pm <span class="op">=</span> compute_preference_matrix(subgroup)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    distance <span class="op">=</span> calculate_distance(dataset_pm, subgroup_pm, quality_measure)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    subgroup.score <span class="op">=</span> calculate_score(distance, subgroup.size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>compute_preference_matrix(subgroup)</code>: Calcula a matriz de preferência para o subgrupo específico.<br> <code>calculate_distance(dataset_pm, subgroup_pm, quality_measure)</code>: Calcula a distância entre a matriz de preferência do dataset completo e a do subgrupo, utilizando a medida de qualidade fornecida.</p>
+<section id="fórmula-geral" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-geral">Fórmula Geral</h4>
+<p>A distância geral <span class="math inline">\(L_S\)</span> entre a matriz de preferência do dataset completo <span class="math inline">\(M_D\)</span> e a matriz de preferência do subgrupo <span class="math inline">\(M_S\)</span> é calculada como:</p>
+<p><span class="math inline">\(L_S = \frac{1}{2} (M_D - M_S)\)</span></p>
+</section>
+<section id="medidas-de-qualidade" class="level4">
+<h4 class="anchored" data-anchor-id="medidas-de-qualidade">Medidas de Qualidade</h4>
+<section id="norm" class="level5">
+<h5 class="anchored" data-anchor-id="norm">Norm</h5>
+<p>A medida de qualidade <code>Norm</code> é definida como a norma de Frobenius da matriz <span class="math inline">\(L_S\)</span>. A fórmula é:</p>
+<p><span class="math inline">\(\text{Norm}(S) = \| L_S \|_F = \sqrt{s/n} \cdot \sqrt{ \sum_{i=1}^{k} \sum_{j=1}^{k} L(i,j)^2 }\)</span></p>
+</section>
+<section id="labelwise" class="level5">
+<h5 class="anchored" data-anchor-id="labelwise">Labelwise</h5>
+<p>A medida de qualidade <code>Labelwise</code> é calculada como o valor máximo entre todas as somas das linhas da matriz <span class="math inline">\(L_S\)</span>:</p>
+<p><span class="math inline">\(\text{Labelwise}(S) = \max_{i=1,\ldots,k} \frac{1}{k(k-1)} \sum_{j=1}^{k} L(i,j)\)</span></p>
+</section>
+<section id="pairwise" class="level5">
+<h5 class="anchored" data-anchor-id="pairwise">Pairwise</h5>
+<p>A medida de qualidade <code>Pairwise</code> é calculada como o valor máximo entre todos os elementos da matriz <span class="math inline">\(L_S\)</span>:</p>
+<p><span class="math inline">\(\text{Pairwise}(S) = \max_{i,j=1,\ldots,k} L(i,j)\)</span></p>
+<p>Essas medidas são utilizadas para avaliar a diferença entre as preferências do dataset original e dos subgrupos, ajudando a identificar subgrupos excepcionais.</p>
+<p><code>calculate_score(distance, subgroup.size)</code>: Calcula a pontuação do subgrupo com base na distância calculada e no tamanho do subgrupo.</p>
+</section>
+</section>
+<section id="passos-para-calcular-a-pontuação" class="level4">
+<h4 class="anchored" data-anchor-id="passos-para-calcular-a-pontuação">Passos para Calcular a Pontuação</h4>
+<p><strong>Calcular a Cobertura Normalizada do Grupo</strong></p>
+<p>A Cobertura Normalizada do Grupo é dada por:</p>
+<p><span class="math inline">\(\sqrt{\frac{s}{n}}\)</span></p>
+<p>onde: - <span class="math inline">\(s\)</span> é o tamanho do subgrupo. - <span class="math inline">\(n\)</span> é o tamanho do dataset completo.</p>
+<p><strong>Multiplicar pela Distância</strong></p>
+<p>A pontuação final do subgrupo é obtida multiplicando a Cobertura Normalizada do Grupo pela Distância calculada na função <code>calculate_distance</code>.</p>
+<ol type="1">
+<li><strong>Ranqueamento dos Subgrupos</strong></li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ranked_subgroups <span class="op">=</span> rank_subgroups(dataset_pm, candidate_subgroups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>rank_subgroups(dataset_pm, candidate_subgroups)</code>: Ordena os subgrupos candidatos com base na pontuação calculada, gerando uma lista de subgrupos ranqueados.</p>
+</section>
+<section id="fórmula-da-covariância-ponderada" class="level4">
+<h4 class="anchored" data-anchor-id="fórmula-da-covariância-ponderada">Fórmula da Covariância Ponderada</h4>
+<p>A fórmula utilizada para calcular a covariância ponderada entre o vetor da matriz de preferência do dataset completo <span class="math inline">\(\text{vec}(M_D)\)</span> e o vetor da matriz de preferência do subgrupo <span class="math inline">\(\text{vec}(M_S)\)</span> é:</p>
+<p><span class="math inline">\(\text{RWCov}(S) = -\sqrt{\frac{s}{n}} \cdot \text{cov}(\text{vec}(M_D), \text{vec}(M_S))\)</span></p>
+<p>onde:<br> - <span class="math inline">\(\text{vec}(M_D)\)</span> é o vetor da matriz de preferência do dataset completo.<br> - <span class="math inline">\(\text{vec}(M_S)\)</span> é o vetor da matriz de preferência do subgrupo.<br> - <span class="math inline">\(\text{cov}\)</span> representa a covariância entre os dois vetores.<br> - <span class="math inline">\(s\)</span> é o tamanho do subgrupo.<br> - <span class="math inline">\(n\)</span> é o tamanho do dataset completo.</p>
+<p>Esta medida ajuda a identificar subgrupos que possuem preferências excepcionalmente diferentes em relação ao dataset original.</p>
+<ol type="1">
+<li><strong>Validação dos Subgrupos Significativos</strong></li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>significant_subgroups <span class="op">=</span> validate_subgroups(ranked_subgroups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>validate_subgroups(ranked_subgroups)</code>: Valida os subgrupos ranqueados para identificar aqueles que são estatisticamente significativos.</p>
+<ol type="1">
+<li><strong>Retorno dos Subgrupos Significativos</strong> Retorno dos Subgrupos Significativos</li>
+</ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">return</span> significant_subgroups</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+</section>
+<section id="metodologia" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia">Metodologia</h2>
+<p>Para fazer os experimentos, os autores incorporaram EPM no <a href="https://datamining.liacs.nl/cortana.html">Cortana</a>, que oferece uma estrutura genérica para descoberta de subgrupos e possui ferramentas para que diferentes abordagens de SD sejam aplicadas. Além disso, eles definiram uma linguagem de descrição para os subgrupos, que é composta por conjunções lógicas de restrições para atributos individuais.</p>
+<p>A estratégia adotada para percorrer o espaço de busca foi uma best-first search gulosa. Sendo que os atributos numéricos foram discretizados com <em>on fly greedy best-first search</em> contendo 8 bins de mesma largura. Os resultados encontrados passaram pela validação DFD, que serve para evitar que subgrupos sejam selecionados por fatores aleatórios. A validação DFD consiste na criação de cópias do dataset, com algumas alterações aleatórias dos atributos-alvo. Subgrupos encontrados nessas cópias podem ser considerados aleatórios. Dessa forma, o método EPM foi aplicado sobre alguns datasets reais. O procedimento DFD permite controlar o problema das múltiplas comparações em SD e EMM, fornecendo uma forma robusta de identificar padrões realmente excepcionais enquanto minimiza a probabilidade de falsas descobertas.</p>
+<p>O procedimento DFD tem apenas um parâmetro: o número de cópias do conjunto de dados. Este número deve ser suficientemente grande para satisfazer certas condições decorrentes da modelagem global envolvida na criação da DFD. Tipicamente, 100 cópias são suficientes, com um nível de significância estatística de 1%.</p>
+<p>Seis bases de dados reais de diferentes domínios foram utilizadas nos experimentos. O dataset Algae apresenta os níveis de frequência de alguns tipos de alga em diferentes rios europeus. O dataset Sushi contém os dados demográficos de um conjunto de pessoas, bem como suas preferências em relação a diferentes tipos de sushi. O dataset Top7movies é um subconjunto de outra base de dados, que apresenta os rankings dos usuários para os 7 filmes mais avaliados. Os datasets GermanElections2005 e GermanElections2009 contém dados socioeconômicos dos distritos administrativos da Alemanha e o ranking de votação dos partidos mais populares nessas regiões. O dataset Cpu-small apresenta dados extraídos de medições relacionadas a servidores.</p>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<figure style="margin-right: 10px; width: 45%;" class="figure">
+<img src="imgs/artigo6/sushi.png" style="width: 100%; height: 200px;" class="figure-img">
+<figcaption>
+Fonte: <a href="https://depositphotos.com/photos/sushi.html">sushi</a>
+</figcaption>
+</figure>
+<figure style="margin-left: 10px; width: 45%;" class="figure">
+<img src="imgs/artigo6/movies.jpg" style="width: 100%; height: 200px;" class="figure-img">
+<figcaption>
+Fonte: <a href="https://www.gamesradar.com/star-wars-movies-order-first-chronological/">movies</a>
+</figcaption>
+</figure>
+</div>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/databases.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Bases de Dados
+</figcaption>
+</figure>
+<p>É usado um método chamado Regra de Distribuição para procurar distribuições alvo, ele foi comparado com o RWNorm aplicado no Cortana</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/caren.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Metodologia técnica DR
+</figcaption>
+</figure>
+<p>Para comparar a distribuição dos subgrupos com a populção (o conjunto de dados inteiro) foi realizado o teste estatístico de Komolgorov-Smirgov</p>
+</section>
+<section id="resultados-obtidos" class="level2">
+<h2 class="anchored" data-anchor-id="resultados-obtidos">Resultados obtidos</h2>
+<p>A excepcionalidade informada pelas métricas de qualidade podem se apresentar de diferentes formas em diferentes métricas de qualidade, ou seja, depende o que a métricas de qualidade está procurando. As métricas podem até estar correlacionadas, mas não perfeitamente, os autores forneceram no estudo uma forma do usuário utilizar essas métricas para tomar escolhas mais bem informadas.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/results.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Relação Entre Métricas de Qualidade
+</figcaption>
+</figure>
+<p>A figura acima mostra geração de 10.000 subgrupos aleatórios, os quais a pontuação foi avaliada pelas métricas de qualidade apresentadas. A geração aleatória combina descrições até uma profundidade máxima ser alcançada. A profundidade da busca é fixada em 3, permitindo uma boa diversidade de combinações de atributos. Para cada par de métrica de qualidade na figura, há um scatter plot mostrando a relação das pontuações. A primeira linha mostra os subgrupos avaliados por RWNorm e o eixo vertical representa a pontuação dela; o eixo horizontal representa a pontuação de cada métrica de qualidade na seguinte ordem: RWNorm; RWNorm-mode; RWCov; LWNorm; PWMax</p>
+<p>Pode-se notar que RWNorm-mode mostra um comportamento distinto, ela é baseada na matriz de distância diferencial L_S, obtida pela diferença entre as modas da população (M_D) e a moda dos subgrupos (M_S). Para essa métrica, se houver uma inversão de preferência no ranking dos rótulos em algum subgrupo de tamanho significativo, ele é considerado interessante, mesmo que seja pouco, como 2%. Para as métricas RWMNorm, LWNorm e PWMax, subgrupos desse tipo já não irão ser interessantes, a não ser que a diferença seja maior, isso fica evidente observando a segunda linha da Figura.</p>
+<p>Observando o RWConv, parece que tem o maior viés, isso se dá pelo fato dessa métrica não se basear na matriz de distância L_S; ao invés disso ela é baseada na correlação negativa entre as matrizes de população (M_D) e subgrupos (M_S). Portanto, essa métrica de qualidade não necessariamente irá encontrar subgrupos que maximizem a preference distance, mas irá mostrar features não usuais de comportamento de forma abstrata.</p>
+<section id="eleições-alemãs-2005-e-2009-germanelections2005" class="level3">
+<h3 class="anchored" data-anchor-id="eleições-alemãs-2005-e-2009-germanelections2005">1. Eleições Alemãs (2005 e 2009) GermanElections2005:</h3>
+<ul>
+<li><p>Utilizando a métrica de qualidade PWMax com profundidade de busca 1, foram encontrados 62 subgrupos significativos.</p></li>
+<li><p>O subgrupo mais relevante foi “Região = Leste”, onde o partido Esquerda teve mais votos que o partido FDP em todos os 87 distritos da Alemanha Oriental, contrastando com a maioria dos distritos na Alemanha.</p></li>
+<li><p>Outro subgrupo significativo mostrou que em regiões de baixa renda (renda ≤ 16.979), o partido Esquerda recebeu mais votos que o partido Verde. GermanElections2009:</p></li>
+<li><p>Com as mesmas configurações, foram identificados 57 subgrupos significativos. Novamente, “Região = Leste” mostrou uma forte preferência pelo partido Esquerda em comparação ao partido Verde.</p></li>
+<li><p>Houve um aumento no número de distritos de baixa renda favorecendo o partido Esquerda em relação ao partido Verde comparado a 2005. Análise com LWNorm:</p></li>
+<li><p>Usando a métrica LWNorm com profundidade de busca 2, foram encontrados 2965 subgrupos significativos.</p></li>
+<li><p>O subgrupo “Região = Leste” continuou mostrando forte preferência pelo partido Esquerda.</p></li>
+<li><p>Outros subgrupos com características como menor população infantil e maior desemprego também favoreceram o partido Esquerda, enquanto regiões de maior renda mostraram o partido Esquerda como o menos votado.</p></li>
+</ul>
+</section>
+<section id="top7movies" class="level3">
+<h3 class="anchored" data-anchor-id="top7movies">2. Top7Movies</h3>
+<ul>
+<li>Utilizando a métrica LWNorm, foram encontrados 2 subgrupos significativos com profundidade de busca 2.</li>
+<li>O primeiro subgrupo incluía pessoas com mais de 34 anos vivendo abaixo de uma latitude de 32.9, que não gostaram do filme “Beleza Americana” e preferiram “Star Wars: Episódio IV” e “O Resgate do Soldado Ryan”.</li>
+<li>A média de classificação deste subgrupo foi b (Star Wars: Episódio IV) &gt; f (O Resgate do Soldado Ryan) &gt; c (Star Wars: Episódio V) &gt; d (Star Wars: Episódio VI) &gt; g (O Exterminador do Futuro 2) &gt; a (Beleza Americana) &gt; e (Jurassic Park).</li>
+</ul>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/results1.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Resultados Filmes Matriz de Prefixos
+</figcaption>
+</figure>
+</section>
+<section id="algae" class="level3">
+<h3 class="anchored" data-anchor-id="algae">3. Algae</h3>
+<ul>
+<li>Utilizando a métrica RWNorm, os resultados indicam que durante a primavera, as espécies de algas a, b e c são mais comuns em rios.</li>
+<li>A métrica LWNorm revelou mais de 400 subgrupos com profundidade máxima de 2.</li>
+<li>O melhor subgrupo mostrou que a espécie de alga a é fortemente preferida no subgrupo em comparação com o conjunto de dados geral.</li>
+<li>Utilizando profundidade de 3, foram encontrados cerca de 5400 subgrupos, mostrando um comportamento oposto em relação à espécie de alga a.</li>
+</ul>
+</section>
+<section id="sushi" class="level3">
+<h3 class="anchored" data-anchor-id="sushi">4. Sushi</h3>
+<ul>
+<li>Devido ao alto percentual de rankings únicos, focou-se em padrões de ranking labelwise.</li>
+<li>A métrica LWNorm identificou 149 subgrupos.</li>
+<li>O melhor subgrupo revelou que homens com mais de 30 anos mostraram uma forte preferência por ouriço-do-mar (rótulo e), contrastando com a população geral.</li>
+</ul>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/results2.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Comparação de Subgrupod de Preferência de Sushi com a População
+</figcaption>
+</figure>
+</section>
+<section id="cpu-small" class="level3">
+<h3 class="anchored" data-anchor-id="cpu-small">5. Cpu-small</h3>
+<ul>
+<li>Utilizando a métrica RWCov, foram encontrados 275 subgrupos significativos com profundidade máxima de 4.</li>
+<li>O subgrupo mais relevante exibiu grandes desvios em todas as entradas da matriz de preferência, indicando comportamento de preferência incomum.</li>
+</ul>
+</section>
+<section id="comparação-de-métricas-de-qualidade" class="level3">
+<h3 class="anchored" data-anchor-id="comparação-de-métricas-de-qualidade">6. Comparação de Métricas de Qualidade</h3>
+<ul>
+<li><p>Observou-se uma variação na quantidade de subgrupos obtidos por diferentes métricas.</p></li>
+<li><p>A RWNorm apresentou mais subgrupos em comparação a RWNorm-Mode e RWCov. Cada métrica mostrou diferentes vieses, destacando subgrupos específicos com comportamentos de preferência únicos.</p></li>
+<li><p>Esses resultados demonstram a eficácia do EPM na identificação de padrões de preferência excepcionais em diversos contextos, proporcionando insights valiosos sobre comportamentos não usuais em rankings.</p></li>
+</ul>
+Também foi feita uma comparação entre o CORTANA e o CAREN que usava a técnica DR:
+<figure align="center" class="figure">
+<img src="imgs/artigo6/caren_cortana_results.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Comparação Resultados CAREN vs CORTANA
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="aplicações-e-desafios" class="level2">
+<h2 class="anchored" data-anchor-id="aplicações-e-desafios">Aplicações e desafios</h2>
+<p>A mineração de preferências excepcionais pode ser aplicada em diversos contextos e trazer benefícios. Vamos apresentar abaixo algumas aplicações onde o uso de EPM teria grande valor.</p>
+<p>Na área de negócios, seria possível encontrar subpopulações que possuem preferências divergentes da maioria, o que permitiria a construção de estratégias de marketing direcionado a esses nichos. Além disso, torna-se mais fácil a identificação de variações em tendências de mercado.</p>
+<p>A medicina pode ser positivamente afetada pelo uso de EPM na segmentação de grupos de pacientes com características semelhantes. Isso faz com que cada grupo possa receber um tratamento mais especializado.</p>
+<p>Outro exemplo de aplicação é o setor público. Nesse caso, o conceito de preferência poderia ser usado de forma análoga para identificar subgrupos que possuem necessidades específicas, possibilitando a criação de políticas públicas direcionadas para atender essas pessoas.</p>
+<p>Na área de gestão de recursos humanos, seria interessante utilizar EPM para detectar nichos de funcionários que possuem alguns fatores de motivação e necessidades mais específicos. Assim, a equipe de RH poderia agir de maneira mais assertiva, tornando o ambiente de trabalho mais agradável e inclusivo.</p>
+<p>Apesar das possibilidades benéficas citadas acima, é importante ressaltar os impactos negativos que podem surgir com a aplicação da técnica de EPM nesses cenários. O principal impacto identificado é a manipulação de informações. A busca por padrões de preferências que fogem à regra geral pode ser usada de forma indevida caso esses padrões sejam divulgados como se fossem representativos para toda a população. Como um exemplo, pode-se pensar no caso em que uma empresa usa as informações de grupos específicos para promover seus produtos para o público geral, o que configura em uma propaganda enganosa.</p>
+</section>
+<section id="execução-dos-algoritmos-usados-no-artigo" class="level2">
+<h2 class="anchored" data-anchor-id="execução-dos-algoritmos-usados-no-artigo">Execução dos algoritmos usados no artigo</h2>
+<p>O código-fonte desenvolvido pelos autores para elaboração do artigo não foi disponibilizado. No entanto, foram encontrados dois repositórios no GitHub que utilizam as mesmas técnicas e citam o artigo estudado.</p>
+<section id="repositório-md2s_musicproject" class="level3">
+<h3 class="anchored" data-anchor-id="repositório-md2s_musicproject">Repositório MD2S_MusicProject</h3>
+<p>Este repositório não foi muito explorado pela equipe responsável, pois a documentação que explica os detalhes de implementação foi escrita em francês, o que dificultou o entendimento.</p>
+<p><a href="https://github.com/alicemontel/M2DS_MusicProject/tree/master">Link para o repositório</a></p>
+</section>
+<section id="repositório-my-sushi-addiction" class="level3">
+<h3 class="anchored" data-anchor-id="repositório-my-sushi-addiction">Repositório My-Sushi-Addiction</h3>
+<p>A implementação contida nesse repositório aplica a EPM em um dataset de preferências de tipos de sushi, mas permite também que outros datasets possam ser utilizados. Diferentemente do artigo, o algoritmo de busca usado nessa versão de EPM foi o beam search. No repositório, a métrica de qualidade é parametrizável, mas apenas a RWNorm está disponível para experimentação. Para utilizar outras métricas, é necessário implementá-las antes de passar como parâmetro.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/sushi_db.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Base de dados Sushi 2016
+</figcaption>
+</figure>
+<p><a href="https://github.com/CharlesGaydon/My-Sushi-Addiction">Link para o repositório</a></p>
+<ul>
+<li><p><strong>0 Quick_Start.ipynb</strong>: Realiza a execução do projeto em passos simples, bastando apenas seguir o roteiro do próprio notebook. É possível até aplicar a EPM aos próprios dados do usuário, não apenas ao dataset do sushi; ​</p></li>
+<li><p><strong>1 Exceptional_Preference_Mining.ipynb</strong>: Estruturado como um rascunho, este notebook mostra, passo a passo, como foi implementado o algoritmo de Beam Search e sua aplicação ao conjunto de dados de sushi;​</p></li>
+<li><p><strong>beam_search.py</strong>: Funções para o algoritmo de Beam Search;​</p></li>
+<li><p><strong>preference_matrix.py</strong>: Funções para calcular e visualizar a Matriz de Preferência, e calcular uma pontuação de excepcionalidade derivada delas.</p></li>
+</ul>
+<p>O grupo responsável realizou testes, aplicando o EPM sobre o dataset disponibilizado no repositório. Os principais subgrupos excepcionais descobertos foram os subgrupos de mulheres com menos de 19 anos e homens que responderam a pesquisa muito rapidamente. Também foram feitos experimentos com as outras métricas que não haviam sido previamente disponibilizadas. No geral, os resultados foram semelhantes àqueles vistos com a RWNorm. Uma descoberta notável foi o subgrupo de mulheres com menos de 39 anos de idade com a métrica LWNorm.</p>
+<figure align="center" class="figure">
+<img src="imgs/artigo6/results_hacker.png" style="max-width: 100%;" class="figure-img">
+<figcaption>
+Resultados Hacker
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>O artigo analisado apresenta a técnica de Exceptional Preferences Mining (EPM) como uma abordagem inovadora para a descoberta de subgrupos com padrões de preferência excepcionais. Através de uma comparação detalhada com outras técnicas, como SD e EMM, o artigo evidencia a especificidade e a utilidade da EPM. Os experimentos realizados com diversos conjuntos de dados demonstram a eficácia da técnica e suas possíveis aplicações em áreas como negócios, medicina, setor público e gestão de recursos humanos. Apesar dos benefícios apresentados, é importante considerar os impactos negativos potenciais, como a manipulação de informações. A análise dos repositórios relacionados também fornece informações importantes sobre a implementação prática da EPM, evidenciando a adaptabilidade e flexibilidade da técnica.</p>
+</section>
+<section id="referências" class="level2">
+<h2 class="anchored" data-anchor-id="referências">Referências</h2>
+<p>de Sá, C. R., Duivesteijn, W., Azevedo, P., Jorge, A. M., Soares, C., &amp; Knobbe, A. (2018). Discovering a taste for the unusual: exceptional models for preference mining. Machine Learning, 107, 1775-1807.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/DCC831-Aprendizado-Descritivo\.github\.io\/2024\.1\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
