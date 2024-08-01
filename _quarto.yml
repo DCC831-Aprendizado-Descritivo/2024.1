@@ -15,8 +15,10 @@ website:
             - seminario1/artigo1.qmd
             - seminario1/artigo2.qmd
             - seminario1/artigo3.qmd
-            
-      #- about.qmd
+        
+      - text: "Seminário 2"
+        menu:
+            - seminario2/artigo4.qmd
 
 format:
   html:
