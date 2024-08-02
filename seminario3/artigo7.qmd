@@ -36,7 +36,7 @@ Os principais objetivos deste estudo são:
 
 ## O que a literatura fala sobre isso
 
-A literatura já xistente destaca várias abordagens para a mineração de padrões sequenciais em contextos esportivos. Métodos como **_Generalized Sequential Patterns (GSP), PrefixSpan e Spade_** têm sido amplamente utilizados para descobrir padrões frequentes em dados sequenciais. No entanto, essas técnicas geralmente não consideram explicitamente o impacto de padrões específicos na determinação de resultados positivos ou negativos em esportes de equipe.
+A literatura já existente destaca várias abordagens para a mineração de padrões sequenciais em contextos esportivos. Métodos como **_Generalized Sequential Patterns (GSP), PrefixSpan e Spade_** têm sido amplamente utilizados para descobrir padrões frequentes em dados sequenciais. No entanto, essas técnicas geralmente não consideram explicitamente o impacto de padrões específicos na determinação de resultados positivos ou negativos em esportes de equipe.
 
 A abordagem de mineração de **padrões sequenciais supervisionada (SSPM)** difere das abordagens tradicionais ao **incorporar rótulos de classe** nos dados de treinamento, permitindo a identificação de padrões que são discriminativos para diferentes classes de resultado. Por exemplo, num estudo sobre futebol, [_Bertens et al. (2016)_] usaram mineração supervisionada para identificar padrões de passes que precedem situações de gol, enquanto [_Sato e Sasaki (2018)_] aplicaram técnicas semelhantes ao basquete para analisar sequências de jogadas que levam a cestas.
 
