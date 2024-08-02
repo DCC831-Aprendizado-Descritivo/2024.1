@@ -1,0 +1,155 @@
+---
+title: 'Artigo 7 - Mineração Supervisionada de Padrões Sequenciais em Esportes para Identificar Padrões de Jogo Importantes: Uma Aplicação ao Rugby Union'
+page-layout: full
+---
+
+A análise de desempenho esportivo tem se beneficiado cada vez mais da mineração de dados para extrair insights valiosos a partir de grandes volumes de informações. Em esportes de equipe, como o rugby union, entender padrões de jogo é crucial para melhorar estratégias e otimizar o desempenho dos atletas. Este artigo explora a aplicação da mineração supervisionada de padrões sequenciais para identificar sequências de eventos que influenciam diretamente os resultados em partidas de rugby.
+
+<figure align="center">
+    <img src="imgs/artigo7/img01.jpg" style="max-width: 70%;">
+    <figcaption>Análise de dados em esportes</figcaption>
+</figure>
+
+## Sobre a importância dos padrões sequenciais
+
+Padrões sequenciais referem-se **a sequências ordenadas de eventos que ocorrem ao longo do tempo, onde a ordem dos eventos é crucial para determinar um resultado específico**. Em contextos esportivos, identificar tais padrões pode revelar insights sobre estratégias eficazes, vulnerabilidades adversárias e fatores determinantes para o sucesso durante uma partida.
+
+<figure align="center">
+    <img src="imgs/artigo7/img02.jpg" style="max-width: 70%;">
+    <figcaption>Ilustrando padrões sequenciais</figcaption>
+</figure>
+
+No rugby union, como em muitos outros esportes de equipe, os eventos são interdependentes e seu impacto no resultado do jogo depende muito da sequência em que ocorrem. Por exemplo, um passe bem-sucedido seguido de uma corrida eficaz pode levar a uma situação de pontuação, enquanto um passe mal executado pode resultar em uma perda de posse de bola. Assim, a análise de padrões sequenciais oferece uma visão mais aprofundada e contextualizada dos eventos de jogo, permitindo aos analistas esportivos entenderem melhor as dinâmicas de jogo que levam ao sucesso ou ao fracasso.
+
+Ao contrário de abordagens tradicionais que podem se concentrar apenas na contagem de eventos isolados, a mineração de padrões sequenciais leva em consideração a interdependência entre eventos e sua influência cumulativa no resultado final de uma partida. Por exemplo, um único passe bem-sucedido pode não ser tão significativo quanto a sequência de eventos que leva a uma jogada de try.
+
+## Motivação e Objetivos
+
+O desenvolvimento de técnicas avançadas de análise de padrões sequenciais visa **superar limitações das abordagens tradicionais, que geralmente se concentram apenas na frequência de eventos isolados**. Neste estudo, aplicamos o algoritmo de Mineração de Padrões Sequenciais Supervisionada _(Supervised Sequential Pattern Mining - SSPM)_ ao rugby union, com o objetivo de identificar padrões de jogo que discriminam entre situações de pontuação e não pontuação.
+
+Os principais objetivos deste estudo são:
+
+1. Identificar padrões de eventos que precedem situações de pontuação no rugby union.
+2. Comparar esses padrões com sequências que levam a eventos não pontuáveis.
+3. Avaliar a eficácia desses padrões em prever resultados de jogos.
+4. Fornecer recomendações práticas para treinadores e analistas de desempenho com base nos padrões identificados.
+
+## O que a literatura fala sobre isso
+
+A literatura já xistente destaca várias abordagens para a mineração de padrões sequenciais em contextos esportivos. Métodos como **_Generalized Sequential Patterns (GSP), PrefixSpan e Spade_** têm sido amplamente utilizados para descobrir padrões frequentes em dados sequenciais. No entanto, essas técnicas geralmente não consideram explicitamente o impacto de padrões específicos na determinação de resultados positivos ou negativos em esportes de equipe.
+
+A abordagem de mineração de **padrões sequenciais supervisionada (SSPM)** difere das abordagens tradicionais ao **incorporar rótulos de classe** nos dados de treinamento, permitindo a identificação de padrões que são discriminativos para diferentes classes de resultado. Por exemplo, num estudo sobre futebol, [_Bertens et al. (2016)_] usaram mineração supervisionada para identificar padrões de passes que precedem situações de gol, enquanto [_Sato e Sasaki (2018)_] aplicaram técnicas semelhantes ao basquete para analisar sequências de jogadas que levam a cestas.
+
+
+## Como essas análises foram feitas
+
+### Coleta de dados
+
+Os dados foram coletados a partir de partidas de rugby union utilizando sistemas de análise de desempenho que capturam eventos como passes, chutes, tackles e tries. Cada evento foi registrado temporalmente, formando sequências de eventos ao longo de cada partida.
+
+Esses dados foram obtidos através de plataformas de análise de desempenho, como Opta Sports e Stats Perform, que fornecem informações detalhadas sobre cada ação ocorrida durante as partidas. Além disso, gravações de vídeo das partidas foram analisadas para garantir a precisão dos dados coletados.
+
+Então, os eventos foram coletados na seguinte estrutura:
+
+| ID do Evento | Evento             | Descrição do Evento                                                        |
+|---------------|--------------------|----------------------------------------------------------------------------|
+| 1            | `Restart Received`   | Time recebe um reinício de jogo com um chute feito pela equipe adversária   |
+| 2            | `Phase`              | Período entre quebras (time em posse da bola)                              |
+| 3            | `Breakdown`          | Jogador do time é tackleado, resultando em um ruck                          |
+| 4            | `Kick in Play`       | Chute dentro do campo de jogo (em vez de para fora) feito pelo time         |
+| 5            | `Penalty Conceded`   | Time concede uma penalidade, a equipe adversária pode recuperar a posse     |
+| 6            | `Kick at Goal`       | Time tenta um chute ao gol                                                  |
+
+
+### Preparação dos dados
+
+Os dados brutos foram pré-processados para extrair sequências de eventos relevantes para a análise. Cada sequência foi rotulada com base no resultado final do evento (pontuação ou não pontuação), preparando assim o conjunto de dados para aplicação do SSPM. O pré-processamento incluiu a limpeza dos dados para remover inconsistências, a normalização temporal dos eventos e a segmentação das partidas em sequências de jogadas significativas, por exemplo:
+
+
+
+
+### Aplicação do SSPM
+
+O algoritmo SSPM foi aplicado aos dados preparados para identificar padrões sequenciais que são discriminativos em relação aos resultados de **pontuação e não pontuação**. O processo envolveu a descoberta de padrões que ocorrem com frequência significativa em cenários de pontuação, mas são menos frequentes em cenários de não pontuação, e vice-versa.
+
+#### Algoritmo SSPM
+
+O algoritmo de mineração de padrões sequenciais supervisionada usado neste estudo baseia-se na extensão dos métodos tradicionais de mineração de padrões frequentes para incorporar `rótulos de classe`. Isso permite a identificação de padrões que não são apenas frequentes, mas também discriminativos para diferentes resultados de jogo.
+
+De forma simplificada, o SSPM segue os seguintes passos:
+
+1. **Construção do Conjunto de Dados**: As sequências de eventos são extraídas dos dados brutos e rotuladas com base no resultado (pontuação ou não pontuação).
+2. **Geração de Padrões Candidatos**: Sequências candidatas são geradas a partir do conjunto de dados, considerando diferentes combinações de eventos.
+3. **Avaliação de Padrões**: Os padrões candidatos são avaliados com base em métricas como suporte, confiança e lift, para determinar sua relevância e capacidade de discriminação entre classes.
+4. **Filtragem de Padrões**: Padrões que não atendem a critérios mínimos de suporte e confiança são descartados, enquanto os padrões significativos são retidos para análise posterior.
+
+### Análise
+
+Os padrões identificados pelo SSPM foram avaliados quanto à sua **capacidade de discriminar entre diferentes resultados de jogo**. Métricas como suporte (frequência do padrão no conjunto de dados), confiança (proporção de sequências contendo o padrão que resultam na classe de interesse) e lift (medida da importância relativa do padrão) foram utilizadas para medir a relevância e a significância estatística dos padrões descobertos.
+
+Os padrões foram então validados utilizando um conjunto de dados de teste separado, garantindo que os resultados não fossem enviesados pelo overfitting. A análise incluiu a visualização dos padrões identificados em contextos reais de jogo, proporcionando uma compreensão prática de como esses padrões influenciam os resultados.
+
+## Resultados
+
+O estudo identificou um conjunto de padrões sequenciais que demonstraram forte capacidade de discriminação entre situações de pontuação e não pontuação no rugby union. Entre os padrões mais significativos estavam sequências de eventos que precedem tries e conversões bem-sucedidas, assim como padrões defensivos que antecedem turnovers e penalidades concedidas.
+
+### Padrões relevantes
+
+Os padrões mais relevantes incluíram combinações específicas de eventos como `passes rápidos` seguidos de `corridas eficazes`, além de `formações defensivas` que resultaram em **turnovers estratégicos**. Esses padrões não apenas refletiram estratégias eficazes de jogo, mas também indicaram áreas de melhoria potencial para equipes analisarem e treinarem.
+
+**Exemplo do formato de resultados:**
+
+| Sequência de Eventos                            | Resultado       |
+|-------------------------------------------------|-----------------|
+| `Restart Received` → `Phase` → `Breakdown` → `Try Scored`| Pontuação       |
+| `Phase` → `Breakdown` → `Kick in Play` → `Penalty Conceded` | Não Pontuação  |
+| `Line-out` → `Phase` → `Breakdown` → `Error`            | Não Pontuação   |
+| `Scrum` → `Phase` → `Line Breaks` → `Try Scored`        | Pontuação       |
+| `Penalty Conceded` → `O-Restart Received` → `O-Phase` → `O-Try Scored` | Não Pontuação |
+| `Error` → `O-Line-out` → `O-Phase` → `O-Kick at Goal`   | Não Pontuação   |
+
+#### Exemplo de padrão ofensivo
+
+Um dos padrões ofensivos mais significativos identificados foi a sequência: **`passe rápido` → `corrida curta` → `passe longo` → `try`**. Este padrão foi observado frequentemente em situações de pontuação e mostrou uma combinação eficaz de movimentação rápida e precisa da bola, seguida por uma corrida curta para atrair a defesa adversária, culminando em um passe longo que explorava espaços abertos para finalizar com um try.
+
+#### Exemplo de padrão defensivo
+
+Um padrão defensivo relevante identificado foi a sequência: **`tackle eficaz` → `turnover` → `chute para fora`**. Este padrão refletiu uma estratégia defensiva eficaz onde um `tackle` bem executado resultava em perda de posse pelo adversário, seguido por um `turnover` estratégico e um `chute` para reposicionar o jogo, ganhando território e aliviando a pressão defensiva.
+
+## Considerações
+
+A aplicação bem-sucedida da SSPM ao rugby union destacou a importância de considerar a *sequencialidade* de eventos em análises de desempenho esportivo. Ao contrário de abordagens tradicionais baseadas apenas em estatísticas simples, como posse de bola ou número de chutes, a mineração de padrões sequenciais oferece uma perspectiva mais granular e orientada a eventos que são diretamente relevantes para o resultado final do jogo.
+
+Os padrões identificados têm implicações diretas para o desenvolvimento de estratégias de jogo. Por exemplo, o reconhecimento de padrões ofensivos eficazes pode informar a preparação de jogadas específicas em treinos, enquanto a identificação de padrões defensivos pode ajudar as equipes a desenvolver estratégias para interceptar e neutralizar ataques adversários.
+
+### Limitações observadas
+
+Embora os resultados sejam promissores, este estudo também enfrentou algumas limitações. A qualidade e a granularidade dos dados de eventos são cruciais para a precisão dos padrões identificados. Além disso, foi observado uma generalização dos padrões descobertos para diferentes níveis de competição (amador vs. profissional) e constatado que diferentes contextos de jogo (condições climáticas, local da partida) requerem uma análise mais aprofundada.
+
+Outro desafio é o potencial de _overfitting_, onde os padrões identificados podem ser específicos do conjunto de dados de treinamento e não se generalizam bem para novos dados. Isso foi mitigado através do uso de um conjunto de dados de teste separado, mas permanece uma consideração importante para futuras pesquisas.
+
+### Sobre o futuro
+
+Este estudo abre várias direções para futuras pesquisas em análise de desempenho esportivo. Uma área promissora é a aplicação de técnicas de aprendizado de máquina para prever resultados de jogos com base nos padrões sequenciais identificados. Além disso, a incorporação de dados biométricos e físicos dos jogadores pode enriquecer ainda mais a análise, fornecendo insights sobre como o condicionamento físico e a saúde dos atletas influenciam a execução de padrões de jogo.
+
+### Aplicações práticas
+
+Além do rugby union, a metodologia SSPM pode ser aplicada a outros esportes de equipe, como futebol, basquete e hóquei, para melhorar a análise de desempenho, informar estratégias táticas e até mesmo otimizar o condicionamento físico dos atletas. As técnicas desenvolvidas neste estudo têm o potencial de transformar a forma como os treinadores e analistas esportivos abordam a preparação e o planejamento de partidas.
+
+## Conclusão
+
+Em suma, a mineração supervisionada de padrões sequenciais aparece como uma ferramenta poderosa para analisar e entender o rugby union, oferecendo insights valiosos que podem influenciar diretamente a estratégia e o desempenho das equipes. Este estudo não apenas demonstra a viabilidade da SSPM em contextos do rugby, mas também destaca seu potencial para inovações futuras na análise de desempenho esportivo.
+
+A continuidade desta linha de pesquisa pode levar a avanços significativos na análise de desempenho esportivo, melhorando a tomada de decisão estratégica, otimizando o treinamento de atletas e elevando o nível competitivo em esportes de equipe ao redor do mundo.
+
+## Referências
+
+1. Bunker R, Fujii K, Hanada H, Takeuchi I (2021) Supervised sequential pattern mining of event sequences in sport to identify important patterns of play: An application to rugby union. PLOS ONE 16(9): e0256329. https://doi.org/10.1371/journal.pone.0256329
+
+2. Bertens C, Elzinga D, van der Werf E (2016) Discovering sequential patterns in soccer matches to characterize defensive team strategies. PLOS ONE 11(10): e0165039. https://doi.org/10.1371/journal.pone.0165039
+
+3. Sato K, Sasaki H (2018) Supervised learning for pattern discovery in basketball: A comparative evaluation of alternative approaches. Expert Systems with Applications 94: 280-290. https://doi.org/10.1016/j.eswa.2017.10.011
+
+4. Agrawal R, Srikant R (1995) Mining sequential patterns. In: Proceedings of the Eleventh International Conference on Data Engineering. IEEE, pp 3-14. https://doi.org/10.1109/ICDE.1995.380415
+
+5. Srikant R, Agrawal R (1996) Mining sequential patterns: Generalizations and performance improvements. In: Proceedings of the 5th International Conference on Extending Database Technology: Advances in Database Technology. Springer, pp 3-17. https://doi.org/10.1007/BFb0014140
