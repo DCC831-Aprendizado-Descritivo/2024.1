@@ -19,6 +19,11 @@ website:
       - text: "Seminário 2"
         menu:
             - seminario2/artigo4.qmd
+            - seminario2/artigo5.qmd
+            - seminario2/artigo6.qmd
+      - text: "Seminário 3"
+        menu:
+            - seminario3/artigo7.qmd
 
 format:
   html:
