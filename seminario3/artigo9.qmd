@@ -1,0 +1,48 @@
+---
+title: 'Introducing exceptional growth mining— Analyzing the impact of soil characteristics on on-farm crop growth and yield variability'
+page-layout: full
+---
+
+<figure align="center">
+    <img src="imgs/artigo9/capa.jpeg" style="max-width: 70%;">
+    <figcaption>Ilustração do uso de tecnologias no plantio - Imagem criada por IA</figcaption>
+</figure>
+
+A agricultura desempenha um papel fundamental na segurança alimentar e na economia global. A capacidade de produzir alimentos de maneira eficiente é crucial para o sustento das populações e a estabilidade econômica. Entretanto, a variabilidade no crescimento das culturas e no rendimento das colheitas representa um desafio significativo para os agricultores. Essa variabilidade pode resultar em perdas econômicas e insegurança alimentar. Entre os fatores que influenciam o crescimento das plantas, as características do solo, como a composição mineral, o pH e os níveis de nutrientes, desempenham um papel essencial. A compreensão desses fatores é vital para otimizar a produtividade agrícola, considerando também as condições climáticas e as práticas de manejo agrícola. 
+
+É aqui que entra o artigo "Introducing Exceptional Growth Mining—Analyzing the Impact of Soil Characteristics on On-Farm Crop Growth and Yield Variability". Os autores, Puck J. A. M. Mulders, Edwin R. van den Heuvel, Pytrik Reidsma e Wouter Duivesteijn, propõem uma abordagem inovadora chamada Exceptional Growth Mining (EGM) que explora a relação entre as características do solo e a produtividade das cultura. Esta técnica de mineração de dados visa identificar padrões de crescimento excepcionais das plantas, fornecendo aos agricultores insights valiosos para a tomada de decisões sobre o manejo do solo e das culturas.
+
+## Explorando Conceitos Chave
+### Descritores Utilizados
+Foram utilizados diversos descritores relacionados às características do solo e parâmetros de crescimento das plantas. Entre os principais deles estão a concentração de nutrientes como nitrogênio (N), fósforo (P) e potássio (K), níveis de umidade do solo em diferentes estágios de crescimento e parâmetros de crescimento como a taxa de crescimento e tamanho das plantas. 
+
+### Curvas de Crescimento
+Modeladas utilizando modelos mistos não lineares, que incorporam efeitos fixos e aleatórios, para capturar tanto os padrões comuns quanto a variabilidade específica de subgrupos.
+
+### Fronteira de Pareto
+Utilizada para filtrar subgrupos, garantindo que apenas os mais excepcionais sejam considerados. Ela consiste no conjunto de subgrupos que não são dominados por outros em todos os critérios avaliados.
+
+### Coleta de Dados
+Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. Cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula:
+$y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}} } $
+
+## Entendendo o Algoritmo EGM
+O EGM é projetado para identificar subgrupos de dados com crescimento excepcional, destacando aqueles que se desviam significativamente dos padrões normais.
+
+### Dados Necessários
+O algoritmo EGM requer dados longitudinais das plantações, o que significa que as informações devem ser coletadas ao longo do tempo, permitindo a análise do desenvolvimento das plantas em diferentes condições. As variáveis principais analisadas incluem nutrientes do solo, umidade e crescimento das plantas, medido em termos de altura, peso e produtividade ao longo do tempo.
+
+### Estimativa das Curvas de Crescimento
+Para capturar o crescimento das plantas ao longo do tempo, o algoritmo utiliza modelos mistos, que incorporam: 
+
+ - Componentes Fixos: Representam os efeitos comuns que afetam todas as observações de forma consistente, como a influência média dos nutrientes do solo em todas as plantas. 
+ - Componentes Aleatórios: Capturam a variabilidade que ocorre entre subgrupos específicos, permitindo que o modelo se adapte a diferenças individuais ou específicas de cada subgrupo. 
+
+Esses modelos mistos são ajustados logisticamente para estimar com precisão as curvas de crescimento das plantas. O ajuste é avaliado utilizando o coeficiente de determinação $R^2$, que mede a qualidade do ajuste do modelo. 
+
+### Análise de Correlação
+Após a estimativa das curvas de crescimento, o EGM envolve a análise das correlações entre os parâmetros de crescimento e as variáveis como nutrientes do solo. Isso ajuda a entender como diferentes fatores influenciam o crescimento das plantas. 
+
+### Mineração de Modelos Excepcionais (EMM) 
+
+​
