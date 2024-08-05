@@ -1,5 +1,5 @@
 ---
-title: 'Introducing exceptional growth mining— Analyzing the impact of soil characteristics on on-farm crop growth and yield variability'
+title: ' Artigo 9: "Introducing exceptional growth mining— Analyzing the impact of soil characteristics on on-farm crop growth and yield variability"'
 page-layout: full
 ---
 
@@ -24,7 +24,7 @@ Utilizada para filtrar subgrupos, garantindo que apenas os mais excepcionais sej
 
 ### Coleta de Dados
 Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. Cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula:
-$y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}} } $
+$y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}}}$
 
 ## Entendendo o Algoritmo EGM
 O EGM é projetado para identificar subgrupos de dados com crescimento excepcional, destacando aqueles que se desviam significativamente dos padrões normais.
@@ -44,5 +44,6 @@ Esses modelos mistos são ajustados logisticamente para estimar com precisão as
 Após a estimativa das curvas de crescimento, o EGM envolve a análise das correlações entre os parâmetros de crescimento e as variáveis como nutrientes do solo. Isso ajuda a entender como diferentes fatores influenciam o crescimento das plantas. 
 
 ### Mineração de Modelos Excepcionais (EMM) 
-
+A Mineração de Modelos Excepcionais (Exceptional Model Mining - EMM) é um framework de mineração de padrões locais, projetado para encontrar subgrupos interessantes em conjuntos de dados. Os subgrupos são considerados interessantes se forem interpretáveis e excepcionais.
+No artigo, a fase final do EGM envolve a identificação de subgrupos que apresentam crescimento excepcional e métodos estatísticos são empregados para distinguir os subgrupos mais relevantes, assegurando que os padrões identificados não sejam devido ao acaso, mas sim o reflexo de fenômenos importantes nos dados.
 ​
