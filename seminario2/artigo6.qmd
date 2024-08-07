@@ -228,17 +228,10 @@ O procedimento DFD tem apenas um parâmetro: o número de cópias do conjunto de
 
 Seis bases de dados reais de diferentes domínios foram utilizadas nos experimentos. O dataset Algae apresenta os níveis de frequência de alguns tipos de alga em diferentes rios europeus. O dataset Sushi contém os dados demográficos de um conjunto de pessoas, bem como suas preferências em relação a diferentes tipos de sushi. O dataset Top7movies é um subconjunto de outra base de dados, que apresenta os rankings dos usuários para os 7 filmes mais avaliados. Os datasets GermanElections2005 e GermanElections2009 contém dados socioeconômicos dos distritos administrativos da Alemanha e o ranking de votação dos partidos mais populares nessas regiões. O dataset Cpu-small apresenta dados extraídos de medições relacionadas a servidores. 
 
-<div style="display: flex; justify-content: space-between; align-items: center;">
-  <figure style="margin-right: 10px; width: 45%;">
-    <img src="imgs/artigo6/sushi.png" style="width: 100%; height: 200px;">
-    <figcaption>Fonte: [sushi](https://depositphotos.com/photos/sushi.html)</figcaption>
-  </figure>
-
-  <figure style="margin-left: 10px; width: 45%;">
-    <img src="imgs/artigo6/movies.jpg" style="width: 100%; height: 200px;">
-    <figcaption>Fonte: [movies](https://www.gamesradar.com/star-wars-movies-order-first-chronological/)</figcaption>
-  </figure>
-</div>
+<figure align="center">
+    <img src="imgs/artigo6/sushi_movie.png" style="max-width: 100%;">
+    <figcaption>Imagem gerada por [DALL-E](https://openai.com/index/dall-e-2/)</figcaption>
+</figure>
 
 <figure align="center">
     <img src="imgs/artigo6/databases.png" style="max-width: 100%;">
