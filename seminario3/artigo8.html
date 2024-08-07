@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Artigo 8 - Automated identification of patient subgroups: A case-study on mortality of COVID-19 patients admitted to the ICU – Aprendizado Descritivo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seminário-1" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Seminário 1</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seminário-1">    
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo1.html">
+ <span class="dropdown-text">Artigo 1: A Survey of High Utility Itemset Mining</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo2.html">
+ <span class="dropdown-text">Artigo 2: Finding Local Groupings of Time Series</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario1/artigo3.html">
+ <span class="dropdown-text">Artigo 3: Representation Learning for Frequent Subgraph Mining</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seminário-2" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Seminário 2</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seminário-2">    
+        <li>
+    <a class="dropdown-item" href="../seminario2/artigo4.html">
+ <span class="dropdown-text">Artigo 4: Anytime discovery of a diverse set of patterns with Monte Carlo tree search</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario2/artigo5.html">
+ <span class="dropdown-text">Artigo 5: For Real: A Thorough Look at Numeric Attributes in Subgroup Discovery</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../seminario2/artigo6.html">
+ <span class="dropdown-text">Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-seminário-3" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Seminário 3</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-seminário-3">    
+        <li>
+    <a class="dropdown-item" href="../seminario3/artigo7.html">
+ <span class="dropdown-text">Artigo 7 - Mineração Supervisionada de Padrões Sequenciais em Esportes para Identificar Padrões de Jogo Importantes: Uma Aplicação ao Rugby Union</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#o-contexto-da-covid-19" id="toc-o-contexto-da-covid-19" class="nav-link active" data-scroll-target="#o-contexto-da-covid-19">O contexto da COVID-19</a></li>
+  <li><a href="#motivação-e-objetivos" id="toc-motivação-e-objetivos" class="nav-link" data-scroll-target="#motivação-e-objetivos">Motivação e Objetivos</a></li>
+  <li><a href="#conjuto-de-dados" id="toc-conjuto-de-dados" class="nav-link" data-scroll-target="#conjuto-de-dados">Conjuto de Dados</a></li>
+  <li><a href="#aplicação" id="toc-aplicação" class="nav-link" data-scroll-target="#aplicação">Aplicação</a>
+  <ul class="collapse">
+  <li><a href="#algoritmos" id="toc-algoritmos" class="nav-link" data-scroll-target="#algoritmos">Algoritmos</a></li>
+  <li><a href="#metricas-de-qualidade-e-scoring" id="toc-metricas-de-qualidade-e-scoring" class="nav-link" data-scroll-target="#metricas-de-qualidade-e-scoring">Metricas de qualidade e Scoring</a></li>
+  <li><a href="#classificação" id="toc-classificação" class="nav-link" data-scroll-target="#classificação">Classificação</a></li>
+  </ul></li>
+  <li><a href="#metodologia" id="toc-metodologia" class="nav-link" data-scroll-target="#metodologia">Metodologia</a></li>
+  <li><a href="#resultados" id="toc-resultados" class="nav-link" data-scroll-target="#resultados">Resultados</a>
+  <ul class="collapse">
+  <li><a href="#análise-quantitativa-dos-resultados" id="toc-análise-quantitativa-dos-resultados" class="nav-link" data-scroll-target="#análise-quantitativa-dos-resultados">Análise quantitativa dos resultados</a></li>
+  <li><a href="#analise-qualitativa-dos-resultados" id="toc-analise-qualitativa-dos-resultados" class="nav-link" data-scroll-target="#analise-qualitativa-dos-resultados">Analise qualitativa dos resultados</a></li>
+  </ul></li>
+  <li><a href="#aplicações-semelhantes" id="toc-aplicações-semelhantes" class="nav-link" data-scroll-target="#aplicações-semelhantes">Aplicações semelhantes</a></li>
+  <li><a href="#discussões" id="toc-discussões" class="nav-link" data-scroll-target="#discussões">Discussões</a></li>
+  <li><a href="#replicando-a-obtenção-de-resultados" id="toc-replicando-a-obtenção-de-resultados" class="nav-link" data-scroll-target="#replicando-a-obtenção-de-resultados">Replicando a obtenção de resultados</a>
+  <ul class="collapse">
+  <li><a href="#base-de-dados" id="toc-base-de-dados" class="nav-link" data-scroll-target="#base-de-dados">Base de dados</a></li>
+  <li><a href="#repositório-dos-algoritmos" id="toc-repositório-dos-algoritmos" class="nav-link" data-scroll-target="#repositório-dos-algoritmos">Repositório dos Algoritmos</a></li>
+  <li><a href="#execução" id="toc-execução" class="nav-link" data-scroll-target="#execução">Execução</a></li>
+  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Artigo 8 - Automated identification of patient subgroups: A case-study on mortality of COVID-19 patients admitted to the ICU</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A identificação de grupos sintomáticos é fundamental para abordagens macros no contexto médico, como por exemplos no tratamento de doenças endêmicas e pandêmicas. Neste sentido há um esforço do setor em utilizar a mineração de dados para esta tarefa afim de otimizar os tratamentos, auxiliar nas decições médicas de risco e possivelmente incrementar na curva de sobrevivência destes pacientes. Este artigo explora a aplicação de descoberta de subgrupos no contexto da COVID-19, procurando encontrar maneiras de automatizar a identificação dos pacientes que deram entrada na UTI em subgrupos.</p>
+<section id="o-contexto-da-covid-19" class="level2">
+<h2 class="anchored" data-anchor-id="o-contexto-da-covid-19">O contexto da COVID-19</h2>
+<p>No âmbito das pesquisas clínicas, as análises de subgrupos envolvem a divisão de todos os pacientes em subgrupos, muitas vezes como meio de tornar populações heterogêneas mais homogêneas ou para responder a perguntas específicas sobre determinados grupos de pacientes, tipos de intervenção ou tipos de estudo.</p>
+<p>No contexto da COVID-19, havia em contexto global uma situação crítica, com diversos hospitais superlotados com pacientes em diferentes níveis de riscos, com sintomas variados e históricos medicos diversos. A princípio, todos estes fatores se tornaram complicadores para a tarefa de encontrar padrões relevantes e de forma rápida, principalmente quanto os métodos tradicionais utilizados baseavam-se em análises manuais em limiares únicos. Além da ausência de informação concreta, em virtude da novidade da doença.</p>
+<p>Nesse contexto, os métodos de Descoberta de Subgrupos (SD) foram relevantes para a análise de subgrupos clínicos, uma vez que estes métodos poderiam propor uma divisão automatizada dos dados em subgrupos complexos, ou seja, baseados em múltiplas variáveis e/ou múltiplos limiares.</p>
+</section>
+<section id="motivação-e-objetivos" class="level2">
+<h2 class="anchored" data-anchor-id="motivação-e-objetivos">Motivação e Objetivos</h2>
+<p>Então a partir da comoção e empenho global em torno da pandêmia os autores decidiram então buscar aplicar os métodos de Descoberta de subgrupos aos dados disponíveis com o objetivo de compreender se estes métodos automatizada=oa podem auxiliar na identificação de agrupamentos de pacientes de maneira relevante. Para isto, foram definidos dois críterios para avaliação dos resultados:</p>
+<ol type="1">
+<li><strong>Qualidades númericas</strong>: Verificando a coerência dos dados e evitando resultados advindos de acasos.</li>
+<li><strong>Qualidades clínicas</strong>: Analisando a praticidade do uso destes dados para os especialistas clínicos.</li>
+</ol>
+<figure align="center" class="figure">
+<img src="imgs/artigo8/img03.png" style="max-width: 80%;" class="figure-img">
+</figure>
+<p>Além disso, três algoritmos de Descoberta de subgrupos foram estabelecidos como fonte de geração de resultados para as analises posteriores, sendo eles: <strong>SSD++</strong>, <strong>PRIM</strong> e <strong>APRIORI-SD</strong>.</p>
+</section>
+<section id="conjuto-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="conjuto-de-dados">Conjuto de Dados</h2>
+<p>Os dados utilizados para a análise são do Registro NICE (National Intensive Care Evaluation) na Holanda, abrangendo o período de fevereiro de 2020 a maio de 2022. O conjunto de dados inclui informações detalhadas sobre 14.548 pacientes internados em UTI, com 27,5% dos indivíduos falecendo durante a internação. As variáveis registradas incluem dados demográficos, valores laboratoriais e de monitoramento nas primeiras 24 horas de internação, diagnósticos, duração da internação e mortalidade hospitalar.</p>
+<p>Durante o pré-processamento dos dados, foi realizada a manipulação de dados ausentes através da imputação múltipla por cadeias de equações (MICE), uma técnica que permite preencher valores faltantes. Além disso, foi feita a seleção de variáveis, resultando na exclusão de variáveis que apresentavam apenas um valor único, o que poderia comprometer a análise e a modelagem dos dados.</p>
+</section>
+<section id="aplicação" class="level2">
+<h2 class="anchored" data-anchor-id="aplicação">Aplicação</h2>
+<p>Os algoritmos de descoberta de subgrupos buscam encontrar regiões no espaço de busca com distribuições interessantes do atributo alvo. No trabalho em questão o atributo alvo é binário, representando o rótulo de diagnóstico para COVID-19. Para a realização desta tarefa, subgrupos foram considerados como combinações de restrições nos atributos das bases de dados, como por exemplo: (age &gt;=25 and BMI &lt; 19.)</p>
+<section id="algoritmos" class="level3">
+<h3 class="anchored" data-anchor-id="algoritmos">Algoritmos</h3>
+<p>Dois tipos de algoritmos são explorados neste artigo, de busca exaustiva, envolve a exploração de todas as possíveis soluções ou caminhos para encontrar a solução ótima ou todas as soluções possíveis, e de busca heurística, que utiliza regras práticas ou intuições, para orientar a busca e encontrar soluções boas o suficiente sem explorar todas as possibilidades.</p>
+<p>A principal vantagem de buscas exaustivas é a análise de todos os subgrupos possíveis, o que acaba gerando um alto custo computacional, para este método foi utilizado o algoritmo APRIORI-SD. Já a busca heurística possui um desempenho mais rápido e eficiente, mas como desvantagem tem sua precisão, exatidão e integridade reduzidas, além da baixa otimização, para esse método foi utilizado os algoritmos PRIM e SSD++.</p>
+<ol type="1">
+<li><strong>SSD++</strong>: Utiliza um método de busca heurística com Beam Search, onde a busca é guiada pela métrica de qualidade, a qual considera o critério Minimum Description Length (MLD). O algoritmo usa a estratégia Dividir e Conquistar, em cada iteração, e os dados cobertos por este subgrupo são removidos ou ponderados para orientar a busca. Também é realizada uma adição gulosa na busca, adicionando o subgrupo mais significativo em cada iteração.</li>
+<li><strong>PRIM</strong>: Busca grupos que possuam características semelhantes e resultados clínicos parecidos, ajustando os algoritmos para que os pacientes de um mesmo grupo tenham características similares. Este algoritmo se assemelha a uma árvore de decisão. Elimina regiões menos propensas a retornar valores melhores para a métrica de qualidade (Peeling) e introduzindo pontos que favorecem valores melhores para a métrica de qualidade (Pasting).</li>
+<li><strong>APRIORI-SD</strong>: Baseia-se em combinação de características para buscar subgrupos frequentemente associados em desfechos específicos, utilizando tais combinações para formar os subgrupos. Ele realiza a exporação do espaço de forma semelhante ao algoritmo de mineração de padrões frequentes <strong>Apriori</strong>, podando ramos com baixo suporte.</li>
+</ol>
+<figure align="center" class="figure">
+<img src="imgs/artigo8/img01.png" style="max-width: 80%;" class="figure-img">
+</figure>
+</section>
+<section id="metricas-de-qualidade-e-scoring" class="level3">
+<h3 class="anchored" data-anchor-id="metricas-de-qualidade-e-scoring">Metricas de qualidade e Scoring</h3>
+<p>Para além do funcionamento básico dos algoritmos supracitados, é necessário também o entendimento das métricas utilizadas pelos autores do artigo.</p>
+<ul>
+<li><strong>Cobertura</strong>: Número de amostras corretamente classificadas sobre quantidade de amostras da classe alvo.</li>
+<li><strong>Suporte</strong>: Número de amostras cobertas pelo subgrupo em relação ao total da base de dados.</li>
+<li><strong>Comprimento de regra</strong>: Número de atributos seletores no subgrupo.</li>
+<li><strong>Significância</strong>: Métrica estatística que determina se a diferença observada entre o subgrupo e a população é estatisticamente relevante.</li>
+<li><strong>WRAcc</strong>: Avalia a utilidade de um subgrupo considerando tanto a cobertura quanto a precisão, ajustada para a distribuição de classe do conjunto de dados.</li>
+<li><strong>Confiança</strong>: Número de amostras pertencentes a classe alvo sobre número de amostras não pertencentes a esta.</li>
+<li><strong>Redundância</strong>: Seletores repetidos nos subgrupos retornados.</li>
+</ul>
+</section>
+<section id="classificação" class="level3">
+<h3 class="anchored" data-anchor-id="classificação">Classificação</h3>
+<p>Os autores fazem uso também de técnicas de classificação supervisionada, especificamente o modelo de regressão logística, para avaliar a qualidade dos subgrupos encontrados e se estes adicionam valor preditivo. Para poder realizar a classificação foram incluídos indicadores para cada subgrupos na base de dados original.</p>
+<p>Métodos estatísticos foram utilizados para comparar o modelo base com o modelo estendido (teste ANOVA). Permitindo avaliar se a inclusão de uma variável indicadora de um subgrupo melhora, significativamente, a performance do modelo de classificação (usando relevância estatística de 0.05). Foi utilizada então a técnica de seleção stepwise (AIC) onde é adicionado e removido variáveis para encontrar o melhor ajuste do modelo.</p>
+<p>Também foi realizada uma análise de significância clínica, comparando as descrições obtidas pelos subgrupos com os coeficientes de um modelo de regressão linear encaixado sob os dados de mortalidade no hospital. No entanto, esta segunda análise foi realizada usando uma seleção de variáveis backwards stepwise, que também usa o AIC.</p>
+<p>Tudo isso foi realizado em conjunto a clínicos especialistas, que analisaram os subgrupos para validação dos resultados.</p>
+</section>
+</section>
+<section id="metodologia" class="level2">
+<h2 class="anchored" data-anchor-id="metodologia">Metodologia</h2>
+<figure align="center" class="figure">
+<img src="imgs/artigo8/img02.png" style="max-width: 80%;" class="figure-img">
+</figure>
+<p>Como dito nos tópicos anteriores, os autores através das experimentações no contexto da COVID-19, desejam avaliar sistematicamente a qualidade numérica e clínica dos métodos utilizados: SSD++, PRIM e APRIORI-SD, com uma base dados em que há uma diversidade de pacientes com diferentes caractéristicas e níveis de risco.</p>
+<p>A análise realizada envolveu a descoberta de subgrupos entre os pacientes com base em condições definidas pelos algoritmos supracitados. No qual, cada paciente foi alocado em um ou mias subgrupos conforme as regras e critérios estabalecidas pelos métodos. Os resultados obtidos por cada método foram analisados, tanto em termos de métricas quantitativas, como a precisão e a robustez dos subgrupos identificados, quanto em termos de relevância clínica, avaliando se os subgrupos encontrados possuíam significância prática para a gestão e o tratamento de pacientes.</p>
+<p>Para garantir a eficácia dos modelos, os hiperparâmetros foram otimizados utilizando a técnica de grid search. Essa abordagem permitiu explorar diferentes combinações de parâmetros, como o número de subgrupos, a profundidade do algoritmo APRIORI-SD, e os parâmetros α e β do PRIM, além do número de candidatos para o SSD++. A otimização buscou maximizar o desempenho dos algoritmos em termos de qualidade dos subgrupos identificados.</p>
+<p>A significância numérica dos subgrupos foi avaliada com base em métricas de qualidade e valor preditivo específicas para cada algoritmo, proporcionando uma medida objetiva da eficácia dos subgrupos na predição de resultados.</p>
+<p>Adicionalmente, a significância clínica foi abordada de forma mais qualitativa. As descrições das regras dos subgrupos foram comparadas informalmente com os coeficientes de um modelo de regressão linear para verificar a consistência e a relevância clínica dos padrões identificados. Para complementar essa análise, dois intensivistas avaliaram a relevância clínica dos subgrupos encontrados, proporcionando uma perspectiva prática e especializada sobre a utilidade dos subgrupos na gestão e tratamento dos pacientes.</p>
+</section>
+<section id="resultados" class="level2">
+<h2 class="anchored" data-anchor-id="resultados">Resultados</h2>
+<section id="análise-quantitativa-dos-resultados" class="level3">
+<h3 class="anchored" data-anchor-id="análise-quantitativa-dos-resultados">Análise quantitativa dos resultados</h3>
+<p>Em relação aos aspectos quantitativos dos resultados obtidos pelos três algoritmos, pode-se notar que dentre as técnicas de descoberta de subgrupos o Apriori-SD foi o melhor em quase todas as métricas SD, com exceção da cobertura, que apresentou variação. Isso indica que este algoritmo teve um desempenho superior na identificação de subgrupos relevantes, exceto em termos de cobertura onde a variabilidade foi observada.</p>
+<section id="relvância-preditiva" class="level4">
+<h4 class="anchored" data-anchor-id="relvância-preditiva">Relvância preditiva</h4>
+<p>Em termos de capacidade preditiva, a maioria dos subgrupos identificados sobreviveu ao processo de seleção stepwise, o que sugere que os subgrupos eram robustos e mantinham a sua relevância preditiva quando ajustados no modelo. Aproximadamente metade dos subgrupos identificados pelo Prim e pelo Apriori-SD continuaram a mostrar relevância preditiva significativa quando combinados com variáveis clínicas adicionais, mostrando assim a relevância dos algoritmos SD na identificação de padrões significativos e na melhoria da precisão preditiva dos modelos clínicos.</p>
+</section>
+</section>
+<section id="analise-qualitativa-dos-resultados" class="level3">
+<h3 class="anchored" data-anchor-id="analise-qualitativa-dos-resultados">Analise qualitativa dos resultados</h3>
+<p>Na avaliação qualitativa, destaca-se no Apriori-SD todos os cinco subgrupos identificados foram considerados clinicamente significativos. Isso indica que o Apriori-SD foi altamente eficaz em encontrar subgrupos com relevância clínica clara e útil. O SSD++ demonstrou uma alta taxa de significância clínica, com 59,5 dos 62 subgrupos identificados sendo considerados clinicamente relevantes.</p>
+<p>O SSD++ conseguiu identificar grupos com altas e baixas probabilidades de morte, mostrando a capacidade do método em discriminar entre diferentes níveis de risco, demonstrando grande diversidade nos subgrupos encontrados. Por outro lado, regras do tipo “não igual a”, comuns no PRIM, foram consideradas menos intuitivas e, portanto, menos úteis na prática clínica. Além disso, os grupos identificados pelo APRIORI-SD foram considerados menos distintivos em comparação com os subgrupos encontrados pelos outros métodos. Também foi notado que algumas variáveis incluídas na análise se mostraram clinicamente não significativas, o que pode ter impactado a eficácia dos modelos na prática clínica.</p>
+</section>
+</section>
+<section id="aplicações-semelhantes" class="level2">
+<h2 class="anchored" data-anchor-id="aplicações-semelhantes">Aplicações semelhantes</h2>
+<p>Existem aplicações similares à abordagem feita no artigo, como por exemplo o Sonoconsult, um sistema de ultrassonografia abdominal integrado com técnicas de mineração de dados e estatística. A abordagem utiliza o software Vikamine em um hospital alemão desde 2005. Os principais benefícios do seu uso são a construção de relatórios completos e padronizados, auxiliando na documentação dos resultados, alem de alta acurácia no diagnóstico, facilitando também o trabalho de médicos iniciantes. As referências estão disponíveis nos artigos: <a href="https://www.ijcai.org/Proceedings/05/Papers/1217.pdf">Exploiting Background Knowledge for Knowledge-Intensive Subgroup Discovery</a>, <a href="https://pdfs.semanticscholar.org/b163/6e7ae20a6bf7db347b942a5480b00ac2bb70.pdf">Semi-Automatic Visual Subgroup Mining using VIKAMINE</a> e <a href="https://www.researchgate.net/publication/312898868_Application_and_evaluation_of_a_medical_knowledge-system_in_sonography_sonoconsult">Application and Evaluation of a Medical Knowledge-System in Sonography</a>(SonoConsult).</p>
+<p>Dessa forma, a abordagem de analisar subgrupos de pacientes também se expande para outras áreas da medicina. Como exemplo, para aplicações em doenças cardíacas, identificando grupos de paciente com maior risco para problemas do coração ( <a href="https://dl.acm.org/doi/10.5555/1622810.1622825">Expert-Guided Subgroup Discovery: Methodology and Application</a>, <a href="https://www.sciencedirect.com/science/article/abs/pii/S0933365703000344">Active Subgroup Mining: A Case Study in Coronary Heart Disease Risk Group Detection</a>, <a href="https://scholar.google.si/citations?view_op=view_citation&amp;hl=en&amp;user=vAZ1t84AAAAJ&amp;cstart=200&amp;pagesize=100&amp;citation_for_view=vAZ1t84AAAAJ:p2g8aNsByqUC">Subgroup Discovery for Actionable Knowledge Generation: Shortcomings of Classification Rule Learning and the Lessons Learned</a>), além da verificação da qualidade de registros médicos, visto que dado a quantidade de pacientes, os registros podem acabar sendo feitos de maneira inadequada, sendo necessário analisar o que indica boas documentações clínicas, como disponível no artigo <a href="https://file.biolab.si/biolab/idamap/idamap2005/papers/17%20Atzmueller%20CR.pdf">Profiling Examiners using Intelligent Subgroup Mining</a>.</p>
+</section>
+<section id="discussões" class="level2">
+<h2 class="anchored" data-anchor-id="discussões">Discussões</h2>
+<p>Atualmente, devido a recente pandêmia de COVID-19 diversos estudos na aréa da saúde, como este relatado no artigo analisado. Para se ter uma ideia, mais de 700 estudos de predição diagnósitca e prognóstica de COVID-19 foram produzios neste período, retornando modelos para diversas condições de saúde com diferentes resultados. Tendo em vista essa grande quantidade de informação, uma preocupação é a qualidade desses modelos, sendo necessário estudos e verificações para garantir e reproduzir a relevância desses métodos, além do uso cuidadoso dos modelos disponibilizados.</p>
+<p>Além disso, outos tópicos a serem debatidos são referentes a segurança, privacidade e tratamento dos dados coletados. Como muitas dessas aplicações médicas necessitam de informações dos pacientes, dados de saúde e condições clínicas, surgem mecanismos de evitar com que esses dados sejam divulgados ou utilizados de maneira inadequada, como é o caso da Equator. A <a href="https://www.equator-network.org/about-us/">Equator</a> é uma iniciativa internacional que busca melhorar a confiabilidade dos dados presentes em publicações e literatura médica, promovendo a verificação e transparência dos trabalhos, definindo guias de utilização dessas informações.</p>
+</section>
+<section id="replicando-a-obtenção-de-resultados" class="level2">
+<h2 class="anchored" data-anchor-id="replicando-a-obtenção-de-resultados">Replicando a obtenção de resultados</h2>
+<section id="base-de-dados" class="level3">
+<h3 class="anchored" data-anchor-id="base-de-dados">Base de dados</h3>
+<p>A base de dados disponibilizada no artigo está presente no link a seguir: https://www.stichting-nice.nl/extractieverzoek.jsp. A base de dados tem sua execução baseada no formato ‘feather’, sendo um formato binário utilizado para armazenar informações de maneira rápida e eficiente, útil para o trabalho com grande quantidade de informações, além de ser suportado por diferentes linguagens de programação.</p>
+<p>Apesar do link ser disponibilizado no artigo, ela não é publicamente acessível, sendo necessário realizar uma solicitação de acesso, o que pode demorar algumas semanas. Dessa forma, a reprodução e testes com os dados utilizados no trabalho não foi possível de ser realizada. Contudo, ainda é possível comentar sobre a implementação e execução dos testes conforme mencionado no artigo.</p>
+</section>
+<section id="repositório-dos-algoritmos" class="level3">
+<h3 class="anchored" data-anchor-id="repositório-dos-algoritmos">Repositório dos Algoritmos</h3>
+<p>Em relação aos algoritmos mencionados, é possivel encontra-los facilmente em repositórios e bibliotecas públicas. Segue a então a lista de referências para estes: - <strong>Apriori-SD</strong>: Sua implementação é baseada na biblioteca Python pysubgroup, com a documentação disponível em https://pysubgroup.readthedocs.io/en/latest/ . - <strong>PRIM</strong>: Tem sua implementação e documentação disponível em https://github.com/martinsps/PRIM. - <strong>SSD++</strong>: Possui sua implementação baseada no SSDpp-numérico, disponibilizado no repositório: https://github.com/HMProenca/SSDpp-numeric.</p>
+</section>
+<section id="execução" class="level3">
+<h3 class="anchored" data-anchor-id="execução">Execução</h3>
+<p>No procedimento de execução, há duas rotas possíveis de se explorar. A primeira rota é a execução dos algoritmos em cima do dataset, e a segunda é o procedimento de comparação entre os três metodos. Ambas as rotas são feitas através do script python <strong>subgroups.py</strong> referenciado no artigo. Para executá-lo, é apenas utilizar este formato de comando no terminal:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> subgroups.py <span class="pp">[</span><span class="ss">dataset</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">modo</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Neste caso, o <strong>[dataset]</strong> deve ser trocado pelo arquivo contento os dados a ser utilizados na analise. Já o <strong>[modo]</strong> pode possuir apenas dois valores: <strong>algorithm</strong> e <strong>compare</strong>. No modo de <strong>algorithm</strong>, um terceiro argumento é adicionado a linha de comando sendo este, o nome do algoritmo a ser utilizado (prim, apriori, beam e ssdpp). Um exemplo de comando seria:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> subgroups.py  data.feather algorithm apriori</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Já no modo <strong>compare</strong>, nenhum novo argumento é adicionado ficando apenas:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> subgroups.py data.feather compare</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>Concluindo, o artigo foca então não em fazer uma análise médica referente a COVID com os resultados obtidos, mas sim mostrar uma metodologia de análise e tratamento de dados e como isso pode ser aplicada em outros ramos da saúde. O trabalho desenvolvido é executado de forma a encontrar os subgrupos mais relevantes, que são removidos continuamente para validar o modelo construído, construindo assim uma lista de subgrupos que geram os melhores modelos de regressão para o risco envolvido na doença.</p>
+<p>Assim, os algoritmos testados possuem diferentes compromissos, com o Apriori retornando bons resultados nas métricas de qualidade, no entanto, atrelado a subgrupos genéricos e redundantes. Já o SSD por exemplo possui o foco de encontrar mais subgrupos e utilizar descrições mais diversas, focando então em diminuir a redundância, porém sem utilizar grupos tão complexos, também retornando boas métricas de qualidade e resultados com validade clínica para serem analisados pelos médicos.</p>
+</section>
+<section id="referências" class="level2">
+<h2 class="anchored" data-anchor-id="referências">Referências</h2>
+<ol type="1">
+<li><p>ATZMUELLER, M. Semi-Automatic Visual Subgroup Mining using VIKAMINE. Disponível em: <a href="https://pdfs.semanticscholar.org/b163/6e7ae20a6bf7db347b942a5480b00ac2bb70.pdf" class="uri">https://pdfs.semanticscholar.org/b163/6e7ae20a6bf7db347b942a5480b00ac2bb70.pdf</a>.</p></li>
+<li><p>ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Exploiting background knowledge for knowledge-intensive subgroup discovery. Disponível em: <a href="https://www.ijcai.org/Proceedings/05/Papers/1217.pdf" class="uri">https://www.ijcai.org/Proceedings/05/Papers/1217.pdf</a>. Acesso em: 27 jul. 2024a.</p></li>
+<li><p>ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Profiling Examiners using Intelligent Subgroup Mining. Disponível em: <a href="https://file.biolab.si/biolab/idamap/idamap2005/papers/17%20Atzmueller%20CR.pdf" class="uri">https://file.biolab.si/biolab/idamap/idamap2005/papers/17%20Atzmueller%20CR.pdf</a>.</p></li>
+<li><p>GAMBERGER, D.; LAVRAC, N. Expert-guided subgroup discovery: Methodology and application. 2002. Disponível em: <a href="http://arxiv.org/abs/1106.4576" class="uri">http://arxiv.org/abs/1106.4576</a>.</p></li>
+<li><p>GAMBERGER, D.; LAVRAČ, N.; KRSTAČIĆ, G. Active subgroup mining: a case study in coronary heart disease risk group detection. Artificial intelligence in medicine, v. 28, n.&nbsp;1, p.&nbsp;27–57, 2003.</p></li>
+<li><p>PUPPE, F. et al.&nbsp;Application and evaluation of a medical knowledge system in sonography (SONOCONSULT). Proceedings of the 2008 conference on ECAI 2008: 18th European Conference on Artificial Intelligence. Anais…NLD: IOS Press, 2008.</p></li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/DCC831-Aprendizado-Descritivo\.github\.io\/2024\.1\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
