@@ -15,7 +15,7 @@ Busca-se portanto encontrar correlações entre os rótulos, objetivando encontr
 
 <figure align="center">
     <img src="imgs/artigo6/image1.png" style="max-width: 100%;">
-    <figcaption>Descoberta de Modelos Excepcionais</figcaption>
+    <figcaption>Descoberta de Modelos Excepcionais - Imagem Gerada por [DALL-E](https://openai.com/index/dall-e-2/)</figcaption>
 </figure>
 
 Entre os métodos que realizam funções semelhantes a EPM, pode-se destacar o uso de regras de associação, proposto por Henzgen e Hullermeier, que faz uma busca por padrões de subranking.
@@ -230,19 +230,19 @@ Seis bases de dados reais de diferentes domínios foram utilizadas nos experimen
 
 <figure align="center">
     <img src="imgs/artigo6/sushi_movie.png" style="max-width: 100%;">
-    <figcaption>Imagem gerada por [DALL-E](https://openai.com/index/dall-e-2/)</figcaption>
+    <figcaption>Filmes e sushi - Imagem gerada por [DALL-E](https://openai.com/index/dall-e-2/)</figcaption>
 </figure>
 
 <figure align="center">
     <img src="imgs/artigo6/databases.png" style="max-width: 100%;">
-    <figcaption>Bases de Dados</figcaption>
+    <figcaption>Bases de Dados - Fonte: de Sá et. al, Table 2</figcaption>
 </figure>
 
 É usado um método chamado Regra de Distribuição para procurar distribuições alvo, ele foi comparado com o RWNorm aplicado no Cortana
 
 <figure align="center">
     <img src="imgs/artigo6/caren.png" style="max-width: 100%;">
-    <figcaption>Metodologia técnica DR</figcaption>
+    <figcaption>Metodologia técnica DR - Fonte: de Sá et. al, Table 1</figcaption>
 </figure>
 
 
@@ -255,7 +255,7 @@ A excepcionalidade informada pelas métricas de qualidade podem se apresentar de
 
 <figure align="center">
     <img src="imgs/artigo6/results.png" style="max-width: 100%;">
-    <figcaption>Relação Entre Métricas de Qualidade</figcaption>
+    <figcaption>Relação Entre Métricas de Qualidade - Fonte: de Sá et. al, Fig 2</figcaption>
 </figure>
 
 
@@ -289,7 +289,7 @@ Análise com LWNorm:
 
 <figure align="center">
     <img src="imgs/artigo6/results1.png" style="max-width: 100%;">
-    <figcaption>Resultados Filmes Matriz de Prefixos</figcaption>
+    <figcaption>Resultados Filmes Matriz de Prefixos - Fonte: de Sá et. al, Fig 6</figcaption>
 </figure>
 
 
@@ -306,7 +306,7 @@ Análise com LWNorm:
 
 <figure align="center">
     <img src="imgs/artigo6/results2.png" style="max-width: 100%;">
-    <figcaption>Comparação de Subgrupod de Preferência de Sushi com a População</figcaption>
+    <figcaption>Comparação de Subgrupod de Preferência de Sushi com a População - Fonte: de Sá et. al, Fig 10</figcaption>
 </figure>
 
 
@@ -325,7 +325,7 @@ Cada métrica mostrou diferentes vieses, destacando subgrupos específicos com c
 Também foi feita uma comparação entre o CORTANA e o CAREN que usava a técnica DR:
 <figure align="center">
     <img src="imgs/artigo6/caren_cortana_results.png" style="max-width: 100%;">
-    <figcaption>Comparação Resultados CAREN vs CORTANA</figcaption>
+    <figcaption>Comparação Resultados CAREN vs CORTANA - Fonte: de Sá et. al, Table 5 & 6</figcaption>
 </figure>
 
 
