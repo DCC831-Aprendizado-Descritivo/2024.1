@@ -24,6 +24,7 @@ Utilizada para filtrar subgrupos, garantindo que apenas os mais excepcionais sej
 
 ### Coleta de Dados
 Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. Cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula:
+
 $y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}}}$
 
 ## Entendendo o Algoritmo EGM
@@ -46,7 +47,75 @@ Após a estimativa das curvas de crescimento, o EGM envolve a análise das corre
 ### Mineração de Modelos Excepcionais (EMM)
 A Mineração de Modelos Excepcionais (Exceptional Model Mining - EMM) é um framework de mineração de padrões locais, projetado para encontrar subgrupos interessantes em conjuntos de dados. Os subgrupos são considerados interessantes se forem interpretáveis e excepcionais.
 
-No artigo, a fase final do EGM envolve a identificação de subgrupos que apresentam crescimento excepcional e métodos estatísticos são empregados para distinguir os subgrupos mais relevantes, assegurando que os padrões identificados não sejam devido ao acaso, mas sim o reflexo de fenômenos importantes nos dados. ​
+No artigo, a fase final do EGM envolve a identificação de subgrupos que apresentam crescimento excepcional e métodos estatísticos são empregados para distinguir os subgrupos mais relevantes, assegurando que os padrões identificados não sejam devido ao acaso, mas sim o reflexo de fenômenos importantes nos dados.
+
+## Metodologia Experimental
+### Modelagem de Curvas de Crescimento
+Para a modelagem das curvas foi usado o peso dos tubérculos ao longo do tempo e um coeficiente de erro para balancear a função de crescimento, já que não haviam dados climáticos. Para estimar os pontos da curva de crescimento, foram utilizadas três variáveis principais:
+
+- **Crescimento máximo:** Representa o valor máximo atingido pela curva de crescimento
+    - $a_{ik} = \alpha_{0k} + \sigma_{\alpha}a_i$
+
+- **Inclinação:** Indica a rapidez com que o crescimento ocorre
+    - $b_{ik} = \exp\{\beta_{0k} + \sigma_{\beta}b_i\}$
+
+- **Ponto médio de crescimento:** Ponto onde ocorre o crescimento mais rápido
+    - $c_{ik} = \gamma_{0k} + \exp\{\sigma_{\gamma}\}c_i$
+
+A correlação entre essas variáveis foi explorada com o método "*NLMIXED*" disponível no software SAS. O resultado foi uma correlação bastante negativa entre o crescimento máximo e a inclinação, sugerindo que curvas de crescimento mais íngremes tendem a resultar em batatas com pesos menores.
+
+De forma similar, foi também identificada uma correlação negativa entre a inclinação da curva e o ponto médio de crescimento, o que indica que curvas mais íngremes tendem a alcançar o ponto médio de crescimento mais cedo.
+
+Ao fim, a equação da curva de crescimento é:  
+$y^{TW}_{ijk} = \frac{\exp(a_{ik})}{1 + \exp\{-b_{ik} \cdot \exp(t_{ijk} - c_{ijk})\}} \exp(e_{ijk})$
+
+Para determinar a qualidade das curvas foi utilizada a métrica $R^2$, que mede o quanto as variáveis dependentes são explicadas pelas variáveis independentes. O resultado foi $R^2=0.92$, indicando uma boa adequação do modelo aos dados.
+
+### Aplicação do Exceptional Growth Mining (EGM)
+A Mineração de Crescimentos Excepcionais (*EGM*) foi feita com o algoritmo Beam Search, com valor de profundidade (*$d$*) definido como 2 ou 3, o que garantiu que todos os subgrupos tivessem ao menos 15 itens.
+
+Com a identificação dos subgrupos iniciais, foi aplicado um pós-processamento que selecionava os subgrupos mais relevantes com análise por **Fronteira de Pareto**. A fronteira de Pareto é responsável por encontrar o elemento dito **Pareto eficiente**, que não é capaz de ser melhorado em uma das métricas de avaliação sem piorar pelo menos alguma outra.
+
+<figure align="center">
+<img src="imgs/artigo9/Pareto-optimal-solutions.png" style="max-width: 70%;">
+<figcaption>Representação da fronteira de Pareto - <a href="https://www.researchgate.net/figure/Pareto-optimal-solutions_fig1_329870692">ResearchGate</a></figcaption>
+</figure>
+
+Ao fim, foram selecionados os cinco principais subgrupos para exibição na seção de resultados.
+
+## Análise Crítica dos Resultados
+Além da análise de correlação entre as variáveis, como foi mostrado na seção anterior, também ocorreu a análise das variáveis em relação aos dados disponíveis das plantações, buscando identificar quais parâmetros eram mais influentes nos parâmetros das curvas. A seguir estão listados cada uma das informações disponíveis, em conjunto com a relação notada com as variáveis da curva de crescimento.
+
+- **Nitrogênio:** Influente na inclinação da curva de crescimento, sendo que maior teor de nitrogênio no solo levava a inclinações mais acentuadas e menores pesos máximos das batatas.
+
+- **Potássio:** Maiores níveis de potássio no solo estão diretamente associados a maior crescimento das batatas, sendo que baixos níveis desse elemento no solo resultam em batatas menores. Isso indica que a riqueza do solo em potássio é essencial para o sucesso da plantação.
+
+- **Cálcio e Zinco:** A combinação de altos níveis de Cálcio com baixos níveis de Zinco resultou em maior crescimento máximo das batatas.
+
+- **Magnésio:** Níveis elevados de magnésio no solo aceleram o crescimento, denotado pela maior inclinação da curva, enquanto níveis mais baixos desaceleram. O Magnésio é um elemento ideal para a síntese de clorofila e qualidade da batata, tendo também forte correlação positiva com o ponto médio de crescimento e crescimento máximo das batatas.
+
+- **Ferro:** O Ferro é essencial para várias funções celulares, mas a presença em demasia no solo pode ser tóxica para as plantas. Foi observado que tanto níveis muito altos quanto níveis muito baixos do elemento no solo prejudicam o crescimento.
+
+- **Manganês e Zinco:** Quando ocorrem níveis elevados de qualquer um dos dois elementos, o rendimento total das batatas fica prejudicado. Foi constatada uma correlação complexa entre o ph do solo e a presença desses dois minerais
+
+## Impactos Sociais do Exceptional Growth Mining (EGM)
+A Mineração de Crescimento Excepcional (EGM) é uma ferramenta poderosa para identificar padrões de crescimento, podendo ser aplicada em diversos setores que vão muito além da agricultura, como mostrado no artigo. As seções a seguir são destinadas a explorar possibilidades de utilização desta técnica com perspectivas positivos e negativos.
+
+### Perspectiva Positiva
+Além da utilização da agricultura para otimizar técnicas de plantio, como destacado no artigo, é possível citar:
+
+- **Segurança alimentar:** Em países com conflitos, desastres naturais, terras menos férteis, entre outros problemas, é possível utilizar a técnica do EGM para identificar áreas de solo mais produtivas e otimizar o uso de recursos limitados, o que contribui para maior segurança alimentar e sustentabilidade. Na mesma linha de pensamento, a técnica pode ser empregada para otimizar a criação de animais para consumo humano.
+
+- **Redução de produtos tóxicos nas plantações:** A aplicação de EGM nas plantações pode ocorrer também para reduzir o uso excessivo de fertilizantes e outros insumos agrícolas, identificando as necessidades de nutrientes do solo com maior exatidão. Isso não só melhora a qualidade dos alimentos produzidos para consumo humano e minimiza o impacto ambiental dos produtos industrializados, mas também reduz os custos dos produtores.
+
+- **Medicina personalizada:** A técnica de EGM pode ser aplicada na área da saúde para identificar crescimentos excepcionais de tumores, populações de vírus, bactérias ou fungos quando expostos a diferentes medicamentos, em diferentes pacientes.
+
+### Perspectiva Negativa
+Apesar dos pontos positivos citados, o uso indiscriminado da técnica pode acarretar em problemas, como:
+
+- **Desigualdade competitiva:** Enquanto grandes produtores agrícolas e pecuários tendem a ter mais recursos para investir em otimizações, outros produtores podem não ter condições para acompanhar o progresso, levando a um agravamento da deslealdade de competição.
+
+- **Otimização de armamentos biológicos:** Enquanto a aplicação da técnica de EGM pode trazer grandes benefícios para tratamentos médicos personalizados, assim como foi dito anteriormente, o mesmo princípio pode ser aplicado para identificar carecterísticas necessárias para que populações de microorganismos prejudiciais à saúde humana cresçam em um hospedeito.
 
 ## Conclusão
 O Exceptional Growth Mining (EGM) é uma técnica de análise de dados que identifica subgrupos excepcionais em conjuntos de dados agrícolas. O EGM não estabelece causalidade, mas revela correlações significativas que podem orientar pesquisas futuras e otimizar práticas no setor. A robustez do método se deve ao uso de modelos mistos não lineares, permitindo a análise de dados ausentes e irregularmente espaçados - uma característica comum em estudos agrícolas.
