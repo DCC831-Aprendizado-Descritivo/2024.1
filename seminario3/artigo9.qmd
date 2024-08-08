@@ -4,17 +4,17 @@ page-layout: full
 ---
 
 <figure align="center">
-    <img src="imgs/artigo9/capa.jpeg" style="max-width: 70%;">
-    <figcaption>Ilustração do uso de tecnologias no plantio - Imagem criada por IA</figcaption>
+<img src="imgs/artigo9/capa.jpeg" style="max-width: 70%;">
+<figcaption>Ilustração do uso de tecnologias no plantio - Imagem criada por IA</figcaption>
 </figure>
 
-A agricultura desempenha um papel fundamental na segurança alimentar e na economia global. A capacidade de produzir alimentos de maneira eficiente é crucial para o sustento das populações e a estabilidade econômica. Entretanto, a variabilidade no crescimento das culturas e no rendimento das colheitas representa um desafio significativo para os agricultores. Essa variabilidade pode resultar em perdas econômicas e insegurança alimentar. Entre os fatores que influenciam o crescimento das plantas, as características do solo, como a composição mineral, o pH e os níveis de nutrientes, desempenham um papel essencial. A compreensão desses fatores é vital para otimizar a produtividade agrícola, considerando também as condições climáticas e as práticas de manejo agrícola. 
+A agricultura desempenha um papel fundamental na segurança alimentar e na economia global. A capacidade de produzir alimentos de maneira eficiente é crucial para o sustento das populações e a estabilidade econômica. Entretanto, a variabilidade no crescimento das culturas e no rendimento das colheitas representa um desafio significativo para os agricultores. Essa variabilidade pode resultar em perdas econômicas e insegurança alimentar. Entre os fatores que influenciam o crescimento das plantas, as características do solo, como a composição mineral, o pH e os níveis de nutrientes, desempenham um papel essencial. A compreensão desses fatores é vital para otimizar a produtividade agrícola, considerando também as condições climáticas e as práticas de manejo agrícola.
 
 É aqui que entra o artigo "Introducing Exceptional Growth Mining—Analyzing the Impact of Soil Characteristics on On-Farm Crop Growth and Yield Variability". Os autores, Puck J. A. M. Mulders, Edwin R. van den Heuvel, Pytrik Reidsma e Wouter Duivesteijn, propõem uma abordagem inovadora chamada Exceptional Growth Mining (EGM) que explora a relação entre as características do solo e a produtividade das cultura. Esta técnica de mineração de dados visa identificar padrões de crescimento excepcionais das plantas, fornecendo aos agricultores insights valiosos para a tomada de decisões sobre o manejo do solo e das culturas.
 
 ## Explorando Conceitos Chave
 ### Descritores Utilizados
-Foram utilizados diversos descritores relacionados às características do solo e parâmetros de crescimento das plantas. Entre os principais deles estão a concentração de nutrientes como nitrogênio (N), fósforo (P) e potássio (K), níveis de umidade do solo em diferentes estágios de crescimento e parâmetros de crescimento como a taxa de crescimento e tamanho das plantas. 
+Foram utilizados diversos descritores relacionados às características do solo e parâmetros de crescimento das plantas. Entre os principais deles estão a concentração de nutrientes como nitrogênio (N), fósforo (P) e potássio (K), níveis de umidade do solo em diferentes estágios de crescimento e parâmetros de crescimento como a taxa de crescimento e tamanho das plantas.
 
 ### Curvas de Crescimento
 Modeladas utilizando modelos mistos não lineares, que incorporam efeitos fixos e aleatórios, para capturar tanto os padrões comuns quanto a variabilidade específica de subgrupos.
@@ -33,17 +33,70 @@ O EGM é projetado para identificar subgrupos de dados com crescimento excepcion
 O algoritmo EGM requer dados longitudinais das plantações, o que significa que as informações devem ser coletadas ao longo do tempo, permitindo a análise do desenvolvimento das plantas em diferentes condições. As variáveis principais analisadas incluem nutrientes do solo, umidade e crescimento das plantas, medido em termos de altura, peso e produtividade ao longo do tempo.
 
 ### Estimativa das Curvas de Crescimento
-Para capturar o crescimento das plantas ao longo do tempo, o algoritmo utiliza modelos mistos, que incorporam: 
+Para capturar o crescimento das plantas ao longo do tempo, o algoritmo utiliza modelos mistos, que incorporam:
 
- - Componentes Fixos: Representam os efeitos comuns que afetam todas as observações de forma consistente, como a influência média dos nutrientes do solo em todas as plantas. 
- - Componentes Aleatórios: Capturam a variabilidade que ocorre entre subgrupos específicos, permitindo que o modelo se adapte a diferenças individuais ou específicas de cada subgrupo. 
+- Componentes Fixos: Representam os efeitos comuns que afetam todas as observações de forma consistente, como a influência média dos nutrientes do solo em todas as plantas.
+- Componentes Aleatórios: Capturam a variabilidade que ocorre entre subgrupos específicos, permitindo que o modelo se adapte a diferenças individuais ou específicas de cada subgrupo.
 
-Esses modelos mistos são ajustados logisticamente para estimar com precisão as curvas de crescimento das plantas. O ajuste é avaliado utilizando o coeficiente de determinação $R^2$, que mede a qualidade do ajuste do modelo. 
+Esses modelos mistos são ajustados logisticamente para estimar com precisão as curvas de crescimento das plantas. O ajuste é avaliado utilizando o coeficiente de determinação $R^2$, que mede a qualidade do ajuste do modelo.
 
 ### Análise de Correlação
-Após a estimativa das curvas de crescimento, o EGM envolve a análise das correlações entre os parâmetros de crescimento e as variáveis como nutrientes do solo. Isso ajuda a entender como diferentes fatores influenciam o crescimento das plantas. 
+Após a estimativa das curvas de crescimento, o EGM envolve a análise das correlações entre os parâmetros de crescimento e as variáveis como nutrientes do solo. Isso ajuda a entender como diferentes fatores influenciam o crescimento das plantas.
 
-### Mineração de Modelos Excepcionais (EMM) 
+### Mineração de Modelos Excepcionais (EMM)
 A Mineração de Modelos Excepcionais (Exceptional Model Mining - EMM) é um framework de mineração de padrões locais, projetado para encontrar subgrupos interessantes em conjuntos de dados. Os subgrupos são considerados interessantes se forem interpretáveis e excepcionais.
-No artigo, a fase final do EGM envolve a identificação de subgrupos que apresentam crescimento excepcional e métodos estatísticos são empregados para distinguir os subgrupos mais relevantes, assegurando que os padrões identificados não sejam devido ao acaso, mas sim o reflexo de fenômenos importantes nos dados.
-​
+
+No artigo, a fase final do EGM envolve a identificação de subgrupos que apresentam crescimento excepcional e métodos estatísticos são empregados para distinguir os subgrupos mais relevantes, assegurando que os padrões identificados não sejam devido ao acaso, mas sim o reflexo de fenômenos importantes nos dados. ​
+
+## Conclusão
+O Exceptional Growth Mining (EGM) é uma técnica de análise de dados que identifica subgrupos excepcionais em conjuntos de dados agrícolas. O EGM não estabelece causalidade, mas revela correlações significativas que podem orientar pesquisas futuras e otimizar práticas no setor. A robustez do método se deve ao uso de modelos mistos não lineares, permitindo a análise de dados ausentes e irregularmente espaçados - uma característica comum em estudos agrícolas.
+
+Contudo, a aplicação do EGM suscita questões éticas, principalmente relacionadas à desigualdade, privacidade e segurança de dados. Estas preocupações não devem ser subestimadas e requerem atenção cuidadosa dos pesquisadores e profissionais que utilizam a técnica. A utilização responsável do EGM pode contribuir significativamente para o avanço da pesquisa agrícola e o desenvolvimento de práticas mais sustentáveis no setor.
+
+## Referências
+Mulders, P. J. A. M., van den Heuvel, E. R., Reidsma, P., & Duivesteijn, W. (2024). Introducing exceptional growth mining—Analyzing the impact of soil characteristics on on-farm crop growth and yield variability. PLOS ONE, 19(1), e0296684. https://doi.org/10.1371/journal.pone.0296684
+
+## Apêndice
+
+### Acesso ao Dataset e Código Fonte
+O código para o método de Mineração de Crescimento Excepcional (Exceptional Growth Mining - EGM) foi disponibilizado pelos autores deste artigo. O acesso ao código e aos dados pode ser realizado através do seguinte link: [Exceptional Growth Mining data](https://figshare.com/articles/dataset/Exceptional_Growth_Mining_data/24592506). Para obter os dados brutos, entre em contato com Jacob van den Borne pelo e-mail jacob\@vandenborneaardappelen.com.
+
+#### Mineração de Padrões Excepcionais: `EMM.py`
+A função `EMM` é um método que realiza mineração de padrões excepcionais. O objetivo é encontrar descrições que maximizem uma medida de qualidade em um conjunto de dados. A função opera de acordo com os seguintes parâmetros:
+
+-   `w`: Largura do feixe.
+-   `d`: Número de níveis.
+-   `q`: Número máximo de resultados.
+-   `eta`: Uma função que recebe uma descrição e retorna todos os refinamentos possíveis.
+-   `satisfies_all`: Uma função que verifica se uma descrição atende a determinados requisitos.
+-   `eval_quality`: Retorna a qualidade de uma descrição, que deve ser comparável às qualidades de outras descrições.
+-   `catch_all_description`: A descrição que equivale a "verdadeiro" ou "todos", de modo que todo o conjunto de dados corresponda.
+
+No final, é retornado conjunto de resultados (`resultSet`) com as melhores descrições encontradas.
+
+Exemplo de chamada: `EMM(w=10, d=5, q=50, eta=func_eta, satisfies_all=func_satisfies_all, eval_quality=func_eval_quality, catch_all_description=True)`
+
+#### Gerando Curvas de Crescimento: `growth_curve.sas`
+Este script SAS é utilizado para calcular os parâmetros da curva de crescimento das batatas. Ele começa preparando os dados, ordenando-os por ano e calculando a média dos dias até o plantio. Em seguida, categoriza o tempo de plantio como "early" (cedo), "average" (médio) ou "late" (tardio) com base na média. Posteriormente, ele transforma e filtra os dados para garantir que apenas observações válidas e relevantes sejam utilizadas no ajuste das curvas de crescimento.
+
+Na prática, o script usa o procedimento `proc nlmixed` para ajustar um modelo de mistura não linear aos dados, estimando parâmetros específicos para cada ano e variáveis aleatórias para cada campo de batata. Ele especifica os parâmetros iniciais, os limites de variabilidade e as correlações entre as variáveis aleatórias. O resultado final inclui as previsões dos parâmetros ajustados e a curva de crescimento ajustada, permitindo ao leitor entender e prever o crescimento das batatas ao longo dos anos com base nos dados fornecidos.
+
+#### Análise de Subgrupos: `pareto_front.ipynb`
+O Jupyter Notebook contém 6 arquivos, cada um correspondendo a um conceito-alvo, como variação dos parâmetros da curva (high/low e a/b/c). Dado que pode haver uma quantidade exorbitante de subgrupos excepcionais, este código é responsável por identificar os subgrupos que pertencem ao ótimo de Pareto para cada conceito-alvo. O código recebe como entrada o DataFrame resultante do EMM, produzindo uma saída semelhante, porém com um número reduzido de subgrupos.
+
+Ele começa lendo os dados de um arquivo CSV e visualizando a relação entre a média (`Mean`) e o desvio padrão (`Std`) com um gráfico de dispersão. Em seguida, define a função `identify_pareto`, que compara cada ponto do conjunto de dados para verificar se ele é dominado por outros, determinando assim se pertence ao ótimo de Pareto. O código usa as médias absolutas, o inverso do desvio padrão e o número de subgrupos (`n`) para criar um conjunto de pontuações. A função retorna os índices dos pontos no ótimo de Pareto, que são extraídos e ordenados, filtrando o DataFrame para destacar os subgrupos mais relevantes.
+
+### Formato do Dataset
+| Feature(s) | Descrição | Unidade | Observação |
+|--------------------|------------------|------------------|------------------|
+| Nutrient_content | Classificação estimada pelo agricultor | \- | \- |
+| Previously_cultivated_crop | Nome da cultura anterior | \- | Cultivada por Van den Borne ou outro agricultor |
+| Dryness | Umidade relativa | \% | \- |
+| Nematodes | Presença de nematoides | yes/no | Praga que afeta batatas |
+| N_soil, S_soil, K_soil, Mg_soil, Si_soil | Conteúdo de nutrientes do solo | kg/ha | Coletado desde 2015 |
+| Fe_soil, Zn_soil, Ca_soil, Mn_soil, B_soil, P_soil | Conteúdo de minerais do solo | g/ha ou kg/ha | Coletado no mesmo local das amostras |
+
+### Formato de Saída
+| Quality | Description | Mean | Std | t | n |
+|------------|------------|------------|------------|------------|------------|
+| Qualidade do resultado | Agrupamento de descritores do resultado | Média | Desvio Padrão | Valor t | Número de campos de batata pertencentes ao subgrupo |
