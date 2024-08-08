@@ -25,6 +25,11 @@ Utilizada para filtrar subgrupos, garantindo que apenas os mais excepcionais sej
 ## Entendendo o Algoritmo EGM
 O EGM é projetado para identificar subgrupos de dados com crescimento excepcional, destacando aqueles que se desviam significativamente dos padrões normais.
 
+<figure align="center">
+    <img src="imgs/artigo9/3-passos-EGM.PNG" style="max-width: 70%;">
+    <figcaption>Visão geral dos três passos do EGM (<a href="https://doi.org/10.1371/journal.pone.0296684.g002">Fonte</a>)</figcaption>
+</figure>
+
 ### Dados Necessários
 O algoritmo EGM requer dados longitudinais das plantações, o que significa que as informações devem ser coletadas ao longo do tempo, permitindo a análise do desenvolvimento das plantas em diferentes condições. As variáveis principais analisadas incluem nutrientes do solo, umidade e crescimento das plantas (medido em termos de altura), peso e produtividade ao longo do tempo.
 
