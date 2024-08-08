@@ -48,7 +48,7 @@ No artigo, a fase final do EGM envolve a identificação de subgrupos que aprese
 ### Coleta de Dados
 Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. O dataset abrange informações sobre níveis de nutrientes (como nitrogênio, potássio, fósforo, entre outros) em cada campo de plantação, mas não inclui dados climáticos ou informações de pH do solo. 
 
-Para cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula: $y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}}}$
+Para cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula: $y({gr}\times{m^{-2}}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}}}$
 
 Além disso, a coleta das batatas foi realizada no ponto médio de condutividade elétrica de cada campo, medida com o uso do dispositivo DUALEM-21s. Esse cuidado é importante porque campos com alta condutividade elétrica são ricos em sal, o que pode prejudicar o crescimento das plantações. 
 
