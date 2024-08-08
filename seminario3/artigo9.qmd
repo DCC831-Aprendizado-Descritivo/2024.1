@@ -10,7 +10,7 @@ page-layout: full
 
 A agricultura desempenha um papel fundamental na segurança alimentar e na economia global. A capacidade de produzir alimentos de maneira eficiente é crucial para o sustento das populações e a estabilidade econômica. Entretanto, a variabilidade no crescimento das culturas e no rendimento das colheitas representa um desafio significativo para os agricultores. Essa variabilidade pode resultar em perdas econômicas e insegurança alimentar. Entre os fatores que influenciam o crescimento das plantas, as características do solo, como a composição mineral, o pH e os níveis de nutrientes, desempenham um papel essencial. A compreensão desses fatores é vital para otimizar a produtividade agrícola, considerando também as condições climáticas e as práticas de manejo agrícola.
 
-É aqui que entra o artigo "Introducing Exceptional Growth Mining—Analyzing the Impact of Soil Characteristics on On-Farm Crop Growth and Yield Variability". Os autores, Puck J. A. M. Mulders, Edwin R. van den Heuvel, Pytrik Reidsma e Wouter Duivesteijn, propõem uma abordagem inovadora chamada Exceptional Growth Mining (EGM) que explora a relação entre as características do solo e a produtividade das cultura. Esta técnica de mineração de dados visa identificar padrões de crescimento excepcionais das plantas, fornecendo aos agricultores insights valiosos para a tomada de decisões sobre o manejo do solo e das culturas.
+É aqui que entra o artigo "Introducing Exceptional Growth Mining—Analyzing the Impact of Soil Characteristics on On-Farm Crop Growth and Yield Variability". Os autores, Puck J. A. M. Mulders, Edwin R. van den Heuvel, Pytrik Reidsma e Wouter Duivesteijn, propõem uma abordagem inovadora chamada Exceptional Growth Mining (EGM) que explora a relação entre as características do solo e a produtividade das culturas. Esta técnica de mineração de dados visa identificar padrões de crescimento excepcionais das plantas, fornecendo aos agricultores insights valiosos para a tomada de decisões sobre o manejo do solo e das culturas.
 
 ## Explorando Conceitos Chave
 ### Descritores Utilizados
@@ -23,7 +23,9 @@ Modeladas utilizando modelos mistos não lineares, que incorporam efeitos fixos 
 Utilizada para filtrar subgrupos, garantindo que apenas os mais excepcionais sejam considerados. Ela consiste no conjunto de subgrupos que não são dominados por outros em todos os critérios avaliados.
 
 ### Coleta de Dados
-Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. Cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula:
+Os dados foram coletados na fazenda de batatas Van den Borne Aardappelen, no sul da Holanda, entre 2015 e 2018. Cada ano, cinco a sete amostragens foram feitas em aproximadamente 100 campos. Além disso, a coleta das batatas foi realizada no ponto médio de condutividade elétrica de cada campo, medida com o uso do dispositivo DUALEM-21s. Esse cuidado é importante porque campos com alta condutividade elétrica são ricos em sal, o que pode prejudicar o crescimento das plantações.
+
+Em cada amostragem, três plantas de batata foram selecionadas e os tubérculos foram pesados para calcular o peso por metro quadrado através da fórmula:
 
 $y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\text {planting distance (cm)}\times {\frac{3}{100}}}$
 
@@ -31,7 +33,7 @@ $y({gr}\times{m^-2}) = \frac{{\tilde{y}(\text {gr/3 plants})} \times 1.333}{\tex
 O EGM é projetado para identificar subgrupos de dados com crescimento excepcional, destacando aqueles que se desviam significativamente dos padrões normais.
 
 ### Dados Necessários
-O algoritmo EGM requer dados longitudinais das plantações, o que significa que as informações devem ser coletadas ao longo do tempo, permitindo a análise do desenvolvimento das plantas em diferentes condições. As variáveis principais analisadas incluem nutrientes do solo, umidade e crescimento das plantas, medido em termos de altura, peso e produtividade ao longo do tempo.
+O algoritmo EGM requer dados longitudinais das plantações, o que significa que as informações devem ser coletadas ao longo do tempo, permitindo a análise do desenvolvimento das plantas em diferentes condições. As variáveis principais analisadas incluem nutrientes do solo, umidade e crescimento das plantas (medido em termos de altura), peso e produtividade ao longo do tempo.
 
 ### Estimativa das Curvas de Crescimento
 Para capturar o crescimento das plantas ao longo do tempo, o algoritmo utiliza modelos mistos, que incorporam:
