@@ -24,6 +24,8 @@ website:
       - text: "Seminário 3"
         menu:
             - seminario3/artigo7.qmd
+            - seminario3/artigo8.qmd
+            - seminario3/artigo9.qmd
 
 format:
   html:
