@@ -160,14 +160,16 @@ Concluindo, o artigo foca então não em fazer uma análise médica referente a 
 Assim, os algoritmos testados possuem diferentes compromissos, com o Apriori retornando bons resultados nas métricas de qualidade, no entanto, atrelado a subgrupos genéricos e redundantes. Já o SSD por exemplo possui o foco de encontrar mais subgrupos e utilizar descrições mais diversas, focando então em diminuir a redundância, porém sem utilizar grupos tão complexos, também retornando boas métricas de qualidade e resultados com validade clínica para serem analisados pelos médicos.  
 
 ## Referências 
-1. ATZMUELLER, M. Semi-Automatic Visual Subgroup Mining using VIKAMINE. Disponível em: <https://pdfs.semanticscholar.org/b163/6e7ae20a6bf7db347b942a5480b00ac2bb70.pdf>. 
+1. VAGLIANO, I.; KINGMA, M.Y.; DONGELMANS, D.A; de LANGE, D.W.; de KEIZER, N.F.; SCHUT, M.C. Automated identification of patient subgroups: A case-study on mortality of COVID-19 patients admitted to the ICU. Disponível em: <https://www.sciencedirect.com/science/article/pii/S001048252300611X?via%3Dihub>
 
-2. ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Exploiting background knowledge for knowledge-intensive subgroup discovery. Disponível em: <https://www.ijcai.org/Proceedings/05/Papers/1217.pdf>. Acesso em: 27 jul. 2024a. 
+2. ATZMUELLER, M. Semi-Automatic Visual Subgroup Mining using VIKAMINE. Disponível em: <https://pdfs.semanticscholar.org/b163/6e7ae20a6bf7db347b942a5480b00ac2bb70.pdf>. 
 
-3. ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Profiling Examiners using Intelligent Subgroup Mining. Disponível em: <https://file.biolab.si/biolab/idamap/idamap2005/papers/17%20Atzmueller%20CR.pdf>. 
+3. ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Exploiting background knowledge for knowledge-intensive subgroup discovery. Disponível em: <https://www.ijcai.org/Proceedings/05/Papers/1217.pdf>. Acesso em: 27 jul. 2024a. 
 
-4. GAMBERGER, D.; LAVRAC, N. Expert-guided subgroup discovery: Methodology and application. 2002. Disponível em: <http://arxiv.org/abs/1106.4576>. 
+4. ATZMUELLER, M.; PUPPE, F.; BUSCHER, H.-P. Profiling Examiners using Intelligent Subgroup Mining. Disponível em: <https://file.biolab.si/biolab/idamap/idamap2005/papers/17%20Atzmueller%20CR.pdf>. 
 
-5. GAMBERGER, D.; LAVRAČ, N.; KRSTAČIĆ, G. Active subgroup mining: a case study in coronary heart disease risk group detection. Artificial intelligence in medicine, v. 28, n. 1, p. 27–57, 2003. 
+5. GAMBERGER, D.; LAVRAC, N. Expert-guided subgroup discovery: Methodology and application. 2002. Disponível em: <http://arxiv.org/abs/1106.4576>. 
 
-6. PUPPE, F. et al. Application and evaluation of a medical knowledge system in sonography (SONOCONSULT). Proceedings of the 2008 conference on ECAI 2008: 18th European Conference on Artificial Intelligence. Anais...NLD: IOS Press, 2008. 
+6. GAMBERGER, D.; LAVRAČ, N.; KRSTAČIĆ, G. Active subgroup mining: a case study in coronary heart disease risk group detection. Artificial intelligence in medicine, v. 28, n. 1, p. 27–57, 2003. 
+
+7. PUPPE, F. et al. Application and evaluation of a medical knowledge system in sonography (SONOCONSULT). Proceedings of the 2008 conference on ECAI 2008: 18th European Conference on Artificial Intelligence. Anais...NLD: IOS Press, 2008. 
