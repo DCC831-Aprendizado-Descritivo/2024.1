@@ -1,0 +1,54 @@
+---
+# title: 'Seminários sobre aplicações de aprendizado descritivo -- 2024.1'
+page-layout: full
+---
+
+# Introdução
+
+Os seminários da disciplina consistem em uma apresentação coletiva (da turma) de um artigo mais recente
+sobre tópicos diretamente relacionados ao conteúdo visto em sala. A ideia é que a turma
+como um todo estude os artigos mais recentes da área e discuta esses trabalhos em sala.
+Em cada sessão, discutimos três artigos recentes relacionados aos tópicos abordados
+nas aulas teóricas.
+
+Para isso, adotamos um formato adaptado da proposta apresentada pelos Profs. Alec Jacobson
+e Colin Raffel, ambos da Universidade de Toronto (Canadá) -- veja a proposta original
+em <https://colinraffel.com/blog/role-playing-seminar.html>. A proposta consiste em
+fazer uma encenação de papéis (role play) científicos para a apresentação do seminário.
+Nessa proposta, cada grupo cumprirá um papel na apresentação. Ao final, uma apresentação
+em formato de slides e um documento textual são produzidos. A apresentação é usada em sala
+de aula para fomentar as discussões, enquanto o documento fornece uma descrição textual
+das impressões da turma com a intenção de descrever o tema do artigo para um público 
+amplo interessado em aprendizado de máquina e mineração de dados.
+
+São apresentados a seguir os artigos discutidos no semestre 2024/1, com os respectivos
+links para os slides e documentos textuais apresentando os artigos.
+
+## Artigo 7
+
+[Supervised sequential pattern mining of event sequences in sport to
+identify important patterns of play: An application to rugby union](seminario3/artigo7.qmd)
+
+by Rory Bunker, Keisuke Fujii, Hiroyuki Hanada, and Ichiro Takeuchi. 2021
+
+<https://doi.org/10.1371/journal.pone.0256329>
+
+
+## Artigo 8
+
+[Automated identification of patient subgroups: A case-study on mortality
+of COVID-19 patients admitted to the ICU](seminario3/artigo8.qmd)
+
+by I. Vagliano, M.Y. Kingma, D.A. Dongelmans, D.W. de Lange, N.F. de Keizer, 
+M.C. Schut, and the Dutch COVID-19 ICU Research Consortium. 2023
+
+<https://doi.org/10.1016/j.compbiomed.2023.107146>
+
+## Artigo 9
+
+[Introducing exceptional growth mining—Analyzing the
+impact of soil characteristics on on-farm crop growth and yield variability](seminario3/artigo9.qmd)
+
+by Puck J. A. M. Mulders, Edwin R. van den Heuvel, Pytrik Reidsma, and Wouter Duivesteijn. 2024
+
+<https://doi.org/10.1371/journal.pone.0296684>

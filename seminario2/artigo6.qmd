@@ -1,5 +1,5 @@
 ---
-title: 'Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining'
+title: 'Artigo 6: Discovering a Taste for the Unusual: Exceptionla Models for Preference Mining'
 page-layout: full
 ---
 

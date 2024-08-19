@@ -1,5 +1,5 @@
 ---
-# title: 'Seminários sobre Mineração de Padrões Frequentes -- 2024.1'
+# title: 'Seminários sobre Descoberta de Subgrupos -- 2024.1'
 page-layout: full
 ---
 
@@ -35,5 +35,16 @@ by Guillaume Bosc, Jean-François Boulicaut, Chedy Raissi, Tin Truong-Chi, and M
 
 ## Artigo 5
 
+[For Real: A Thorough Look at Numeric Attributes in Subgroup Discovery](seminario2/artigo5.qmd)
+
+by Marvin Meeng and Arno Knobbe. 2021
+
+<https://doi.org/10.1007/s10618-020-00703-x>
 
 ## Artigo 6
+
+[Discovering a Taste for the Unusual: Exceptional Models for Preference Mining](seminario2/artigo6.qmd)
+
+by Cláudio Rebelo de Sá, Wouter Duivesteijn, Paulo Azevedo, Alípio Mário Jorge, Carlos Soares and Arno Knobbe. 2018
+
+<https://doi.org/10.1007/s10994-018-5743-z>

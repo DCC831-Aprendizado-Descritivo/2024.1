@@ -1,18 +1,7 @@
 ---
-title: "Links para repositórios dos projetos da disciplina Aprendizado Descritivo 2024/1"
-date: 2024-08-19
-author:
-  - name: Renato Vimieiro
-    email: rvimieiro@dcc.ufmg.br
-    affiliation: 
-      - name: Universidade Federal de Minas Gerais
-        city: Belo Horizonte
-        state: MG
-        url: www.dcc.ufmg.br
+title: "Projetos apresentados pelos alunos na disciplina Aprendizado Descritivo 2024/1"
 page-layout: full
 ---
-
-# Projetos apresentados pelos alunos na disciplina
 
 O projeto da disciplina de Aprendizado Descritivo é uma atividade avaliativa conduzida pelos
 alunos da turma divididos em grupos. O objetivo do projeto é analisar um conjunto de dados
