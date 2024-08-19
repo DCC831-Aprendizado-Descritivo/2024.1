@@ -41,5 +41,5 @@ dos métodos estudados para extração de conhecimento de bases de dados.
 Utilize o menu acima ou o link a seguir para visualizar o conteúdo produzido nos seminários e projetos
 desenvolvidos pelos alunos.
 
-- Seminários: [Padrões frequentes](seminario1.qmd); [Descoberta de subgrupos](seminario2.qmd); Aplicações
+- Seminários: [Padrões frequentes](seminario1.qmd); [Descoberta de subgrupos](seminario2.qmd); [Aplicações](seminario3.qmd)
 

@@ -1,0 +1,113 @@
+---
+title: "Links para repositórios dos projetos da disciplina Aprendizado Descritivo 2024/1"
+date: 2024-08-19
+author:
+  - name: Renato Vimieiro
+    email: rvimieiro@dcc.ufmg.br
+    affiliation: 
+      - name: Universidade Federal de Minas Gerais
+        city: Belo Horizonte
+        state: MG
+        url: www.dcc.ufmg.br
+page-layout: full
+---
+
+# Projetos apresentados pelos alunos na disciplina
+
+O projeto da disciplina de Aprendizado Descritivo é uma atividade avaliativa conduzida pelos
+alunos da turma divididos em grupos. O objetivo do projeto é analisar um conjunto de dados
+escolhido pelo grupo, usando as técnicas vistas em sala de aula (aulas expositivas e seminários).
+Os links a seguir redirecionam para os repositórios dos respectivos projetos. É importante
+ressaltar que, embora tenha sido exigido rigor científico na execução do projeto, os resultados
+cumprem apenas um papel didático.
+
+
+- [Avaliação dos Fatores Determinantes da Duração da
+Hospitalização em Casos de Dengue no Brasil: Uma Análise
+Baseada em Descoberta de Subgrupos](https://github.com/alexandrehm84/projeto_dengue_internacao)
+
+Autores: Alexandre Henrique Martins, Ana Luísa Araújo Bastos, Fernanda Luiza Tobias,
+Jorge Augusto de Lima e Silva, Rodrigo Sales Nascimento, Vitor Emanuel Ferreira
+Vital
+
+Relatório: [pdf](projetos/g5.pdf)
+
+- [How to Win: Uma Análise Exploratória de Dados de Partidas Vitoriosas da La Liga usando o FP-Growth](https://github.com/LuccaAug/how-to-win)
+
+Autores: Lucca C. Augusto, André L. M. Dutra, Carlos M. Silva
+
+Relatório: [pdf](projetos/g13.pdf)
+
+- [Análise da Dinâmica dos Acidentes de Trânsito com Vítima em Belo Horizonte através da Descoberta de Subgrupos com Monte Carlo Tree Search](https://github.com/fillipeoa/UFMG-AD-AcidentesTransitoBH)
+
+Autores: Alan M. Campos, Fillipe O. Almeida, Marcos L. Araujo
+
+Relatório: [pdf](projetos/g12.pdf)
+
+- [Mineração de Dados Urbanos](https://github.com/guinamen/aprendizado)
+
+Autor: Guilherme Namen Pimenta
+
+Relatório: [pdf](projetos/g1.pdf)
+
+- [Mineração de Dados de Evento em Futebol](https://github.com/lframosferreira/projeto-ad)
+
+Autores: Igor Lacerda F. da Silva, Luís Felipe R. Ferreira, Matheus Tiago P. de Souza
+
+Relatório: [pdf](projetos/g2.pdf)
+
+- [Descoberta de Subgrupos em Jogos da Steam](https://github.com/IndraMatsiendra/TP-aprendizado-descritivo)
+
+Autores: Etelvina Oliveira, Henrique Furst Scheid, Igor Eduardo Braga, Indra Matsiendra Ribeiro
+
+Relatório: [pdf](projetos/g11.pdf)
+
+- [ExploratoryWeb Usage Mining for E-commerce: A Multi-approach Analysis Using Descriptive Learning Techniques](https://github.com/JeffGM/descriptive-learning)
+
+Autor: Jefferson G. M. Lopes
+
+Relatório: [pdf](projetos/g7.pdf)
+
+- [Detecção de Discurso de Ódio nas Redes Sociais: Uma
+Abordagem de Extração de Padrões com Algoritmo Apriori](https://github.com/VictorHugoMartins/deteccao_odio)
+
+Autores: Gabriel Ikaro Fonseca de Paiva, Hugo Baraky, João Vítor Vaz,
+Victor Hugo Martins, Vitória Maria Silva Bispo
+
+Relatório: [pdf](projetos/g10.pdf)
+
+- [Análise de Subgrupos e Padrões Frequentes
+na Base de Dados do Stack Overflow 2023](https://github.com/vinciusb/TP-AD)
+
+Autores: Ester Sara, Filipe Pirola, Júnio Veras, Thaís Ferreira, Vinícius Braga
+
+Relatório: [pdf](projetos/g8.pdf)
+
+- [Mineração de Subgrupos de Baterias de Íon-Lítio no
+Contexto de Predição de Tempo Vida Útil](https://github.com/EduMio/TP-AD)
+
+Autores: Davi Lage, Eduardo Mio, João Pedro Fernandes, Leandro Diniz, Pedro Cimini
+
+Relatório: [pdf](projetos/g3.pdf)
+
+- [Framework para mineração de subgrupos usando o database METABRIC](https://github.com/Nagi0/metabric-sd)
+
+Autores: Adriano V. M. Zanini, Bruno L. Fonseca, Gabriel M. M. Fialho,
+José M. da R. Júnior, Matheus A. I. de Oliveira, Matheus V. L. Lima
+
+Relatório: [pdf](projetos/g4.pdf)
+
+- [Análise de decks e cartas em torneios Pokemon](https://github.com/Francisco-aragao/Pokemon_analysis)
+
+Autores: Francisco Teixeira Rocha Aragão, Leonardo de Oliveira Maia, Pedro Henrique Meireles de Almeida
+
+Relatório: [pdf](projetos/g6.pdf)
+
+- [Descoberta de Subgrupos Aplicada ao Mercado de Jogos
+Digitais: Exploração de métricas delimitadoras de subgrupos
+em jogos positivamente avaliados na plataforma Steam](https://github.com/TarcizioLafaiete/aprendizado_descritivo-steam_games_subgroups)
+
+Autores: Gabriel B. Freddi, João Vitor S. Depollo, Pedro O. Guedes, Tarcízio A. S.
+Lafaiete, Vinícius A. F. Resende
+
+Relatório: [pdf](projetos/g9.pdf)
