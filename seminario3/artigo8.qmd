@@ -1,5 +1,5 @@
 ---
-title: 'Artigo 8 - Automated identification of patient subgroups: A case-study on mortality of COVID-19 patients admitted to the ICU'
+title: 'Artigo 8: Automated identification of patient subgroups: A case-study on mortality of COVID-19 patients admitted to the ICU'
 page-layout: full
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: 'Artigo 7 - Mineração Supervisionada de Padrões Sequenciais em Esportes para Identificar Padrões de Jogo Importantes: Uma Aplicação ao Rugby Union'
+title: 'Artigo 7: Mineração Supervisionada de Padrões Sequenciais em Esportes para Identificar Padrões de Jogo Importantes: Uma Aplicação ao Rugby Union'
 page-layout: full
 ---
 
